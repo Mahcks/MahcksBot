@@ -58,7 +58,6 @@ export async function updateOne(query: string, values: any[]) {
   } finally {
     if (conn) {
       conn.end();
-      console.log(data)
       return data;
     }
   }

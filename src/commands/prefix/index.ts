@@ -28,7 +28,7 @@ const exampleCommand: CommandInt = {
         await updateOne('UPDATE channels SET prefix=? WHERE id=?', [context[0], userstate['user-id']]);
 
         // Update cache
-        await updatePrefix(parseInt(userstate['user-id']!), context[0]);
+        await updatePrefix(parseInt(userstate['user-id']!), 'prefix', context[0]);
 
         return client.action(channel, `@${user} set the prefix to "${context[0]}"`);
       }

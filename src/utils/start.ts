@@ -15,7 +15,7 @@ export interface Permissions {
 }
 
 export let permissions: Permissions[] = [];
-export let channelSettings: ChannelSettings[] = [];
+export let channelSettings: (ChannelSettings|any)[] = [];
 
 // Get all prefixes from database
 export async function initChannelSettings() {
@@ -42,9 +42,19 @@ export async function removeChannelSetting(id: number) {
   });
 }
 
-export async function updatePrefix(id: number, newPrefix: string) {
+/* 
+
+  id: number; // ID of the broadcaster.
+  username: string; // Username of the broadcaster.
+  prefix: string; // Sets their own prefix.
+  logged: boolean; // Does the broadcaster want their channel logged for WST?
+  disabledCommands: string[]; // List of commands that are disabled for that streamer.
+
+*/
+
+export async function updatePrefix(id: number, type: 'id' | 'username' | 'prefix' | 'logged' | 'disabledCommands', value: string) {
   let index = channelSettings.map(e => e.id).indexOf(id);
-  channelSettings[index].prefix = newPrefix;
+  channelSettings[index][type] = value;
 }
 
 export function getChannelSettings(channel: string) {

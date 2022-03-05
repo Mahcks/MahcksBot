@@ -5,7 +5,6 @@ const pb = require("@madelsberger/pausebuffer");
 import mariadb from "mariadb";
 import { initChannelSettings } from "./utils/start";
 
-import onChatEvent from "./events/onChatEvent/onChatEvent";
 export const pool = mariadb.createPool({
   host: config.MariaDB.host,
   user: config.MariaDB.user,
@@ -15,6 +14,22 @@ export const pool = mariadb.createPool({
 });
 
 export let channelsToJoin: string[] = [];
+
+const client = pb.wrap(new TMI.client({
+  options: {
+    debug: true
+  },
+  connection: {
+    reconnect: true,
+    secure: true
+  },
+  identity: {
+    username: "mahcksbot",
+    password: config.tmiOptions.identity.password
+  },
+  channels: channelsToJoin
+}));
+
 (async function () {
   if (config.production) {
     let conn;
@@ -32,23 +47,9 @@ export let channelsToJoin: string[] = [];
   } else channelsToJoin.push('mahcksimus')
 })();
 
-const client = pb.wrap(new TMI.client({
-  options: {
-    debug: true
-  },
-  connection: {
-    reconnect: true,
-    secure: true
-  },
-  identity: {
-    username: "mahcksbot",
-    password: config.tmiOptions.identity.password
-  },
-  channels: channelsToJoin
-}));
-
 client.connect().then(async () => {
   await initChannelSettings();
 });
 
+import onChatEvent from "./events/onChatEvent/onChatEvent";
 client.on("chat", async (channel: string, userstate: TMI.Userstate, message: string, self: boolean) => await onChatEvent(client, channel, userstate, message, self));

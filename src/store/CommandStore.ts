@@ -14,21 +14,42 @@ export class CommandStore {
 
   _storeAllCommands(commands: Array<CommandInt>) {
     commands.forEach(async (command) => {
-      // TODO: for some reason this doesn't work but it does on RPB
-      console.log(command.Name)
       let isThere = await findQuery('SELECT * FROM commands WHERE name=?', [command.Name.toString()]);
 
-      if (isThere) {
-        let values = [command.Name, command.Aliases, command.Permissions, command.Description, command.DynamicDescription, command.GlobalCooldown, command.Cooldown, (command.Testing) ? "true" : "false", (command.OfflineOnly) ? "true" : "false", (command.OnlineOnly) ? "true" : "false", command.Name];
-        await updateOne(`UPDATE commands SET name=?, aliases=?, permissions=?, description=?, dynamicDescription=?, globalCooldown=?, cooldown=?, testing=?, offlineOnly=?, onlineOnly=? WHERE name=?;`, values);
-        //console.log('updated');
+      if (isThere[0]) {
+        let qString = `UPDATE commands SET name=?, aliases=?, permissions=?, description=?, dynamicDescription=?, globalCooldown=?, cooldown=?, testing=?, offlineOnly=?, onlineOnly=?, optout=? WHERE name=?;`;
+        let values = [
+          command.Name,
+          JSON.stringify(command.Aliases),
+          JSON.stringify(command.Permissions),
+          command.Description,
+          JSON.stringify(command.DynamicDescription),
+          command.GlobalCooldown,
+          command.Cooldown,
+          (command.Testing) ? 1 : 0,
+          (command.OfflineOnly) ? 1 : 0,
+          (command.OnlineOnly) ? 1 : 0,
+          (command.Optout) ? 1 : 0,
+          command.Name
+        ];
+        await updateOne(qString, values);
       } else {
-        // TODO: Fix this
-/*         let queryStr = `INSERT INTO commands (name, aliases, permissions, description, dynamicDescription, globalCooldown, cooldown, testing, offlineOnly, onlineOnly, count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
-        let values = [command.Name, JSON.stringify(command.Aliases), JSON.stringify(command.Permissions), command.Description, JSON.stringify(command.DynamicDescription), command.GlobalCooldown, command.Cooldown, (command.Testing) ? "true" : "false", (command.OfflineOnly) ? "true" : "false", (command.OnlineOnly) ? "true" : "false", 0];
-        await insertRow(queryStr, values); */
+        let queryStr = `INSERT INTO commands (name, aliases, permissions, description, dynamicDescription, globalCooldown, cooldown, testing, offlineOnly, onlineOnly, optout, count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+        let values = [
+          command.Name,
+          JSON.stringify(command.Aliases),
+          JSON.stringify(command.Permissions),
+          command.Description,
+          JSON.stringify(command.DynamicDescription),
+          command.GlobalCooldown, command.Cooldown,
+          (command.Testing) ? 1 : 0,
+          (command.OfflineOnly) ? 1 : 0,
+          (command.OnlineOnly) ? 1 : 0,
+          (command.Optout) ? 1 : 0,
+          0
+        ];
+        await insertRow(queryStr, values);
       }
-      //findOrCreate("commands", `Name='${command.name}'`, queryStr, values);
     })
   }
 

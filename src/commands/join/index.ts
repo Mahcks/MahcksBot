@@ -23,7 +23,7 @@ const leaveCommand: CommandInt = {
 
     // Insert into database
     await insertRow('INSERT INTO channels (id, username, prefix, disabledCommands, logged) VALUES (?, ?, ?, ?, ?);', 
-    [parseInt(userstate["user-id"]!), userstate['username'], '!', [], 0]);
+    [parseInt(userstate["user-id"]!), userstate['username'], '!', JSON.stringify([]), 0]);
 
     // Add to cache
     let uid: number;

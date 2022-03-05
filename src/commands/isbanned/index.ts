@@ -29,7 +29,7 @@ const isbannedCommand: CommandInt = {
       let isBanned = data.banned;
       let toSend = (isBanned) ? 'banned PoroSad' : 'not banned from Twitch PogChamp';
 
-      client.action(channel, `@${user} "${toTarget}" is ${toSend} `)
+      client.action(channel, `@${user} "${toTarget}" is ${toSend}`);
 
     } catch (error: any) {
       let why = error.response.data.error.toLowerCase();
