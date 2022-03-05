@@ -26,11 +26,7 @@ export function getTarget(user: any, target: string) {
 
 export function removeFirstWord(str: string) {
   const indexOfSpace = str.indexOf(' ');
-
-  if (indexOfSpace === -1) {
-    return '';
-  }
-
+  if (indexOfSpace === -1) return '';
   return str.substring(indexOfSpace + 1);
 }
 

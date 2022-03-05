@@ -5,7 +5,6 @@ import { CommandInt } from "../../validation/ComandSchema";
 
 interface UserSettings {
   id: number;
-  bio: string;
   chatColor: string;
   badge: string[] | string;
   created: string;
@@ -43,14 +42,13 @@ const whoisCommand: CommandInt = {
 
     let usersSettings: UserSettings = {
       id: (isSelf) ? userstate['user-id'] : userLookup.id,
-      bio: (userLookup.bio === null) ? '[None]' : userLookup.bio,
       chatColor: (userLookup.chatColor === undefined) ? '[None]' : userLookup.chatColor,
       badge: (userLookup.badge.length === 0) ? '[None]' : getBadges(userLookup.badge),
       created: calcDate(new Date(), new Date(userLookup['createdAt']), ['s', 'm'])
     }
 
     if (target.toLowerCase() === userstate['username']) {
-      client.action(channel, `@${user} you ID is: ${usersSettings.id} bio: ${usersSettings.bio} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
+      client.action(channel, `@${user} you ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
     }
   }
 }
