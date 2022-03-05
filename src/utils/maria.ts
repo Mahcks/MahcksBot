@@ -53,10 +53,12 @@ export async function updateOne(query: string, values: any[]) {
       data = rows;
     } else data = false;
   } catch (err) {
+    console.log(err);
     throw err;
   } finally {
     if (conn) {
       conn.end();
+      console.log(data)
       return data;
     }
   }

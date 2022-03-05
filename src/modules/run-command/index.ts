@@ -3,6 +3,7 @@ import config from "../../config/config";
 import { CommandStore } from "../../store/CommandStore";
 import { cooldownCanContinue } from "../../utils/cooldown";
 import isUserPremitted from "../../utils/isUserPremitted";
+import { getChannelSettings } from "../../utils/start";
 
 const commands = new CommandStore(process.cwd() + "/dist/commands/");
 
@@ -17,7 +18,13 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   const command = commands.getCommand(commandName);
 
   if (command !== null) {
+    let channelSettings = getChannelSettings(channel.substring(1));
     if (!command) return;
+
+    // If command is disabled for a channel don't run it.
+    // TODO: Check the command aliases, if they are ran then handle it the same way.
+    if (channelSettings.disabledCommands.length >= 1)
+      if (channelSettings.disabledCommands.includes(command.Name)) return client.action(channel, `@${userstate['display-name']} that command is disabled here.`);
 
     // Check if command is in testing.
     if (command.Testing && !config.testing_channels.includes(channel.substring(1))) return;

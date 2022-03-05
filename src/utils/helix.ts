@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import config from "../config/config";
 
 const headers = {
@@ -14,6 +14,20 @@ async function fetchHelixAPI(endpoint: string, query: object | string) {
 
 export async function getUser(user: string | number) {
   return await fetchHelixAPI("users", Number(user) ? `id=${user}` : `login=${user}`);
+}
+
+/**
+ * Get's information from api.ivr.fi
+ * 
+ * @param user string
+ */
+export async function resolveUser(user: string) {
+  try {
+    const res = await axios.get(`https://api.ivr.fi/twitch/resolve/${user}`);
+    return res.data;
+  } catch (error: any) {
+    return error.response.data.error;
+  }
 }
 
 export async function getUserId(username: string) {

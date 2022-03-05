@@ -16,18 +16,20 @@ export const pool = mariadb.createPool({
 
 export let channelsToJoin: string[] = [];
 (async function () {
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const query = await conn.query('SELECT username FROM channels;');
-    query.forEach((channel: any) => {
-      channelsToJoin.push(channel.username);
-    });
-  } catch (err) {
-    throw err;
-  } finally {
-    if (conn) return conn.end();
-  }
+  if (config.production) {
+    let conn;
+    try {
+      conn = await pool.getConnection();
+      const query = await conn.query('SELECT username FROM channels;');
+      query.forEach((channel: any) => {
+        channelsToJoin.push(channel.username);
+      });
+    } catch (err) {
+      throw err;
+    } finally {
+      if (conn) return conn.end();
+    }
+  } else channelsToJoin.push('mahcksimus')
 })();
 
 const client = pb.wrap(new TMI.client({

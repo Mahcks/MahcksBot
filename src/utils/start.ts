@@ -1,10 +1,11 @@
 import { findQuery } from "./maria";
 
 export interface ChannelSettings {
-  id: number;
-  username: string;
-  prefix: string;
-  role: string;
+  id: number; // ID of the broadcaster.
+  username: string; // Username of the broadcaster.
+  prefix: string; // Sets their own prefix.
+  logged: boolean; // Does the broadcaster want their channel logged for WST?
+  disabledCommands: string[]; // List of commands that are disabled for that streamer.
 }
 
 export interface Permissions {

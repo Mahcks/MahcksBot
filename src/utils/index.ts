@@ -1,5 +1,5 @@
+import moment from "moment";
 import { Userstate } from "tmi.js";
-import { findOne, findQuery, updateOne } from "./maria";
 
 export function secondsToHms(d: number): string {
   d = Number(d);
@@ -18,21 +18,6 @@ export function getUserPermissions(currentUserstate: Userstate) {
   return currentPermsArr;
 }
 
-export async function checkAndUpdateBotRole(channel: string, userstate: Userstate) {
-  let desiredRoles = ['moderator', 'vip'];
-
-  let currentPerms = getUserPermissions(userstate);
-  let search = await findQuery('SELECT role FROM channels WHERE username=?', [channel]);
-  let foundRole = search[0].role;
-
-  // this means he's a viewer 
-  if (currentPerms.length === 0) {
-    if (foundRole !== 'viewer') return await updateOne(`UPDATE channels SET role=? WHERE channel=?`, ['viewer', channel]);
-  }
-  console.log('current perms in chat', currentPerms);
-  console.log('search', search[0].role);
-}
-
 export function getTarget(user: any, target: string) {
   let tagged = (target) ? target : user;
   tagged = (tagged?.startsWith("@")) ? tagged.substring(1) : tagged;
@@ -47,4 +32,49 @@ export function removeFirstWord(str: string) {
   }
 
   return str.substring(indexOfSpace + 1);
+}
+
+type OptionalDateStrings = 's' | 'm' | 'h' | 'd' | 'mo' | 'y';
+export function calcDate(startDate: Date, endDate: Date, exclude: OptionalDateStrings[]) {
+  var a = moment(startDate);
+  var b = moment(endDate);
+
+  let years = a.diff(b, 'year');
+  b.add(years, 'years');
+
+  let months = a.diff(b, 'months');
+  b.add(months, 'months');
+
+  let days = a.diff(b, 'days');
+  b.add(days, 'days');
+
+  let hours = a.diff(b, 'hours');
+  b.add(hours, 'hours');
+
+  let minutes = a.diff(b, 'minutes');
+  b.add(minutes, 'minutes');
+
+  let seconds = a.diff(b, 'seconds');
+  b.add(seconds, 'seconds');
+
+  let dateArr: string[] = [];
+  if (!exclude.includes('y'))
+    if (years > 0) dateArr.push(years + 'y');
+
+  if (!exclude.includes('mo'))
+    if (months > 0) dateArr.push(months + 'mo');
+
+  if (!exclude.includes('d'))
+    if (days > 0) dateArr.push(days + 'd');
+
+  if (!exclude.includes('h'))
+    if (hours > 0) dateArr.push(hours + 'h');
+
+  if (!exclude.includes('m'))
+    if (minutes > 0) dateArr.push(minutes + 'm');
+
+  if (!exclude.includes('s'))
+    if (seconds > 0) dateArr.push(seconds + "s");
+
+  return dateArr.join(", ")
 }

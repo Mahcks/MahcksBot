@@ -1,6 +1,6 @@
 import { Actions, CommonUserstate } from "tmi.js";
 import { getUserId } from "../../utils/helix";
-import { findQuery, insertRow, removeOne } from "../../utils/maria";
+import { findQuery, insertRow, removeOne, updateOne } from "../../utils/maria";
 import { addChannelSetting, ChannelSettings, removeChannelSetting } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -36,8 +36,9 @@ const debugCommand: CommandInt = {
         let settings: ChannelSettings = {
           id: id,
           prefix: "!",
-          role: "viewer",
-          username: context[1].toLowerCase()
+          username: context[1].toLowerCase(),
+          disabledCommands: [],
+          logged: false
         };
 
         addChannelSetting(settings);
@@ -67,6 +68,10 @@ const debugCommand: CommandInt = {
 
       client.action(channel, 'Goodbye MrDestructoid 👋');
       client.part(channel);
+    
+    } else if (cmd === "disable") {
+      await updateOne('UPDATE channels SET disabledCommands=? WHERE username=?', [JSON.stringify(["ping"]), userstate['username']]);
+      console.log('test');
     }
   }
 }

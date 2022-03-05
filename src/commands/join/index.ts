@@ -22,7 +22,8 @@ const leaveCommand: CommandInt = {
     if (isThere[0]) return client.action(channel, `@${userstate['username']} I'm already in your channel.`);
 
     // Insert into database
-    await insertRow('INSERT INTO channels (id, username, prefix, role) VALUES (?, ?, ?, ?);', [parseInt(userstate["user-id"]!), userstate['username'], '!', 'viewer']);
+    await insertRow('INSERT INTO channels (id, username, prefix, disabledCommands, logged) VALUES (?, ?, ?, ?, ?);', 
+    [parseInt(userstate["user-id"]!), userstate['username'], '!', [], 0]);
 
     // Add to cache
     let uid: number;
@@ -31,8 +32,9 @@ const leaveCommand: CommandInt = {
       let settings: ChannelSettings = {
         id: uid,
         prefix: "!",
-        role: "viewer",
-        username: userstate["username"]
+        username: userstate["username"], 
+        disabledCommands: [],
+        logged: false
       };
 
       addChannelSetting(settings);
