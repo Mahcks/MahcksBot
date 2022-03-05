@@ -15,6 +15,7 @@ export class CommandStore {
   _storeAllCommands(commands: Array<CommandInt>) {
     commands.forEach(async (command) => {
       // TODO: for some reason this doesn't work but it does on RPB
+      console.log(command.Name)
       let isThere = await findQuery('SELECT * FROM commands WHERE name=?', [command.Name.toString()]);
 
       if (isThere) {

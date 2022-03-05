@@ -26,9 +26,10 @@ const isbannedCommand: CommandInt = {
 
       let data = req.data;
 
-      if (toTarget.toLowerCase() !== userstate["username"]) {
-        return client.action(channel, `@${user} "${toTarget}" is banned from Twitch`);
-      } else return client.action(channel, `@${user} you're not banned PogChamp`)
+      let isBanned = data.banned;
+      let toSend = (isBanned) ? 'banned PoroSad' : 'not banned from Twitch PogChamp';
+
+      client.action(channel, `@${user} "${toTarget}" is ${toSend} `)
 
     } catch (error: any) {
       let why = error.response.data.error.toLowerCase();
