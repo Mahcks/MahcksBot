@@ -57,6 +57,15 @@ const patternCommand: CommandInt = {
 
       createPyramid(5);
 
+    } else if (input === "triangle") {
+      const createTriangle = (height: number) => {
+        for (var i = 1; i <= height; i++) {
+          sendMessage(client, false, channel, (' ' + context[0] + ' ').repeat(i))
+        }
+      }
+
+      createTriangle(6);
+      return '';
     } else chosen = sendMessage(client, false, channel, normal.replace(/(\(emote\))/gm, context[0]));;
 
     
