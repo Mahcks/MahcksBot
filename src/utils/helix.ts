@@ -32,5 +32,6 @@ export async function resolveUser(user: string) {
 
 export async function getUserId(username: string) {
   let id = await getUser(username);
+  if (id['data'].length === 0) return false;
   return id["data"][0]["id"];
 }
