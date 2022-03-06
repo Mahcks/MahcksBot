@@ -22,6 +22,7 @@ const disableCommand: CommandInt = {
     const user = userstate['display-name'];
     let cmdTarget = context[0].toLowerCase();
     let currentSettings = getChannelSettings(channel.substring(1));
+    if (!cmdTarget) return sendMessage(client, false, channel, `@${user} please provide a command to disable. ${currentSettings.prefix}disable (command)`);
 
     // TODO: add support to disable multiple commands like '!disable cmd1 cmd2 cmd3'
 
