@@ -1,6 +1,7 @@
 import { Actions, Userstate } from "tmi.js";
 import { applyFont } from "../../utils";
 import { bold, fancy, fancyBold, outline } from "../../utils/fonts";
+import { getChannelSettings } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const fontCommand: CommandInt = {
@@ -12,7 +13,7 @@ const fontCommand: CommandInt = {
   Description: "Change the font of any text.",
   DynamicDescription: [
     "Change the font of a message.",
-    "<code>!font (fancy, fancybold, outline) (message)</code>",
+    "<code>!font (fancy, fancybold, outline, small) (message)</code>",
   ],
   Testing: false,
   OfflineOnly: false,
@@ -20,6 +21,7 @@ const fontCommand: CommandInt = {
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     let askedFont = context[0];
+    let currentSettings = getChannelSettings(channel.substring(1));
 
     function getTranslated() {
       context.shift();
@@ -39,7 +41,7 @@ const fontCommand: CommandInt = {
     } else if (askedFont === "outline") {
       client.say(channel, `${applyFont(getTranslated(), outline)}`);
 
-    } else client.say(channel, `@${userstate["display-name"]} incorrect syntax: !font (fancy, fancybold, outline, bold) (message)`);
+    } else client.say(channel, `@${userstate["display-name"]} incorrect syntax: ${currentSettings.prefix}font (fancy, fancybold, outline, bold, small) (message)`);
   }
 }
 
