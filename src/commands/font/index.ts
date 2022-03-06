@@ -1,6 +1,6 @@
 import { Actions, Userstate } from "tmi.js";
 import { applyFont } from "../../utils";
-import { bold, fancy, fancyBold, outline } from "../../utils/fonts";
+import { bold, fancy, fancyBold, outline, small } from "../../utils/fonts";
 import { getChannelSettings } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -41,6 +41,8 @@ const fontCommand: CommandInt = {
     } else if (askedFont === "outline") {
       client.say(channel, `${applyFont(getTranslated(), outline)}`);
 
+    } else if (askedFont === "small") {
+      client.say(channel, `${applyFont(getTranslated(), small)}`)
     } else client.say(channel, `@${userstate["display-name"]} incorrect syntax: ${currentSettings.prefix}font (fancy, fancybold, outline, bold, small) (message)`);
   }
 }
