@@ -95,7 +95,7 @@ export async function checkMessageBanPhrase(message: string) {
 
 export async function updateOrCreateChatter(userstate: Userstate) {
   let query = await findQuery('SELECT id FROM chatters WHERE username=?;', [userstate['username']]);
-  
+
   if (!query[0]) {
     let values = [userstate["user-id"], userstate["username"], 0];
     await insertRow(`INSERT INTO chatters (id, username, commandsUsed) VALUES (?, ?, ?);`, values);
@@ -118,9 +118,58 @@ export function humanizeNumber(number: number) {
  * @param font font choice from data.ts
  * @returns string of the new message
  */
- export function applyFont(message: string, font: any) {
+export function applyFont(message: string, font: any) {
   return message.split("").map(function (c) {
     if (typeof font[c] === "undefined") font[c] = " ";
     return font[c];
   }).join('');
+}
+
+export function booleanCheck(bool: string, defaultBool: boolean) {
+  if (typeof bool !== "undefined" && (parseInt(bool) === 0 || parseInt(bool) === 1))
+    return Boolean(parseInt(bool));
+  else return defaultBool;
+}
+
+export async function isMod(user: Userstate, channel: string) {
+  channel = channel[0] === "#" ? channel.substring(1) : channel;
+  const isMod = user.mod || user['user-type'] === 'mod';
+  const isBroadcaster = channel === user.username;
+  const isModUp = isMod || isBroadcaster;
+  return isModUp;
+}
+
+export async function checkIfUserOptedout(id: number, command: string) {
+  let query = await findQuery('SELECT * FROM optout WHERE id=?', [id]);
+  let toReturn;
+
+  if (query[0]) {
+    let cmds = JSON.parse(query[0].commands);
+    (cmds.includes(command)) ? toReturn = true : toReturn = false;
+  } else toReturn = false;
+
+  return toReturn;
+}
+
+export async function fetchAPI(url: string) {
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.warn(error)
+    return error;
+  }
+}
+
+export async function getAllChatters(channel: string) {
+  let chatters: string[] = [];
+
+  let chatData = await fetchAPI(`https://tmi.twitch.tv/group/user/${channel}/chatters`);
+  let cd = chatData["chatters"];
+  chatters.push(...cd["broadcaster"], ...cd["moderators"], ...cd["staff"], ...cd["admins"], ...cd["global_mods"], ...cd["viewers"]);
+  return chatters;
+}
+
+export async function logMessage(channel: string, id: number, username: string, message: string, timestamp: Date) {
+  await insertRow('INSERT INTO logs (channel, id, username, message, timestamp) VALUES (?, ?, ?, ?, ?);', [channel, id, username, message, timestamp]);
 }

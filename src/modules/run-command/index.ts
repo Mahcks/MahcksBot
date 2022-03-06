@@ -6,6 +6,7 @@ import { cooldownCanContinue } from "../../utils/cooldown";
 import isUserPremitted from "../../utils/isUserPremitted";
 import { updateOne } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
+import sendMessage from "../send-message/sendMessage";
 
 const commands = new CommandStore(process.cwd() + "/dist/commands/");
 
@@ -20,9 +21,9 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   const command = commands.getCommand(commandName);
 
   let checkMessage = await checkMessageBanPhrase(message);
-  if (checkMessage === null) return client.action(channel, `@${userstate["display-name"]} FeelsDankMan sorry couldn't check for banphrase.`);
+  if (checkMessage === null) return client.action(channel, `@${userstate["display-name"]} FeelsDankMan sorry couldn't check for banphrase, try again in a bet FeelsDankMan`);
   if (/(i'm\s12|im\s12|i\sam\s12|am\s12)/gm.test(message)) return;
-  if (checkMessage.data.banned) return;
+  if (checkMessage.data.banned) sendMessage(client, false, channel.substring(1), `[REDACTED] cmonBruh`);
 
   if (command !== null) {
     let channelSettings = getChannelSettings(channel.substring(1));

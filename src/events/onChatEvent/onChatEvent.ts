@@ -1,6 +1,6 @@
 import { Actions, Userstate } from "tmi.js";
 import runCommand from "../../modules/run-command";
-import { updateOrCreateChatter } from "../../utils";
+import { logMessage, updateOrCreateChatter } from "../../utils";
 import { channelSettings } from "../../utils/start";
 
 export default async (client: Actions, channel: string, userstate: Userstate, message: string, self: boolean) => {
@@ -22,4 +22,6 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
 
     // Save/update chatter in table
     await updateOrCreateChatter(userstate);
+
+    await logMessage(channel.substring(1), parseInt(userstate['user-id']!), userstate['username'], message, new Date());
 }
