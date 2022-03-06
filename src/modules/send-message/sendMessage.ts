@@ -1,4 +1,5 @@
 import { Actions } from "tmi.js";
+import config from "../../config/config";
 import { ChannelSettings, getChannelSettings } from "../../utils/start";
 
 interface Roles {
@@ -34,6 +35,7 @@ const rateLimits: Roles = {
 
 let alternate = false;
 export default async (client: Actions, isAction: boolean, channel: string, message: string) => {
+  if (config.production && channel.substring(1) === "mahcksimus") return;
   let msg = (alternate) ? message.concat(" 󠀀") : message;
   (alternate) ? alternate = false : alternate = true;
 
