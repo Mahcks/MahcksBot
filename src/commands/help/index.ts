@@ -1,4 +1,5 @@
 import { Actions, CommonUserstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { findQuery } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
@@ -31,9 +32,9 @@ const helpCommand: CommandInt = {
         command = command[0];
         let aliasParse = JSON.parse(command["aliases"]);
         let aliases = (aliasParse.length) ? aliasParse.map((s: string) => channelSettings.prefix + s).join(', ') : 'No aliases';
-        client.action(channel, `@${user} ${channelSettings.prefix}${command['name']} (${aliases}): ${command["description"]} - ${command['cooldown']}sec cooldown.`);
-      } else client.action(channel, `@${user} couldn't find a command with the name "${search}"`);
-    } else client.action(channel, `@${user} Commands and more information avilable here: [TODO]`);
+        sendMessage(client, false, channel, `@${user} ${channelSettings.prefix}${command['name']} (${aliases}): ${command["description"]} - ${command['cooldown']}sec cooldown.`);
+      } else sendMessage(client, false, channel, `@${user} couldn't find a command with the name "${search}"`);
+    } else sendMessage(client, false, channel, `@${user} Commands and more information avilable here: [TODO]`);
   }
 }
 

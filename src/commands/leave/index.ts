@@ -1,4 +1,5 @@
 import { Actions, CommonUserstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { removeOne } from "../../utils/maria";
 import { removeChannelSetting } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
@@ -29,7 +30,7 @@ const leaveCommand: CommandInt = {
       removeChannelSetting(uid);
     } 
 
-    client.action(channel, 'Goodbye MrDestructoid 👋');
+    sendMessage(client, true, channel, 'Goodbye MrDestructoid 👋');
     client.part(channel);
   }
 }

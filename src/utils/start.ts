@@ -4,8 +4,9 @@ export interface ChannelSettings {
   id: number; // ID of the broadcaster.
   username: string; // Username of the broadcaster.
   prefix: string; // Sets their own prefix.
+  role: string;
   logged: boolean; // Does the broadcaster want their channel logged for WST?
-  disabledCommands: string[]; // List of commands that are disabled for that streamer.
+  disabledCommands: string | string[]; // List of commands that are disabled for that streamer.
 }
 
 export interface Permissions {
@@ -23,7 +24,16 @@ export async function initChannelSettings() {
   let data = cSettings;
 
   data.forEach((channel: ChannelSettings) => {
-    channelSettings.push(channel);
+    let toPush: ChannelSettings = {
+      id: channel.id,
+      username: channel.username,
+      prefix: channel.prefix,
+      role: channel.role,
+      disabledCommands: JSON.parse(channel.disabledCommands as string),
+      logged: Boolean(channel.logged)
+    };
+
+    channelSettings.push(toPush);
   });
 
   let perms = await findQuery('SELECT * FROM permissions;', []);
@@ -52,7 +62,7 @@ export async function removeChannelSetting(id: number) {
 
 */
 
-export async function updatePrefix(id: number, type: 'id' | 'username' | 'prefix' | 'logged' | 'disabledCommands', value: string) {
+export async function updateChannelCache(id: number, type: 'id' | 'username' | 'prefix' | 'logged' | 'disabledCommands', value: string | string[]) {
   let index = channelSettings.map(e => e.id).indexOf(id);
   channelSettings[index][type] = value;
 }

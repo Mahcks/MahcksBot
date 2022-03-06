@@ -6,6 +6,7 @@
 */
 
 import { Actions, CommonUserstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const patternCommand: CommandInt = {
@@ -14,7 +15,7 @@ const patternCommand: CommandInt = {
   Permissions: [],
   GlobalCooldown: 10,
   Cooldown: 30,
-  Description: "Generate a pattern",
+  Description: "Generates a pattern with a specific emote.",
   DynamicDescription: [
     "<code>!pattern (emote)</code>"
   ],
@@ -23,10 +24,10 @@ const patternCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
-    let template = '⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote)';
+    let template = '⠀⠀⠀⠀ ⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀  (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote)';
     template = template.replace(/(\(emote\))/gm, context[0]);
 
-    return client.action(channel, template);
+    return sendMessage(client, false, channel, template);
   }
 }
 

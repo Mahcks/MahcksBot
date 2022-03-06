@@ -1,6 +1,7 @@
 import { Actions, Userstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { updateOne } from "../../utils/maria";
-import { updatePrefix } from "../../utils/start";
+import { updateChannelCache } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const exampleCommand: CommandInt = {
@@ -23,16 +24,16 @@ const exampleCommand: CommandInt = {
     if (context[0]) {
       // make sure there isn't any spaces.
       if (/\s/g.test(context.join(" "))) {
-        return client.action(channel, `@${user} you can't have spaces in your prefix.`);
+        return sendMessage(client, false, channel, `@${user} you can't have spaces in your prefix.`);
       } else {
         await updateOne('UPDATE channels SET prefix=? WHERE id=?', [context[0], userstate['user-id']]);
 
         // Update cache
-        await updatePrefix(parseInt(userstate['user-id']!), 'prefix', context[0]);
+        await updateChannelCache(parseInt(userstate['user-id']!), 'prefix', context[0]);
 
-        return client.action(channel, `@${user} set the prefix to "${context[0]}"`);
+        return sendMessage(client, false, channel, `@${user} set the prefix to "${context[0]}"`);
       }
-    } else return client.action(channel, `@${user} please provide a new prefix.`);
+    } else return sendMessage(client, false, channel, `@${user} please provide a new prefix.`);
   }
 }
 

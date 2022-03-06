@@ -1,4 +1,5 @@
 import { Actions, CommonUserstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { calcDate, getTarget } from "../../utils";
 import { getUser, getUserId, resolveUser } from "../../utils/helix";
 import { CommandInt } from "../../validation/ComandSchema";
@@ -48,7 +49,7 @@ const whoisCommand: CommandInt = {
     }
 
     if (target.toLowerCase() === userstate['username']) {
-      client.action(channel, `@${user} you ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
+      sendMessage(client, false, channel, `@${user} you ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
     }
   }
 }

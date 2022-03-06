@@ -1,4 +1,5 @@
 import { Actions, CommonUserstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { getUserId } from "../../utils/helix";
 import { findQuery, insertRow, removeOne, updateOne } from "../../utils/maria";
 import { addChannelSetting, ChannelSettings, removeChannelSetting } from "../../utils/start";
@@ -24,18 +25,19 @@ const debugCommand: CommandInt = {
     // Force bot to join a channel.
     if (cmd === "join") {
       let id = await getUserId(context[1]);
-      if (!context[1]) return client.action(channel, `@${userstate['username']} please specify a channel to join.`);
+      if (!context[1]) return sendMessage(client, false, channel, `@${userstate['username']} please specify a channel to join.`);
       let isThere = await findQuery('SELECT * FROM channels WHERE id=?', [id]);
-      if (isThere[0]) return client.action(channel, `@${userstate['username']} I'm already in ${context[1]}.`);
+      if (isThere[0]) return sendMessage(client, false, channel, `@${userstate['username']} I'm already in ${context[1]}.`);
 
       // Insert into database
-      await insertRow('INSERT INTO channels (id, username, prefix, role) VALUES (?, ?, ?, ?);', [id, context[1].toLowerCase(), '!', 'viewer']);
+      await insertRow('INSERT INTO channels (id, username, prefix, role, disabledCommands, logged) VALUES (?, ?, ?, ?, ?, ?);', [id, context[1].toLowerCase(), '!', 'viewer', '[]', 0]);
 
       // Add to cache
       if (id) {
         let settings: ChannelSettings = {
           id: id,
           prefix: "!",
+          role: 'viewer',
           username: context[1].toLowerCase(),
           disabledCommands: [],
           logged: false
@@ -48,9 +50,9 @@ const debugCommand: CommandInt = {
 
       client.join(channelToJoin)
         .then((data) => {
-          client.action(channelToJoin, 'Hello! MrDestructoid 👋');
+          sendMessage(client, false, channelToJoin, 'Hello! MrDestructoid 👋');
         }).catch((err) => {
-          client.action(channel, `@${channelToJoin} sorry there was an error trying to join your channel.`);
+          sendMessage(client, false, channel, `@${channelToJoin} sorry there was an error trying to join your channel.`);
           console.log(err);
         });
     } else if (cmd === "leave") {
@@ -66,7 +68,7 @@ const debugCommand: CommandInt = {
         removeChannelSetting(uid);
       }
 
-      client.action(channel, 'Goodbye MrDestructoid 👋');
+      sendMessage(client, false, channel, 'Goodbye MrDestructoid 👋');
       client.part(channel);
     
     } else if (cmd === "disable") {

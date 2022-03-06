@@ -15,7 +15,7 @@ export const pool = mariadb.createPool({
 
 export let channelsToJoin: string[] = [];
 
-const client = pb.wrap(new TMI.client({
+const client = new TMI.client({
   options: {
     debug: true
   },
@@ -28,7 +28,8 @@ const client = pb.wrap(new TMI.client({
     password: config.tmiOptions.identity.password
   },
   channels: channelsToJoin
-}));
+});
+
 
 (async function () {
   if (config.production) {

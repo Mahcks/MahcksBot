@@ -4,26 +4,25 @@ import { findQuery, updateOne } from "../../utils/maria";
 import { getChannelSettings, updateChannelCache } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
-const disableCommand: CommandInt = {
-  Name: "disable",
+const enableCommand: CommandInt = {
+  Name: "enable",
   Aliases: [],
   Permissions: ['broadcaster'],
   GlobalCooldown: 10,
   Cooldown: 30,
-  Description: "Disable a command.",
+  Description: "Enable a command.",
   DynamicDescription: [
-    "<code>!disable (command)</code>"
+    "<code>!enable (command)</code>"
   ],
   Testing: false,
   OfflineOnly: false,
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
-    const user = userstate['display-name'];
-    let cmdTarget = context[0].toLowerCase();
+    let cmdTarget = context[0];
     let currentSettings = getChannelSettings(channel.substring(1));
 
-    // TODO: add support to disable multiple commands like '!disable cmd1 cmd2 cmd3'
+    // TODO: add support to disable multiple commands like '!enable cmd1 cmd2 cmd3'
 
     let query = await findQuery('SELECT * FROM channels WHERE id=?', [userstate['user-id']]);
     let currDisabled: any[] = JSON.parse(query[0].disabledCommands);
@@ -32,19 +31,20 @@ const disableCommand: CommandInt = {
     let found = qCmd[0];
 
     if (found) {
-      if (!currDisabled.includes(cmdTarget)) {
-        let cantDisable = ['ping', 'disable', 'enable'];
-        if (cantDisable.includes(cmdTarget)) return sendMessage(client, false, channel, `@${user} you can't disable that command.`);
+      if (currDisabled.includes(cmdTarget)) {
+        // Remove command from disabled list.
+        let index = currDisabled.indexOf(cmdTarget.toLowerCase());
+        currDisabled.splice(index, 1);
 
-        // Update cache
-        currDisabled.push(cmdTarget);
+        // Update cache.
         updateChannelCache(parseInt(userstate['user-id']!), "disabledCommands", currDisabled);
 
+        // Update table.
         await updateOne('UPDATE channels SET disabledCommands=? WHERE id=?;', [JSON.stringify(currDisabled), userstate['user-id']]);
-        sendMessage(client, false, channel, `@${user} disabled the command "${cmdTarget}"`)
-      } else return sendMessage(client, false, channel, `@${user} "${cmdTarget}" is already disabled. To enable it do ${currentSettings.prefix}enable ${cmdTarget}`);
-    } else return sendMessage(client, false, channel, `@${user} can't find the command "${cmdTarget}" to disable.`); 
+        sendMessage(client, false, channel, `@${userstate['display-name']} enabled the command "${cmdTarget}"`);
+      } else return sendMessage(client, false, channel, `@${userstate['display-name']} "${cmdTarget}" is enabled. If you'd like to disable it do ${currentSettings.prefix}disable ${cmdTarget}`);
+    } else return sendMessage(client, false, channel, `@${userstate['display-name']} can't find the command "${cmdTarget}" to enable.`); 
   }
 }
 
-export = disableCommand;
+export = enableCommand;

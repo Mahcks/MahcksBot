@@ -1,5 +1,7 @@
+import axios from "axios";
 import moment from "moment";
-import { Userstate } from "tmi.js";
+import { Actions, client, Userstate } from "tmi.js";
+import { findQuery, insertRow, updateOne } from "./maria";
 
 export function secondsToHms(d: number): string {
   d = Number(d);
@@ -73,4 +75,39 @@ export function calcDate(startDate: Date, endDate: Date, exclude: OptionalDateSt
     if (seconds > 0) dateArr.push(seconds + "s");
 
   return dateArr.join(", ")
+}
+
+export async function checkMessageBanPhrase(message: string) {
+  let data: any;
+  try {
+    data = await axios({
+      method: 'POST',
+      url: `https://cyrbot.com/api/v1/banphrases/test/`,
+      headers: { 'Content-Type': 'application/json' },
+      data: { message: message }
+    });
+  } catch (error) {
+    data = null;
+  }
+
+  return await data;
+}
+
+export async function updateOrCreateChatter(userstate: Userstate) {
+  let query = await findQuery('SELECT id FROM chatters WHERE username=?;', [userstate['username']]);
+  
+  if (!query[0]) {
+    let values = [userstate["user-id"], userstate["username"], 0];
+    await insertRow(`INSERT INTO chatters (id, username, commandsUsed) VALUES (?, ?, ?);`, values);
+  }
+}
+
+export function humanizeNumber(number: number) {
+  var mainStr: string | undefined = number.toString();
+  mainStr = mainStr.split('').reverse().join('');
+
+  mainStr = mainStr.match(/.{1,3}/g)?.join(' ');
+  mainStr = mainStr!.split('').reverse().join('');
+
+  return mainStr;
 }

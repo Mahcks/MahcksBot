@@ -1,4 +1,5 @@
 import { Actions, CommonUserstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { getTarget } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -20,7 +21,7 @@ const exampleCommand: CommandInt = {
     const user = userstate["display-name"];
     let target = getTarget(user, context[1]);
 
-    client.action(channel, `@${target} bot made by Mahcksimus, still a work in progress B)`);
+    sendMessage(client, false, channel, `@${target} bot made by Mahcksimus, still a work in progress B)`)
   }
 }
 

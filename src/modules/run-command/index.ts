@@ -1,8 +1,10 @@
 import { Actions, Userstate } from "tmi.js";
 import config from "../../config/config";
 import { CommandStore } from "../../store/CommandStore";
+import { checkMessageBanPhrase } from "../../utils";
 import { cooldownCanContinue } from "../../utils/cooldown";
 import isUserPremitted from "../../utils/isUserPremitted";
+import { updateOne } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 
 const commands = new CommandStore(process.cwd() + "/dist/commands/");
@@ -16,6 +18,11 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
 
   const commandName = context?.shift()?.toLowerCase();
   const command = commands.getCommand(commandName);
+
+  let checkMessage = await checkMessageBanPhrase(message);
+  if (checkMessage === null) return client.action(channel, `@${userstate["display-name"]} FeelsDankMan sorry couldn't check for banphrase.`);
+  if (/(i'm\s12|im\s12|i\sam\s12|am\s12)/gm.test(message)) return;
+  if (checkMessage.data.banned) return;
 
   if (command !== null) {
     let channelSettings = getChannelSettings(channel.substring(1));
@@ -39,6 +46,10 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
     if (!shouldRun) return;
 
     if (isUserPremitted(userstate, command.Permissions)) {
+      if (!config.production) {
+        await updateOne('UPDATE commands SET count=count+1 WHERE name=?;', [command]);
+        await updateOne('UPDATE chatters SET commandsUsed=commandsUsed+1 WHERE username=?;', [userstate['username']]);
+      }
       return await command.Code(client, channel, userstate, context);
     } else return await client.say(channel, `@${userstate["display-name"]} you don't have permission to use that command.`);
   }

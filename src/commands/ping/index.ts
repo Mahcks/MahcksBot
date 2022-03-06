@@ -1,4 +1,5 @@
 import { Actions, CommonUserstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { secondsToHms } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -21,7 +22,7 @@ const ping: CommandInt = {
 
     await client.ping().then(function (data) {
       let ping: number = Math.floor(Math.round(data as any * 1000));
-      client.say(channel, `@${userstate['display-name']}, FeelsOkayMan 🏓 Uptime: ${secondsToHms(uptime)} Latency to Twitch IRC: ${ping}ms`);
+      sendMessage(client, false, channel, `@${userstate['display-name']}, FeelsOkayMan 🏓 Uptime: ${secondsToHms(uptime)} Latency to Twitch IRC: ${ping}ms`);
     });
   }
 }
