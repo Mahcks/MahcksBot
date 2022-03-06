@@ -19,7 +19,7 @@ const fontCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    let askedFont = context[0].toLowerCase();
+    let askedFont = context[0];
 
     function getTranslated() {
       context.shift();
