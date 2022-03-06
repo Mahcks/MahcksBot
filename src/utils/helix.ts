@@ -35,3 +35,24 @@ export async function getUserId(username: string) {
   if (id['data'].length === 0) return false;
   return id["data"][0]["id"];
 }
+
+export async function getTags(channel: string) {
+  channel = (channel.startsWith("#")) ? channel.substring(1) : channel;
+
+  let uid = await getUserId(channel);
+
+  let req = await axios({
+    method: "GET",
+    url: "https://api.twitch.tv/helix/streams/tags?broadcaster_id="+uid,
+    headers: headers
+  });
+
+  let tagData = req.data.data;
+    let currentTags: string[] = [];
+    tagData.forEach((tag: any) => {
+      let names = tag.localization_names;
+      currentTags.push(names["en-us"]);
+    });
+
+  return currentTags;
+}

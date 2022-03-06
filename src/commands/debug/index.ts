@@ -1,6 +1,6 @@
 import { Actions, CommonUserstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { checkIfUserOptedout } from "../../utils";
+import { checkIfUserOptedout, isMod } from "../../utils";
 import { getUserId } from "../../utils/helix";
 import { findQuery, insertRow, removeOne, updateOne } from "../../utils/maria";
 import { addChannelSetting, ChannelSettings, removeChannelSetting } from "../../utils/start";
@@ -79,6 +79,10 @@ const debugCommand: CommandInt = {
     } else if (cmd === "isoptedout") {
       let isOptedOut = await checkIfUserOptedout(parseInt(userstate['user-id']!), context[1]);
       console.log(isOptedOut);
+    
+    } else if (cmd === "ismod") {
+      let testMod = await isMod(userstate, channel);
+      console.log(testMod);
     }
   }
 }

@@ -7,6 +7,7 @@
 
 import { Actions, CommonUserstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
+import { isMod } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const patternCommand: CommandInt = {
@@ -24,6 +25,7 @@ const patternCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
+    const user = userstate['username'];
     let ein = context[0];
     let input = context[1];
 
@@ -39,37 +41,42 @@ const patternCommand: CommandInt = {
     } else if (input === "what") {
       return sendMessage(client, channel, what.replace(/(\(emote\))/gm, ein));
     } else if (input === "pyramid") {
-      const createPyramid = (height: number) => {
-        for (var i = 1; i <= height; i++) {
-          var row = '';
-  
-          for (var j = 1; j <= i; j++)
-            row += " " + ein;
-          sendMessage(client, channel, row);
+      let amMod = await isMod(userstate, channel.substring(1));
+      if (amMod) {
+        const createPyramid = (height: number) => {
+          for (var i = 1; i <= height; i++) {
+            var row = '';
+    
+            for (var j = 1; j <= i; j++)
+              row += " " + ein;
+            sendMessage(client, channel, row);
+          }
+          for (var i = height - 1; i > 0; i--) {
+            var row = '';
+    
+            for (var j = i; j > 0; j--)
+              row += " " + ein;
+            sendMessage(client, channel, row);
+          }
         }
-        for (var i = height - 1; i > 0; i--) {
-          var row = '';
-  
-          for (var j = i; j > 0; j--)
-            row += " " + ein;
-          sendMessage(client, channel, row);
-        }
-      }
+        createPyramid(3);
+      } else return sendMessage(client, channel, `@${user} this is best used when I'm a mod or VIP.`);
 
-      createPyramid(3);
+      
 
     } else if (input === "triangle") {
-      const createTriangle = (height: number) => {
-        for (var i = 1; i <= height; i++) {
-          sendMessage(client, channel, (' ' + ein + ' ').repeat(i))
+      let amMod = await isMod(userstate, channel.substring(1));
+      console.log('mod stats: ' + amMod);
+      if (amMod) {
+        const createTriangle = (height: number) => {
+          for (var i = 1; i <= height; i++) {
+            sendMessage(client, channel, (' ' + ein + ' ').repeat(i))
+          }
         }
-      }
-
-      createTriangle(3);
-      return '';
+  
+        createTriangle(3);
+     } else return sendMessage(client, channel, `@${user} this is best used when I'm a mod or VIP`);
     } else chosen = sendMessage(client, channel, normal.replace(/(\(emote\))/gm, ein));;
-
-    
   }
 }
 

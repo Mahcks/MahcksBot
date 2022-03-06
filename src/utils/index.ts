@@ -133,10 +133,15 @@ export function booleanCheck(bool: string, defaultBool: boolean) {
 
 export async function isMod(user: Userstate, channel: string) {
   channel = channel[0] === "#" ? channel.substring(1) : channel;
-  const isMod = user.mod || user['user-type'] === 'mod';
-  const isBroadcaster = channel === user.username;
-  const isModUp = isMod || isBroadcaster;
-  return isModUp;
+  let req = await axios.get('https://api.ivr.fi/twitch/modsvips/'+channel);
+  let mods = [...req.data.mods, ...req.data.vips];
+
+  let index = mods.map((e: any) => e.login).indexOf(user.username);
+  let isMod = (typeof mods[index] === 'undefined') ? false : true;
+
+  /* const isBroadcaster = channel === user.username;
+  const isModUp = isMod || isBroadcaster; */
+  return isMod;
 }
 
 export async function checkIfUserOptedout(id: number, command: string) {
