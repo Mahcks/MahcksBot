@@ -25,10 +25,10 @@ const optinCommand: CommandInt = {
     let currSettings = getChannelSettings(channel);
 
     let checkCommand = await findQuery('SELECT * FROM commands WHERE name=?;', [cmdSearch]);
-    if (!cmdSearch) return sendMessage(client, false, channel, `@${user} please provide a command to optout of: ${currSettings.prefix}optout (command)`);
+    if (!cmdSearch) return sendMessage(client, channel, `@${user} please provide a command to optout of: ${currSettings.prefix}optout (command)`);
     if (checkCommand[0]) {
       let canOptout = Boolean(checkCommand[0].optout);
-      if (!canOptout) return sendMessage(client, false, channel, `@${user} can't optout/optin for that command.`);
+      if (!canOptout) return sendMessage(client, channel, `@${user} can't optout/optin for that command.`);
     
       let isUser = await findQuery('SELECT * FROM optout WHERE id=?', [userstate['user-id']]);
       if (isUser[0]) {
@@ -38,14 +38,14 @@ const optinCommand: CommandInt = {
           let index = optedOut.indexOf(cmdSearch.toLowerCase());
           optedOut.splice(index, 1);
           await updateOne('UPDATE optout SET commands=? WHERE id=?;', [JSON.stringify(optedOut), userstate['user-id']]);
-          sendMessage(client, false, channel, `@${user} you have opted into ${cmdSearch.toLowerCase()}.`);
+          sendMessage(client, channel, `@${user} you have opted into ${cmdSearch.toLowerCase()}.`);
         } else {
-          sendMessage(client, false, channel, `@${user} you are already opted in for that command. If you'd like to optout do: ${currSettings.prefix}optout ${cmdSearch.toLowerCase()}`);
+          sendMessage(client, channel, `@${user} you are already opted in for that command. If you'd like to optout do: ${currSettings.prefix}optout ${cmdSearch.toLowerCase()}`);
         }
       } else {
-        sendMessage(client, false, channel, `@${user} you are already opted in for that command. If you'd like to optout do: ${currSettings.prefix}optout ${cmdSearch.toLowerCase()}`);
+        sendMessage(client, channel, `@${user} you are already opted in for that command. If you'd like to optout do: ${currSettings.prefix}optout ${cmdSearch.toLowerCase()}`);
       }
-    } else return sendMessage(client, false, channel, `@${user} couldn't find the command "${cmdSearch.toLowerCase()}"`);
+    } else return sendMessage(client, channel, `@${user} couldn't find the command "${cmdSearch.toLowerCase()}"`);
   }
 }
 

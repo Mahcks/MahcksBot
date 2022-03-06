@@ -31,18 +31,18 @@ const suggestCommand: CommandInt = {
 
         let newCount = count+1;
         await insertRow('INSERT INTO suggestions (id, uid, username, message, status) VALUES (?, ?, ?, ?, ?);', [newCount, userstate['user-id'], userstate['username'], idea, 'pending']);
-        return sendMessage(client, false, channel, `@${userstate['username']} suggestion submitted with ID ${newCount}`)
+        return sendMessage(client, channel, `@${userstate['username']} suggestion submitted with ID ${newCount}`)
       
       } else if (context[0] === "check") {
         let found = await findQuery('SELECT * FROM suggestions WHERE id=?', [context[1]]);
         if (found[0]) {
-          return sendMessage(client, false, channel, `@${userstate['display-name']} message: ${found[0].message} status: ${found[0].status}`);
-        } else return sendMessage(client, false, channel, `@${userstate['display-name']} couldn't find a suggestion with that ID`);
+          return sendMessage(client, channel, `@${userstate['display-name']} message: ${found[0].message} status: ${found[0].status}`);
+        } else return sendMessage(client, channel, `@${userstate['display-name']} couldn't find a suggestion with that ID`);
       }
     } else {
       let query = await findQuery('SELECT COUNT(*) FROM suggestions WHERE uid=?', [userstate['user-id']]);
       let total = (query[0]) ? query[0]['COUNT(*)'] : 0;
-      sendMessage(client, false, channel, `@${userstate['display-name']} you have submitted ${total} suggestions. If you'd like to send feedback use: ${currentSettings.prefix}suggest (send/check) (message/id)`);
+      sendMessage(client, channel, `@${userstate['display-name']} you have submitted ${total} suggestions. If you'd like to send feedback use: ${currentSettings.prefix}suggest (send/check) (message/id)`);
     }
   }
 }

@@ -49,7 +49,7 @@ const whoisCommand: CommandInt = {
     }
 
     if (target.toLowerCase() === userstate['username']) {
-      sendMessage(client, false, channel, `@${user} you ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
+      sendMessage(client, channel, `@${user} you ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
     }
   }
 }

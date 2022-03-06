@@ -35,9 +35,9 @@ const patternCommand: CommandInt = {
     if (!input) chosen = normal;
 
     if (input === "space") {
-      return sendMessage(client, false, channel, space.replace(/(\(emote\))/gm, ein));
+      return sendMessage(client, channel, space.replace(/(\(emote\))/gm, ein));
     } else if (input === "what") {
-      return sendMessage(client, false, channel, what.replace(/(\(emote\))/gm, ein));
+      return sendMessage(client, channel, what.replace(/(\(emote\))/gm, ein));
     } else if (input === "pyramid") {
       const createPyramid = (height: number) => {
         for (var i = 1; i <= height; i++) {
@@ -45,14 +45,14 @@ const patternCommand: CommandInt = {
   
           for (var j = 1; j <= i; j++)
             row += " " + ein;
-          sendMessage(client, false, channel, row);
+          sendMessage(client, channel, row);
         }
         for (var i = height - 1; i > 0; i--) {
           var row = '';
   
           for (var j = i; j > 0; j--)
             row += " " + ein;
-          sendMessage(client, false, channel, row);
+          sendMessage(client, channel, row);
         }
       }
 
@@ -61,13 +61,13 @@ const patternCommand: CommandInt = {
     } else if (input === "triangle") {
       const createTriangle = (height: number) => {
         for (var i = 1; i <= height; i++) {
-          sendMessage(client, false, channel, (' ' + ein + ' ').repeat(i))
+          sendMessage(client, channel, (' ' + ein + ' ').repeat(i))
         }
       }
 
       createTriangle(3);
       return '';
-    } else chosen = sendMessage(client, false, channel, normal.replace(/(\(emote\))/gm, ein));;
+    } else chosen = sendMessage(client, channel, normal.replace(/(\(emote\))/gm, ein));;
 
     
   }

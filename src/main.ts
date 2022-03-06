@@ -15,7 +15,7 @@ export const pool = mariadb.createPool({
 
 export let channelsToJoin: string[] = [];
 
-const client = new TMI.client({
+const client = new pb.wrap(new TMI.client({
   options: {
     debug: true
   },
@@ -28,6 +28,13 @@ const client = new TMI.client({
     password: config.tmiOptions.identity.password
   },
   channels: channelsToJoin
+}));
+
+client.setMessageCountLimit(20);
+client.setMessageCountDuration(30);
+client.setThrottle({
+	high: 1500,
+	low: 500
 });
 
 

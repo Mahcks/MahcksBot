@@ -30,7 +30,7 @@ const leaveCommand: CommandInt = {
       removeChannelSetting(uid);
     } 
 
-    sendMessage(client, true, channel, 'Goodbye MrDestructoid 👋');
+    sendMessage(client, channel, 'Goodbye MrDestructoid 👋');
     client.part(channel);
   }
 }

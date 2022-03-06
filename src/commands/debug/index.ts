@@ -26,9 +26,9 @@ const debugCommand: CommandInt = {
     // Force bot to join a channel.
     if (cmd === "join") {
       let id = await getUserId(context[1]);
-      if (!context[1]) return sendMessage(client, false, channel, `@${userstate['username']} please specify a channel to join.`);
+      if (!context[1]) return sendMessage(client, channel, `@${userstate['username']} please specify a channel to join.`);
       let isThere = await findQuery('SELECT * FROM channels WHERE id=?', [id]);
-      if (isThere[0]) return sendMessage(client, false, channel, `@${userstate['username']} I'm already in ${context[1]}.`);
+      if (isThere[0]) return sendMessage(client, channel, `@${userstate['username']} I'm already in ${context[1]}.`);
 
       // Insert into database
       await insertRow('INSERT INTO channels (id, username, prefix, role, disabledCommands, logged) VALUES (?, ?, ?, ?, ?, ?);', [id, context[1].toLowerCase(), '!', 'viewer', '[]', 0]);
@@ -51,9 +51,9 @@ const debugCommand: CommandInt = {
 
       client.join(channelToJoin)
         .then((data) => {
-          sendMessage(client, false, channelToJoin, 'Hello! MrDestructoid 👋');
+          sendMessage(client, channelToJoin, 'Hello! MrDestructoid 👋');
         }).catch((err) => {
-          sendMessage(client, false, channel, `@${channelToJoin} sorry there was an error trying to join your channel.`);
+          sendMessage(client, channel, `@${channelToJoin} sorry there was an error trying to join your channel.`);
           console.log(err);
         });
     } else if (cmd === "leave") {
@@ -69,7 +69,7 @@ const debugCommand: CommandInt = {
         removeChannelSetting(uid);
       }
 
-      sendMessage(client, false, channel, 'Goodbye MrDestructoid 👋');
+      sendMessage(client, channel, 'Goodbye MrDestructoid 👋');
       client.part(channel);
     
     } else if (cmd === "disable") {

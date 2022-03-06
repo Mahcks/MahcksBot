@@ -28,7 +28,7 @@ const botstatsCommand: CommandInt = {
 
     const commits = await execSync("git rev-list --all --count");
 
-    sendMessage(client, false, channel, `@${target} total commands: ${humanizeNumber(parseInt(totalCmds[0]['count(*)']))}, chatters logged: ${humanizeNumber(parseInt(totalChatters[0]['count(*)']))} commits farmed: ${humanizeNumber(parseInt(commits.toString('utf-8').replace("\n", "")))}`);
+    sendMessage(client, channel, `@${target} total commands: ${humanizeNumber(parseInt(totalCmds[0]['count(*)']))}, chatters logged: ${humanizeNumber(parseInt(totalChatters[0]['count(*)']))} commits farmed: ${humanizeNumber(parseInt(commits.toString('utf-8').replace("\n", "")))}`);
   }
 }
 

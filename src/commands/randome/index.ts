@@ -33,7 +33,7 @@ const randomeCommand: CommandInt = {
     let target = (context[0]) ? context[0] : channel.substring(1);
 
     let uid = await getUserId(target);
-    if (!uid) return sendMessage(client, false, channel, `@${user} couldn't find the user "${target}"`);
+    if (!uid) return sendMessage(client, channel, `@${user} couldn't find the user "${target}"`);
     //let targetMsg = (context[0]) ? `random emote from ${context[0]}` : `random emote from this channel`;
     
     if (platform === "bttv") {
@@ -42,21 +42,21 @@ const randomeCommand: CommandInt = {
       let combined = [...data.sharedEmotes, ...data.channelEmotes];
 
       let random = combined[Math.floor(Math.random()*combined.length)];
-      sendMessage(client, false, channel, `@${user} BTTV ${random.code} https://betterttv.com/emotes/${random.id}`);
+      sendMessage(client, channel, `@${user} BTTV ${random.code} https://betterttv.com/emotes/${random.id}`);
     
     } else if (platform === "ffz") {
       let req = await axios.get(`https://api.betterttv.net/3/cached/frankerfacez/users/twitch/${uid}`);
       let data = req.data;
 
       let random = data[Math.floor(Math.random()*data.length)];
-      sendMessage(client, false, channel, `@${user} FFZ ${random.code} https://www.frankerfacez.com/emoticon/${random.id}`);
+      sendMessage(client, channel, `@${user} FFZ ${random.code} https://www.frankerfacez.com/emoticon/${random.id}`);
     
     } else if (platform === '7tv') {
       let req = await axios.get(`https://api.7tv.app/v2/users/${target.toLowerCase()}/emotes`);
       let data = req.data;
 
       let random = data[Math.floor(Math.random()*data.length)];
-      sendMessage(client, false, channel, `@${user} 7tv ${random.name} https://7tv.app/emotes/${random.id}`);
+      sendMessage(client, channel, `@${user} 7tv ${random.name} https://7tv.app/emotes/${random.id}`);
     }
   }
 }

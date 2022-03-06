@@ -24,16 +24,16 @@ const exampleCommand: CommandInt = {
     if (context[0]) {
       // make sure there isn't any spaces.
       if (/\s/g.test(context.join(" "))) {
-        return sendMessage(client, false, channel, `@${user} you can't have spaces in your prefix.`);
+        return sendMessage(client, channel, `@${user} you can't have spaces in your prefix.`);
       } else {
         await updateOne('UPDATE channels SET prefix=? WHERE id=?', [context[0], userstate['user-id']]);
 
         // Update cache
         await updateChannelCache(parseInt(userstate['user-id']!), 'prefix', context[0]);
 
-        return sendMessage(client, false, channel, `@${user} set the prefix to "${context[0]}"`);
+        return sendMessage(client, channel, `@${user} set the prefix to "${context[0]}"`);
       }
-    } else return sendMessage(client, false, channel, `@${user} please provide a new prefix.`);
+    } else return sendMessage(client, channel, `@${user} please provide a new prefix.`);
   }
 }
 

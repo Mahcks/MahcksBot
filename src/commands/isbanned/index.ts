@@ -30,13 +30,13 @@ const isbannedCommand: CommandInt = {
       let isBanned = data.banned;
       let toSend = (isBanned) ? 'banned PoroSad' : 'not banned from Twitch PogChamp';
 
-      sendMessage(client, false, channel, `@${user} "${toTarget}" is ${toSend}`);
+      sendMessage(client, channel, `@${user} "${toTarget}" is ${toSend}`);
 
     } catch (error: any) {
       let why = error.response.data.error.toLowerCase();
 
       if (why === "user was not found") {
-        return sendMessage(client, false, channel, `@${user} sorry I couldn't find the user ${toTarget}`);
+        return sendMessage(client, channel, `@${user} sorry I couldn't find the user ${toTarget}`);
       }
     }
   }
