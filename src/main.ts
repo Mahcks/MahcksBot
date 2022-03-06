@@ -33,8 +33,8 @@ const client = new pb.wrap(new TMI.client({
 client.setMessageCountLimit(20);
 client.setMessageCountDuration(30);
 client.setThrottle({
-	high: 1500,
-	low: 500
+	high: 500,
+	low: 100
 });
 
 
