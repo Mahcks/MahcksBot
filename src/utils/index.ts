@@ -1,6 +1,7 @@
 import axios from "axios";
 import moment from "moment";
 import { Actions, client, Userstate } from "tmi.js";
+import config from "../config/config";
 import { findQuery, insertRow, updateOne } from "./maria";
 
 export function secondsToHms(d: number): string {
@@ -177,4 +178,29 @@ export async function getAllChatters(channel: string) {
 
 export async function logMessage(channel: string, id: number, username: string, message: string, timestamp: Date) {
   await insertRow('INSERT INTO logs (channel, id, username, message, timestamp) VALUES (?, ?, ?, ?, ?);', [channel, id, username, message, timestamp]);
+}
+
+/**
+ * Creates a shortned URL
+ * @param {string} url
+ * @returns {string | null} null if error
+ */
+ export async function shortenURL(url: string) {
+  try {
+    let request = await axios({
+      url: "https://l.mahcks.com/api/url/shorten",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "API-Key": config.lmahcks
+      },
+      data: {
+        longUrl: url
+      }
+    });
+    return await request.data["shortUrl"];
+  } catch (error) {
+    return null;
+  }
 }
