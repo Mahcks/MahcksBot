@@ -111,3 +111,16 @@ export function humanizeNumber(number: number) {
 
   return mainStr;
 }
+
+/** Transforms a string into a different font.
+ * 
+ * @param message message to transform
+ * @param font font choice from data.ts
+ * @returns string of the new message
+ */
+ export function applyFont(message: string, font: any) {
+  return message.split("").map(function (c) {
+    if (typeof font[c] === "undefined") font[c] = " ";
+    return font[c];
+  }).join('');
+}

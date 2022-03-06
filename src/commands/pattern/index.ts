@@ -24,6 +24,7 @@ const patternCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
+    let ein = context[0];
     let input = context[1];
 
     let normal = '⠀⠀⠀⠀ ⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀  (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote) ⠀⠀⠀⠀ ⠀ ⠀ (emote)';
@@ -34,39 +35,39 @@ const patternCommand: CommandInt = {
     if (!input) chosen = normal;
 
     if (input === "space") {
-      return sendMessage(client, false, channel, space.replace(/(\(emote\))/gm, context[0]));
+      return sendMessage(client, false, channel, space.replace(/(\(emote\))/gm, ein));
     } else if (input === "what") {
-      return sendMessage(client, false, channel, what.replace(/(\(emote\))/gm, context[0]));
+      return sendMessage(client, false, channel, what.replace(/(\(emote\))/gm, ein));
     } else if (input === "pyramid") {
       const createPyramid = (height: number) => {
         for (var i = 1; i <= height; i++) {
           var row = '';
   
           for (var j = 1; j <= i; j++)
-            row += " " + context[0];
+            row += " " + ein;
           sendMessage(client, false, channel, row);
         }
         for (var i = height - 1; i > 0; i--) {
           var row = '';
   
           for (var j = i; j > 0; j--)
-            row += " " + context[0];
+            row += " " + ein;
           sendMessage(client, false, channel, row);
         }
       }
 
-      createPyramid(5);
+      createPyramid(3);
 
     } else if (input === "triangle") {
       const createTriangle = (height: number) => {
         for (var i = 1; i <= height; i++) {
-          sendMessage(client, false, channel, (' ' + context[0] + ' ').repeat(i))
+          sendMessage(client, false, channel, (' ' + ein + ' ').repeat(i))
         }
       }
 
-      createTriangle(6);
+      createTriangle(3);
       return '';
-    } else chosen = sendMessage(client, false, channel, normal.replace(/(\(emote\))/gm, context[0]));;
+    } else chosen = sendMessage(client, false, channel, normal.replace(/(\(emote\))/gm, ein));;
 
     
   }
