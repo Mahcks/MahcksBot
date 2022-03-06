@@ -56,3 +56,8 @@ export async function getTags(channel: string) {
 
   return currentTags;
 }
+
+export async function getThumbnail(channel: string) {
+  channel = (channel.startsWith("#")) ? channel.substring(1) : channel;
+  return `https://static-cdn.jtvnw.net/previews-ttv/live_user_${channel.toLowerCase()}-1920x1080.jpg`;
+}
