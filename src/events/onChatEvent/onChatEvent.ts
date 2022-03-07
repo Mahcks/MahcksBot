@@ -22,11 +22,13 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
     }
   }
 
-  if (message.startsWith(foundSettings[0].prefix)) {
-    runCommand(client, channel, userstate, message);
-  }
+  if (foundSettings) {
+    if (message.startsWith(foundSettings[0].prefix)) {
+      runCommand(client, channel, userstate, message);
+    }
+  } else return;
 
-    // Save/update chatter in table
+  // Save/update chatter in table
     await updateOrCreateChatter(userstate);
 
     await logMessage(channel.substring(1), parseInt(userstate['user-id']!), userstate['username'], message, new Date());
