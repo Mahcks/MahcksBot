@@ -3,7 +3,8 @@ import config from "../../config/config";
 
 let alternate = false;
 export default async (client: Actions, channel: string, message: string) => {
-  if (config.production && channel.substring(1) === "mahcksimus") return;
+  if (message.startsWith("#")) channel = channel.substring(1);
+  if (config.production && channel === "mahcksimus") return;
   let msg = (alternate) ? message.concat(" 󠀀") : message;
   (alternate) ? alternate = false : alternate = true;
 
