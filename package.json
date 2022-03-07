@@ -44,6 +44,7 @@
     "@madelsberger/pausebuffer": "^1.2.0",
     "@types/tmi.js": "^1.8.1",
     "axios": "^0.26.0",
+    "cheerio": "^1.0.0-rc.10",
     "mariadb": "^2.5.5",
     "moment": "^2.29.1",
     "tmi.js": "^1.8.5"
