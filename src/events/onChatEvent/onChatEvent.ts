@@ -22,7 +22,7 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
     }
   }
 
-  if (foundSettings) {
+  if (foundSettings[0].length !== 0) {
     if (message.startsWith(foundSettings[0].prefix)) {
       runCommand(client, channel, userstate, message);
     }
