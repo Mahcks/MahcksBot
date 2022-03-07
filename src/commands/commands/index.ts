@@ -22,8 +22,7 @@ const commandsCommand: CommandInt = {
     const user = userstate.username;
     const target = getTarget(user, context[0]);
 
-    let currSettings = getChannelSettings(channel);
-    sendMessage(client, channel, `@${target} sorry, I don't have a command page yet. If you'd like to get a brief description of a command use ${currSettings.prefix}about (command). Or view the source code with ${currSettings.prefix}code (command) It'll be at the top of the file.`);
+    sendMessage(client, channel, `@${target} https://github.com/Mahcks/MahcksBot`);
   }
 }
 
