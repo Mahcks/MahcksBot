@@ -50,6 +50,8 @@ const whoisCommand: CommandInt = {
 
     if (target.toLowerCase() === userstate['username']) {
       sendMessage(client, channel, `@${user} that ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
+    } else {
+      sendMessage(client, channel, `@${user} that ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
     }
   }
 }

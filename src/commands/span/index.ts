@@ -12,7 +12,7 @@ import { CommandInt } from "../../validation/ComandSchema";
 
 const patternCommand: CommandInt = {
   Name: "span",
-  Aliases: [],
+  Aliases: ['spam'],
   Permissions: [],
   GlobalCooldown: 10,
   Cooldown: 30,
