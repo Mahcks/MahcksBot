@@ -177,6 +177,7 @@ export async function getAllChatters(channel: string) {
 }
 
 export async function logMessage(channel: string, id: number, username: string, message: string, timestamp: Date) {
+  if (channel === 'pajlada') return;
   let ignoredBots: string[] = ['mahcksbot', 'streamelements', 'Supibot'];
   if (ignoredBots.includes(username)) return;
   await insertRow('INSERT INTO logs (channel, id, username, message, timestamp) VALUES (?, ?, ?, ?, ?);', [channel, id, username, message, timestamp]);

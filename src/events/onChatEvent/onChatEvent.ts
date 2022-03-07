@@ -6,6 +6,12 @@ import { channelSettings } from "../../utils/start";
 export default async (client: Actions, channel: string, userstate: Userstate, message: string, self: boolean) => {
   if (self) return;
 
+  if (channel === "#pajlada") {
+    if (message == "monkaStop ALARM" &&  userstate["user-id"] === "670591988") {
+      client.action('#pajlada', 'ppL 🚨 ᵃˡᵉʳᵗ');
+    }
+  }
+
   let foundSettings = channelSettings.filter(setting => {
     return setting.username === channel.substring(1);
   });

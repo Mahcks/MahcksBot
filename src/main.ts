@@ -47,12 +47,13 @@ client.setThrottle({
       query.forEach((channel: any) => {
         channelsToJoin.push(channel.username);
       });
+      channelsToJoin.push('pajlada');
     } catch (err) {
       throw err;
     } finally {
       if (conn) return conn.end();
     }
-  } else channelsToJoin.push('mahcksimus')
+  } else channelsToJoin.push('mahcksimus', 'pajlada')
 })();
 
 client.connect().then(async () => {
