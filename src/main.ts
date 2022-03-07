@@ -53,7 +53,7 @@ client.setThrottle({
     } finally {
       if (conn) return conn.end();
     }
-  } else channelsToJoin.push('mahcksimus', 'pajlada')
+  } else channelsToJoin.push('mahcksimus')
 })();
 
 client.connect().then(async () => {

@@ -1,4 +1,5 @@
 import { Actions, Userstate } from "tmi.js";
+import config from "../../config/config";
 import runCommand from "../../modules/run-command";
 import { logMessage, updateOrCreateChatter } from "../../utils";
 import { channelSettings } from "../../utils/start";
@@ -6,9 +7,11 @@ import { channelSettings } from "../../utils/start";
 export default async (client: Actions, channel: string, userstate: Userstate, message: string, self: boolean) => {
   if (self) return;
 
-  if (channel === "#pajlada") {
-    if (message == "monkaStop ALARM" &&  userstate["user-id"] === "670591988") {
-      client.action('#pajlada', 'ppL 🚨 ᵃˡᵉʳᵗ');
+  if (config.production) {
+    if (channel === "#pajlada") {
+      if (message == "monkaStop ALARM" &&  userstate["user-id"] === "670591988") {
+        client.action(channel, 'ppL 📣 🚨 ᵃˡᵉʳᵗ');
+      }
     }
   }
 
