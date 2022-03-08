@@ -71,18 +71,19 @@ const debugCommand: CommandInt = {
 
       sendMessage(client, channel, 'Goodbye MrDestructoid 👋');
       client.part(channel);
-    
+
     } else if (cmd === "disable") {
       await updateOne('UPDATE channels SET disabledCommands=? WHERE username=?', [JSON.stringify(["ping"]), userstate['username']]);
       console.log('test');
-    
+
     } else if (cmd === "isoptedout") {
       let isOptedOut = await checkIfUserOptedout(parseInt(userstate['user-id']!), context[1]);
       console.log(isOptedOut);
-    
+
     } else if (cmd === "ismod") {
       let testMod = await isMod(userstate, channel);
       console.log(testMod);
+
     }
   }
 }
