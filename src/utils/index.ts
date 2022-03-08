@@ -207,3 +207,7 @@ export async function logMessage(channel: string, id: number, username: string, 
     return null;
   }
 }
+
+export const randomArray = (array: any[]) => {
+  return array[Math.floor(Math.random() * array.length)];
+}
