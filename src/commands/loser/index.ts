@@ -4,7 +4,7 @@ import { getAllChatters, getOptedOutUsers, randomArray, randomChatter, removeUse
 import { CommandInt } from "../../validation/ComandSchema";
 
 const looserCommand: CommandInt = {
-  Name: "looser",
+  Name: "loser",
   Aliases: [],
   Permissions: [],
   GlobalCooldown: 10,
