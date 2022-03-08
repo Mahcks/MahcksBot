@@ -1,6 +1,6 @@
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { findQuery, insertRow, updateOne } from "../../utils/maria";
+import { findQuery, insertRow } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -30,18 +30,11 @@ const optoutCommand: CommandInt = {
       let canOptout = Boolean(checkCommand[0].optout);
       if (!canOptout) return sendMessage(client, channel, `@${user} can't optout of that command.`);
       
-      let isUser = await findQuery('SELECT * FROM optout WHERE id=?', [userstate['user-id']]);
+      let isUser = await findQuery('SELECT * FROM optout WHERE id=? AND command=?', [userstate['user-id'], cmdSearch.toLowerCase()]);
       if (isUser[0]) {
-        let optedOut = JSON.parse(isUser[0].commands);
-        if (optedOut.includes(cmdSearch.toLowerCase())) {
           sendMessage(client, channel, `@${user} already opted out of ${cmdSearch.toLowerCase()}. If you'd like to opt back in use ${currSettings.prefix}optin ${cmdSearch.toLowerCase()}`);
-        } else {
-          optedOut.push(cmdSearch.toLowerCase());
-          await updateOne('UPDATE optout SET commands=? WHERE id=?;', [JSON.stringify(optedOut), userstate['user-id']]);
-          sendMessage(client, channel, `@${user} opted out of ${cmdSearch.toLowerCase()}`);
-        }
       } else {
-        await insertRow('INSERT INTO optout (id, commands) VALUES (?, ?);', [userstate['user-id'], JSON.stringify([cmdSearch.toLowerCase()])]);
+        await insertRow('INSERT INTO optout (id, username, command) VALUES (?, ?, ?);', [userstate['user-id'], userstate.username, cmdSearch.toLowerCase()]);
         sendMessage(client, channel, `@${user} opted out of ${cmdSearch.toLowerCase()}`);
       }
 

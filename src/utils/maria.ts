@@ -137,6 +137,21 @@ export async function findQuery(query: string, values: any[]) {
   }
 }
 
+export async function sqlQuery(query: string, values: any[]) {
+  let conn;
+  let data;
+  try {
+    conn = await pool.getConnection();
+    let toFetch = await conn.query(query, values); 
+    data = toFetch;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.end();
+    return data;
+  }
+}
+
 export async function findColumn(table: string, column: string) {
   let conn;
   let data;

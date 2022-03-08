@@ -30,18 +30,11 @@ const optinCommand: CommandInt = {
       let canOptout = Boolean(checkCommand[0].optout);
       if (!canOptout) return sendMessage(client, channel, `@${user} can't optout/optin for that command.`);
     
-      let isUser = await findQuery('SELECT * FROM optout WHERE id=?', [userstate['user-id']]);
+      let isUser = await findQuery('SELECT * FROM optout WHERE id=? AND command=?', [userstate['user-id'], cmdSearch.toLowerCase()]);
       if (isUser[0]) {
-        let optedOut = JSON.parse(isUser[0].commands);
-        if (optedOut.includes(cmdSearch.toLowerCase())) {
           // remove from array and update it with the new array.
-          let index = optedOut.indexOf(cmdSearch.toLowerCase());
-          optedOut.splice(index, 1);
-          await updateOne('UPDATE optout SET commands=? WHERE id=?;', [JSON.stringify(optedOut), userstate['user-id']]);
+          await findQuery('DELETE FROM optout WHERE id=? AND command=?', [userstate["user-id"], cmdSearch.toLowerCase()]);
           sendMessage(client, channel, `@${user} you have opted into ${cmdSearch.toLowerCase()}.`);
-        } else {
-          sendMessage(client, channel, `@${user} you are already opted in for that command. If you'd like to optout do: ${currSettings.prefix}optout ${cmdSearch.toLowerCase()}`);
-        }
       } else {
         sendMessage(client, channel, `@${user} you are already opted in for that command. If you'd like to optout do: ${currSettings.prefix}optout ${cmdSearch.toLowerCase()}`);
       }

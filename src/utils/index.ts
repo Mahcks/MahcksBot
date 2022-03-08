@@ -134,7 +134,7 @@ export function booleanCheck(bool: string, defaultBool: boolean) {
 
 export async function isMod(user: Userstate, channel: string) {
   channel = channel[0] === "#" ? channel.substring(1) : channel;
-  let req = await axios.get('https://api.ivr.fi/twitch/modsvips/'+channel);
+  let req = await axios.get('https://api.ivr.fi/twitch/modsvips/' + channel);
   let mods = [...req.data.mods, ...req.data.vips];
 
   let index = mods.map((e: any) => e.login).indexOf(user.username);
@@ -168,6 +168,7 @@ export async function fetchAPI(url: string) {
 }
 
 export async function getAllChatters(channel: string) {
+  (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
   let chatters: string[] = [];
 
   let chatData = await fetchAPI(`https://tmi.twitch.tv/group/user/${channel}/chatters`);
@@ -188,7 +189,7 @@ export async function logMessage(channel: string, id: number, username: string, 
  * @param {string} url
  * @returns {string | null} null if error
  */
- export async function shortenURL(url: string) {
+export async function shortenURL(url: string) {
   try {
     let request = await axios({
       url: "https://l.mahcks.com/api/url/shorten",
@@ -210,4 +211,26 @@ export async function logMessage(channel: string, id: number, username: string, 
 
 export const randomArray = (array: any[]) => {
   return array[Math.floor(Math.random() * array.length)];
-}
+};
+
+export const randomChatter = async (channel: string) => {
+  (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
+  let chatters = await getAllChatters(channel);
+
+  return randomArray(chatters);
+};
+
+export const getOptedOutUsers = async (command: string) => {
+  let query = await findQuery('SELECT * FROM optout WHERE command=?;', [command]);
+  let names: string[] = [];
+
+  query.forEach((oo: any) => {
+    names.push(oo.username);
+  });
+
+  return names
+};
+
+export const removeUsersOptedOut = async (chatters: any[], optedOut: any[]) => {
+  return chatters = chatters.filter((el) => !optedOut.includes(el));
+};
