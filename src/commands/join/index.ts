@@ -1,4 +1,5 @@
 import { Actions, CommonUserstate } from "tmi.js";
+import { fetchAndStoreEmotes, storeAllEmotes } from "../../modules/emote-listener";
 import { findQuery, insertRow, removeOne } from "../../utils/maria";
 import { addChannelSetting, ChannelSettings, removeChannelSetting } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
@@ -44,8 +45,9 @@ const leaveCommand: CommandInt = {
     let channelToJoin = `${userstate['username']}`
 
     client.join(channelToJoin)
-    .then((data) => {
+    .then(async (data) => {
       client.action(channelToJoin, 'Hello! MrDestructoid 👋');
+      await storeAllEmotes(channel.substring(1), parseInt(userstate["user-id"]!));
     }).catch((err) => {
       client.action(channel, `@${channelToJoin} sorry there was an error trying to join your channel.`);
       console.log(err);

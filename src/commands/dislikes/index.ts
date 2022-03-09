@@ -33,7 +33,6 @@ const dislikesCommand: CommandInt = {
 
     try {
       let req = await axios.get(`https://returnyoutubedislikeapi.com/votes?videoId=${encodeURIComponent(videoId)}`);
-      console.log(req.data);
       sendMessage(client, channel, `@${user} 👍 Likes: ${humanizeNumber(req.data.likes)} 👎 Dislikes: ${humanizeNumber(req.data.dislikes)} 👁 Views: ${humanizeNumber(req.data.viewCount)} Stats created: ${calcDate(new Date(), new Date(req.data.dateCreated), [])}`);
     } catch (error) {
       sendMessage(client, channel, `@${user} an unexpected error occurred. Make sure it was a valid YouTube video ID.`);

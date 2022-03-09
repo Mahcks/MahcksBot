@@ -8,7 +8,9 @@
     "watch": "tsc-watch --onSuccess \"node ./dist/main.js\"",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "start": "tsc && node ./dist/main.js",
+    "pm2": "tsc && pm2 start pm2.config.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,9 @@
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
     "@tsconfig/recommended": "^1.0.1",
+    "@types/eventsource": "^1.1.8",
     "@types/jest": "^27.4.0",
+    "@types/node-cron": "^3.0.1",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
     "eslint": "^8.7.0",
@@ -45,9 +49,11 @@
     "@types/tmi.js": "^1.8.1",
     "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.10",
+    "eventsource": "^2.0.0",
     "mariadb": "^2.5.5",
     "moment": "^2.29.1",
     "nanoid": "^3.3.1",
+    "node-cron": "^3.0.0",
     "tmi.js": "^1.8.5"
   }
 }

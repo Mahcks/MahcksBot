@@ -9,7 +9,7 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
 
   if (config.production) {
     if (channel === "#pajlada") {
-      if (message == "monkaStop ALARM" &&  userstate["user-id"] === "670591988") {
+      if (message == "pajaGIGA 🚨 ALERT" &&  userstate["user-id"] === "743355647") {
         client.action(channel, 'ppL 📣 🚨 ᵃˡᵉʳᵗ');
       }
     }

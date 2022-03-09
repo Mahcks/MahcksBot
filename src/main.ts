@@ -61,4 +61,16 @@ client.connect().then(async () => {
 });
 
 import onChatEvent from "./events/onChatEvent/onChatEvent";
+import openEmoteListeners, { fetchAndStoreEmotes } from "./modules/emote-listener";
+import cron from 'node-cron';
 client.on("chat", async (channel: string, userstate: TMI.Userstate, message: string, self: boolean) => await onChatEvent(client, channel, userstate, message, self));
+
+(async () => {
+  // Opens emote listener
+  await openEmoteListeners();
+
+  // Fetches emotes every 3 hours.
+  cron.schedule('0 */3 * * *', async() => {
+    await fetchAndStoreEmotes();
+  })
+})();

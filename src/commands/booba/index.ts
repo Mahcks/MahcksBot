@@ -27,7 +27,7 @@ const exampleCommand: CommandInt = {
 
   const booba = randomArray(data);
 
-  sendMessage(client, channel, `@${user} ${booba.user_display_name.toLowerCase() === booba.user_login ? booba.user_display_name : booba.user_login} [${booba.stream_viewer_count} viewers] | ${booba.stream_thumbnail_url.replace('{width}', '1920').replace('{height}', '1080')}?${nanoid.nanoid(4)}`);
+  sendMessage(client, channel, `@${user} ${booba.user_display_name.toLowerCase() === booba.user_login ? booba.user_display_name : booba.user_login} ${booba.stream_viewer_count} viewers - ${booba.stream_thumbnail_url.replace('{width}', '1920').replace('{height}', '1080')}?${nanoid.nanoid(4)}`);
   }
 }
 

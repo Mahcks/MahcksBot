@@ -9,9 +9,9 @@ const looserCommand: CommandInt = {
   Permissions: [],
   GlobalCooldown: 10,
   Cooldown: 30,
-  Description: "lmao what a looser.",
+  Description: "lmao what a loser.",
   DynamicDescription: [
-    "<code>!looser</code>"
+    "<code>!loser</code>"
   ],
   Testing: false,
   OfflineOnly: false,
