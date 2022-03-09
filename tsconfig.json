@@ -5,7 +5,7 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "pm2.config.js"  ],
   "exclude": [
     "node_modules",
     "dist"
