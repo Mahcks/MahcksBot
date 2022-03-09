@@ -26,7 +26,7 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   if (checkMessage.data.banned) sendMessage(client, channel.substring(1), `[REDACTED] cmonBruh`);
 
   if (command !== null) {
-    let channelSettings = getChannelSettings(channel.substring(1));
+    let channelSettings = await getChannelSettings(channel.substring(1));
     if (!command) return;
 
     // If command is disabled for a channel don't run it.

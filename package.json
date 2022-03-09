@@ -46,10 +46,12 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "@madelsberger/pausebuffer": "^1.2.0",
+    "@types/ioredis": "^4.28.8",
     "@types/tmi.js": "^1.8.1",
     "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.10",
     "eventsource": "^2.0.0",
+    "ioredis": "^4.28.5",
     "mariadb": "^2.5.5",
     "moment": "^2.29.1",
     "nanoid": "^3.3.1",

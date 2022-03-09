@@ -23,7 +23,7 @@ const suggestCommand: CommandInt = {
     let suggestion = context.join(" ");
     let tableCount = await findQuery('SELECT COUNT(*) FROM suggestions', []);
     let count = tableCount[0]['COUNT(*)'];
-    let currentSettings = getChannelSettings(channel);
+    let currentSettings = await getChannelSettings(channel);
 
     if (context[0]) {
       if (context[0] === "send") {

@@ -22,7 +22,7 @@ const optoutCommand: CommandInt = {
     const user = userstate['username'];
     let cmdSearch = context[0];
     
-    let currSettings = getChannelSettings(channel);
+    let currSettings = await getChannelSettings(channel);
 
     let checkCommand = await findQuery('SELECT * FROM commands WHERE name=?;', [cmdSearch]);
     if (!cmdSearch) return sendMessage(client, channel, `@${user} please provide a command to optout of: ${currSettings.prefix}optout (command)`);

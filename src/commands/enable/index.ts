@@ -21,7 +21,7 @@ const enableCommand: CommandInt = {
   Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
     const user = userstate['username'];
     let cmdTarget = context[0];
-    let currentSettings = getChannelSettings(channel.substring(1));
+    let currentSettings = await getChannelSettings(channel.substring(1));
     if (!cmdTarget) return sendMessage(client, channel, `@${user} please provide a command to enable. ${currentSettings.prefix}enable (command)`);
 
     // TODO: add support to disable multiple commands like '!enable cmd1 cmd2 cmd3'
@@ -39,7 +39,7 @@ const enableCommand: CommandInt = {
         currDisabled.splice(index, 1);
 
         // Update cache.
-        updateChannelCache(parseInt(userstate['user-id']!), "disabledCommands", currDisabled);
+        updateChannelCache(channel, "disabledCommands", currDisabled);
 
         // Update table.
         await updateOne('UPDATE channels SET disabledCommands=? WHERE id=?;', [JSON.stringify(currDisabled), userstate['user-id']]);

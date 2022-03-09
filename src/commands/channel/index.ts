@@ -19,7 +19,7 @@ const channelCommand: CommandInt = {
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
     const user = userstate['display-name'];
-    let currentSettings: ChannelSettings = getChannelSettings(channel);
+    let currentSettings: ChannelSettings = await getChannelSettings(channel);
  
     let disabled = (currentSettings.disabledCommands.length === 0) ? "[None]" : (currentSettings.disabledCommands as string[]).join(", "); 
     sendMessage(client, channel, `@${user} current prefix: ${currentSettings.prefix} disabled commands: ${disabled}`);

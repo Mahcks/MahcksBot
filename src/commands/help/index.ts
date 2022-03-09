@@ -25,7 +25,7 @@ const helpCommand: CommandInt = {
     const user = userstate['username'];
     let search = context[0];
     let command = await findQuery('SELECT * FROM commands WHERE name=? LIMIT 1;', [search]);
-    let channelSettings = getChannelSettings(channel);
+    let channelSettings = await getChannelSettings(channel);
     
     if (search) {
       if (command[0]) {

@@ -24,10 +24,8 @@ const leaveCommand: CommandInt = {
     await removeOne('channels', 'id=?', [userstate["user-id"]]);
 
     // Remove from cache
-    let uid: number;
     if (userstate['user-id']) {
-      uid = parseInt(userstate['user-id']);
-      removeChannelSetting(uid);
+      removeChannelSetting(channel);
     } 
 
     sendMessage(client, channel, 'Goodbye MrDestructoid 👋');

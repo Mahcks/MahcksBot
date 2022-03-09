@@ -21,7 +21,7 @@ const fontCommand: CommandInt = {
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     let askedFont = context[0];
-    let currentSettings = getChannelSettings(channel.substring(1));
+    let currentSettings = await getChannelSettings(channel.substring(1));
 
     function getTranslated() {
       context.shift();

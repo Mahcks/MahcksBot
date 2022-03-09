@@ -2,6 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { Actions, client, Userstate } from "tmi.js";
 import config from "../config/config";
+import { pool } from "../main";
 import { findQuery, insertRow, updateOne } from "./maria";
 
 export function secondsToHms(d: number): string {
@@ -167,6 +168,12 @@ export async function fetchAPI(url: string) {
   }
 }
 
+/**
+ * Gets all chatters from a specific channel. 
+ * 
+ * @param channel string Channel you want to get chatters from.
+ * @returns string[] Array of strings that contains all the chatters.
+ */
 export async function getAllChatters(channel: string) {
   (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
   let chatters: string[] = [];
@@ -177,6 +184,15 @@ export async function getAllChatters(channel: string) {
   return chatters;
 }
 
+/**
+ * 
+ * @param channel string Channel to fetch chatters from.
+ * @param id number ID of the chatter.
+ * @param username string Username of the chatter.
+ * @param message string Message that the chatter sent.
+ * @param timestamp Date Date timestamp from when the message was sent.
+ * @returns nothing.
+ */
 export async function logMessage(channel: string, id: number, username: string, message: string, timestamp: Date) {
   if (channel === 'pajlada') return;
   let ignoredBots: string[] = ['mahcksbot', 'streamelements', 'Supibot'];
@@ -209,10 +225,22 @@ export async function shortenURL(url: string) {
   }
 }
 
+/**
+ * Picks a random item from an array and returns it
+ * 
+ * @param array array to pick an item from.
+ * @returns an item from the array.
+ */
 export const randomArray = (array: any[]) => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
+/**
+ * Gets a random chatter from the viewer list.
+ * 
+ * @param channel string Channel to get the chatters from.
+ * @returns string Random chatter as a string.
+ */
 export const randomChatter = async (channel: string) => {
   (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
   let chatters = await getAllChatters(channel);
@@ -233,4 +261,26 @@ export const getOptedOutUsers = async (command: string) => {
 
 export const removeUsersOptedOut = async (chatters: any[], optedOut: any[]) => {
   return chatters = chatters.filter((el) => !optedOut.includes(el));
+};
+
+/**
+ * Get the best avilable emote from a channel.
+ * 
+ * @param channel string Channel you want to check the emote in.
+ * @param emotes string[] Array of emotes you'd like to choose from.
+ * @param fallback string[] Array of preferably global emotes that you know every channel has.
+ * @returns Either an emote from emotes, or if emotes is empty it chooses a fallback emote.
+ */
+export const getBestAvilableEmote = async (channel: string, emotes: string[], fallback: string[]) => {
+  (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
+
+  let searchedEmotes: string[] = [];
+
+  await Promise.all(emotes.map(async (emote) => {
+    const search = await findQuery('SELECT * FROM emotes WHERE channel=? AND name=?;', [channel, emote]);
+    if (search[0]) searchedEmotes.push(search[0].name);
+  }));
+
+  if (searchedEmotes.length === 0) return randomArray(fallback);
+  return randomArray(searchedEmotes);
 };

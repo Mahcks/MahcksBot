@@ -1,6 +1,7 @@
 import { Actions, CommonUserstate } from "tmi.js";
+import { redis } from "../../main";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { checkIfUserOptedout, isMod } from "../../utils";
+import { checkIfUserOptedout, getBestAvilableEmote, isMod } from "../../utils";
 import { getUserId } from "../../utils/helix";
 import { findQuery, insertRow, removeOne, updateOne } from "../../utils/maria";
 import { addChannelSetting, ChannelSettings, removeChannelSetting } from "../../utils/start";
@@ -63,10 +64,8 @@ const debugCommand: CommandInt = {
       await removeOne('channels', 'id=?', [id]);
 
       // Remove from cache
-      let uid: number;
       if (id) {
-        uid = parseInt(id);
-        removeChannelSetting(uid);
+        removeChannelSetting(channel);
       }
 
       sendMessage(client, channel, 'Goodbye MrDestructoid 👋');
@@ -84,6 +83,20 @@ const debugCommand: CommandInt = {
       let testMod = await isMod(userstate, channel);
       console.log(testMod);
 
+    } else if (cmd === "bestemote") {
+      let found = await getBestAvilableEmote(channel, ["AlienUnpleased", "ApuCool"], ["TriHard"]);
+      console.log(found);
+    
+    } else if (cmd === "redis") {
+      redis.set("foo", "bar");
+
+      redis.get("foo", (err: any, result: any) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(result);
+        }
+      });
     }
   }
 }
