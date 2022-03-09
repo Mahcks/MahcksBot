@@ -5,6 +5,7 @@ const pb = require("@madelsberger/pausebuffer");
 import mariadb from "mariadb";
 import { initChannelSettings } from "./utils/start";
 
+// MariaDB connection
 export const pool = mariadb.createPool({
   host: config.MariaDB.host,
   user: config.MariaDB.user,
@@ -12,6 +13,10 @@ export const pool = mariadb.createPool({
   database: config.MariaDB.database,
   connectionLimit: config.MariaDB.connectionLimit
 });
+
+// Redis
+const Redis = require('ioredis');
+export const redis: Redis = new Redis();
 
 export let channelsToJoin: string[] = [];
 
@@ -63,6 +68,7 @@ client.connect().then(async () => {
 import onChatEvent from "./events/onChatEvent/onChatEvent";
 import openEmoteListeners, { fetchAndStoreEmotes } from "./modules/emote-listener";
 import cron from 'node-cron';
+import { Redis } from "ioredis";
 client.on("chat", async (channel: string, userstate: TMI.Userstate, message: string, self: boolean) => await onChatEvent(client, channel, userstate, message, self));
 
 (async () => {
@@ -74,3 +80,4 @@ client.on("chat", async (channel: string, userstate: TMI.Userstate, message: str
     await fetchAndStoreEmotes();
   })
 })();
+
