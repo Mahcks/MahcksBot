@@ -29,13 +29,21 @@ const devCommand: CommandInt = {
       const res = execSync('git pull').toString().split('\n').filter(Boolean);
       if (res.includes('Already up to date.')) return sendMessage(client, channel, `@${user} no changes detected.`);
       sendMessage(client, channel, `@${getChanges(res) || res.join(' | ')}`);
-    
+
     } else if (cmd === "restart") {
       const res = execSync('git pull').toString().split('\n').filter(Boolean);
       if (res.includes('Already up to date.')) sendMessage(client, channel, `${user} restarting without any changes.`);
       else sendMessage(client, channel, `@${user} restarting ${getChanges(res) || res.join(" | ")}`);
       exec('pm2 restart mahcksbot');
-    
+
+    } else if (cmd === "eval") {
+      try {
+        const ev = await eval('(async () => {' + context.join(" ") + '})()');
+        console.log(ev);
+        if (ev) sendMessage(client, channel, `@${user} FeelsOkayMan output: ${String(ev)}`);
+      } catch (error) {
+        sendMessage(client, channel, `@${user} FeelsDankMan error: ${error}`);
+      }
     } else {
       sendMessage(client, channel, `@${user} invalid option FeelsDankMan`);
     }
