@@ -1,5 +1,7 @@
 import { Actions, Userstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { CommandInt } from "../../validation/ComandSchema";
+import { execSync, exec } from 'child_process';
 
 const devCommand: CommandInt = {
   Name: "developer",
@@ -7,7 +9,7 @@ const devCommand: CommandInt = {
   Permissions: ['developer'],
   GlobalCooldown: 10,
   Cooldown: 30,
-  Description: "",
+  Description: "Allows the developer to fetch updates and restart the bot remotely.",
   DynamicDescription: [
     "<code></code>"
   ],
@@ -16,7 +18,27 @@ const devCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
+    const user = userstate.username;
+
+    function getChanges(arr: any[]) {
+      return arr.find(value => /files? changed/.test(value));
+    }
+
+    const cmd = context[0];
+    if (cmd === "pull") {
+      const res = execSync('git pull').toString().split('\n').filter(Boolean);
+      if (res.includes('Already up to date.')) return sendMessage(client, channel, `@${user} no changes detected.`);
+      sendMessage(client, channel, `@${getChanges(res) || res.join(' | ')}`);
     
+    } else if (cmd === "restart") {
+      const res = execSync('git pull').toString().split('\n').filter(Boolean);
+      if (res.includes('Already up to date.')) sendMessage(client, channel, `${user} restarting without any changes.`);
+      else sendMessage(client, channel, `@${user} restarting ${getChanges(res) || res.join(" | ")}`);
+      exec('pm2 restart mahcksbot');
+    
+    } else {
+      sendMessage(client, channel, `@${user} invalid option FeelsDankMan`);
+    }
   }
 }
 
