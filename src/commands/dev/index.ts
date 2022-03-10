@@ -38,7 +38,7 @@ const devCommand: CommandInt = {
       const res = execSync('git pull').toString().split('\n').filter(Boolean);
       if (res.includes('Already up to date.')) sendMessage(client, channel, `${user} restarting without any changes.`);
       else sendMessage(client, channel, `@${user} restarting ${getChanges(res) || res.join(" | ")}`);
-      exec('pm2 restart mahcksbot');
+      exec('npm run pm2');
 
     } else if (cmd === "eval") {
       try {
