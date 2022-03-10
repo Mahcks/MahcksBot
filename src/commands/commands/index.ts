@@ -12,7 +12,7 @@ const commandsCommand: CommandInt = {
   Cooldown: 30,
   Description: "Shows all the commands.",
   DynamicDescription: [
-    "<code>!commands</code>"
+    "<code>!commands (optional: user)</code>"
   ],
   Testing: false,
   OfflineOnly: false,
@@ -22,7 +22,7 @@ const commandsCommand: CommandInt = {
     const user = userstate.username;
     const target = getTarget(user, context[0]);
 
-    sendMessage(client, channel, `@${target} https://github.com/Mahcks/MahcksBot`);
+    sendMessage(client, channel, `@${target} Commands are available here: https://www.mahcks.com/mb/commands`);
   }
 }
 

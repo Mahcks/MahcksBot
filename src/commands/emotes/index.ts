@@ -12,6 +12,7 @@ const emotesCommand: CommandInt = {
   Cooldown: 30,
   Description: "Links all emotes in the current channel.",
   DynamicDescription: [
+    "By default it targets the current channel, otherwise you can input a seperate channel.",
     "<code>!emotes (channel)</code>"
   ],
   Testing: false,

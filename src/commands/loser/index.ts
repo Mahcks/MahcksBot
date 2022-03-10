@@ -11,6 +11,7 @@ const looserCommand: CommandInt = {
   Cooldown: 30,
   Description: "lmao what a loser.",
   DynamicDescription: [
+    "By default it chooses a random user in the current viewer list. You can also specifiy a user to tag.",
     "<code>!loser</code>"
   ],
   Testing: false,

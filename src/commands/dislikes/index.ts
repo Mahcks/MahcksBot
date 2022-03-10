@@ -12,6 +12,8 @@ const dislikesCommand: CommandInt = {
   Cooldown: 30,
   Description: "Show votes on a specific YouTube video by ID.",
   DynamicDescription: [
+    "If you wanted to check this videos dislikes: https://youtu.be/CRCvq-l_unE",
+    "Get the string at the end which is: CRCvq-l_unE",
     "<code>!dislikes (videoId)</code>"
   ],
   Testing: false,

@@ -11,7 +11,8 @@ const pfpCommand: CommandInt = {
   Cooldown: 30,
   Description: "Get a specific users profile picture, by default targets yourself.",
   DynamicDescription: [
-    "<code></code>"
+    "Defaults to yourself, otherwise specify a user.",
+    "<code>!pfp (user)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

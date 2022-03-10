@@ -19,6 +19,7 @@ const whoisCommand: CommandInt = {
   Cooldown: 30,
   Description: "Check ID, bio, chat color, badge and account age.",
   DynamicDescription: [
+    "If no target it will check your own information.",
     "<code>!whois (user)</code>"
   ],
   Testing: false,

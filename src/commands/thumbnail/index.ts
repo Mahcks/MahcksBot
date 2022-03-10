@@ -11,7 +11,8 @@ const thumbnailCommand: CommandInt = {
   Cooldown: 30,
   Description: "Get a thumbnail of a stream.",
   DynamicDescription: [
-    "<code></code>"
+    'Targets the current channel if no channel is specified.',
+    "<code>!thumbnail (user)</code>"
   ],
   Testing: false,
   OfflineOnly: false,
@@ -20,7 +21,7 @@ const thumbnailCommand: CommandInt = {
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     const user = userstate.username;
 
-    let target = (context[0]) ? context[0] : user;
+    let target = (context[0]) ? context[0] : (channel.startsWith("#") ? channel = channel.substring(1) : channel);
     let thumbnail = await getThumbnail(target);
     sendMessage(client, channel, `@${user} thumbnail of the stream: ${thumbnail}`);    
   }
