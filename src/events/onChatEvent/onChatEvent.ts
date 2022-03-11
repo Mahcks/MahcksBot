@@ -20,7 +20,6 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   }
 
   const foundSettings = await getChannelSettings(channel);
-  console.log(foundSettings);
 
   if (message.startsWith('!')) {
     if (message.includes('mahcksbot')) {
