@@ -7,8 +7,7 @@ import { getChannelSettings } from "../../utils/start";
 export default async (client: Actions, channel: string, userstate: Userstate, message: string, self: boolean) => {
   if (self) {
     // TODO: store this in redius.
-    isMod(userstate, channel)
-    return
+    await isMod(userstate, channel)
   }
 
   if (config.production) {

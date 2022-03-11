@@ -15,7 +15,7 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
 
   // Removing invis character 7tv uses.
   if (context.includes("󠀀")) { let sevenInd = context.indexOf("󠀀"); context.splice(sevenInd, 1); };
-  if (context[0] === "") { context.splice(0, 1) };
+  if (context[0] === "") context.splice(0, 1);
 
   const commandName = context?.shift()?.toLowerCase();
   const command = commands.getCommand(commandName);
@@ -48,10 +48,10 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
 
     if (isUserPremitted(userstate, command.Permissions)) {
       if (!config.production) {
-        await updateOne('UPDATE commands SET count=count+1 WHERE name=?;', [command]);
-        await updateOne('UPDATE chatters SET commandsUsed=commandsUsed+1 WHERE username=?;', [userstate['username']]);
+        await updateOne('UPDATE commands SET count=count+1 WHERE name=?;', [command.Name]);
+        await updateOne('UPDATE chatters SET commandsUsed=commandsUsed+1 WHERE username=?;', [userstate.username]);
       }
       return await command.Code(client, channel, userstate, context);
-    } else return await client.say(channel, `@${userstate["display-name"]} you don't have permission to use that command.`);
+    } else return await client.say(channel, `@${userstate.username} you don't have permission to use that command.`);
   }
 }

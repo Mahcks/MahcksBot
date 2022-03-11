@@ -3,6 +3,7 @@ import moment from "moment";
 import { Actions, client, Userstate } from "tmi.js";
 import config from "../config/config";
 import { pool } from "../main";
+import sendMessage from "../modules/send-message/sendMessage";
 import { findQuery, insertRow, updateOne } from "./maria";
 import { getChannelSettings, updateChannelCache } from "./start";
 
@@ -286,4 +287,10 @@ export const getBestAvilableEmote = async (channel: string, emotes: string[], fa
 
 export const pickNumberBetweenRange = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+export const logError = async (client: Actions, channel: string, username: string, type: "api" | "command" | "permission", message: string) => {
+  (channel.startsWith("#")) ? channel.substring(1) : channel;
+  await insertRow('INSERT INTO errors (channel, username, type, message, timestamp) VALUES (?, ?, ?, ?, ?);', [channel, username, type, message, new Date()]);
+  sendMessage(client, channel, `FeelsDankMan 🚨 @${message}`);
 }

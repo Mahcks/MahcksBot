@@ -31,7 +31,7 @@ export async function initChannelSettings() {
       disabledCommands: JSON.parse(channel.disabledCommands as string),
       logged: Boolean(channel.logged)
     };
-    
+
     redis.set(channel.username, JSON.stringify(toPush));
   });
 
@@ -59,10 +59,11 @@ export async function removeChannelSetting(channel: string) {
 */
 export async function updateChannelCache(channel: string, type: 'id' | 'username' | 'role' | 'prefix' | 'logged' | 'disabledCommands', value: string | string[]) {
   (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
-  
+
   let curr = await getChannelSettings(channel);
   curr[type] = value;
 
+  redis.del(channel);
   redis.set(channel, JSON.stringify(curr));
 }
 
@@ -71,7 +72,7 @@ export async function getChannelSettings(channel: string) {
 
   const toReturn = await redis.get(channel);
   if (!toReturn) return null;
-  
+
   return JSON.parse(toReturn);
 }
 
@@ -83,7 +84,7 @@ export function getUsersPermissions(id: number) {
 
 export function safeCloseBot() {
   ["SIGINT", 'SIGTERM', 'SIGQUIT']
-  .forEach(signal => process.on(signal, () => {
-    
-  }));
+    .forEach(signal => process.on(signal, () => {
+      console.log("GJSAKGHJSAGHJ")
+    }));
 }
