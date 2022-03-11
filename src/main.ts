@@ -48,7 +48,7 @@ client.setThrottle({
     let conn;
     try {
       conn = await pool.getConnection();
-      const query = await conn.query('SELECT username FROM channels;');
+      const query = await conn.query('SELECT username FROM channels WHERE username!="mahcksimus";');
       query.forEach((channel: any) => {
         channelsToJoin.push(channel.username);
       });
