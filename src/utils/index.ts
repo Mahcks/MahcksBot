@@ -284,3 +284,7 @@ export const getBestAvilableEmote = async (channel: string, emotes: string[], fa
   if (searchedEmotes.length === 0) return randomArray(fallback);
   return randomArray(searchedEmotes);
 };
+
+export const pickNumberBetweenRange = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
