@@ -19,7 +19,7 @@ const optoutCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    const user = userstate['username'];
+    const user = userstate.username;
     let cmdSearch = context[0];
     
     let currSettings = await getChannelSettings(channel);

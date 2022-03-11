@@ -26,7 +26,7 @@ const randomeCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    const user = userstate['username'];
+    const user = userstate.username;
     let platforms = ['7tv']; //'bttv' 'ffz'
     let platform = platforms[Math.floor(Math.random()*platforms.length)];
   

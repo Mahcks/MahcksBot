@@ -19,7 +19,7 @@ const exampleCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    const user = userstate['username'];
+    const user = userstate.username;
 
     if (context[0]) {
       // make sure there isn't any spaces.

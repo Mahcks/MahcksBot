@@ -18,7 +18,7 @@ const isbotCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    const user = userstate["display-name"];
+    const user = userstate.username;
     if (context[0]) {
       try {
         let request = await axios.get(`https://api.ivr.fi/twitch/resolve/${context[0]}`);

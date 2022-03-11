@@ -1,4 +1,4 @@
-import { Actions, CommonUserstate } from "tmi.js";
+import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { getTarget } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
@@ -17,7 +17,7 @@ const exampleCommand: CommandInt = {
   OfflineOnly: false,
   OnlineOnly: false,
   Optout: false,
-  Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
+  Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     const user = userstate["display-name"];
     let target = getTarget(user, context[1]);
 

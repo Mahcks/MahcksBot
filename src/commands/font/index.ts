@@ -43,7 +43,7 @@ const fontCommand: CommandInt = {
 
     } else if (askedFont === "small") {
       client.say(channel, `${applyFont(getTranslated(), small)}`)
-    } else client.say(channel, `@${userstate["display-name"]} incorrect syntax: ${currentSettings.prefix}font (fancy, fancybold, outline, bold, small) (message)`);
+    } else client.say(channel, `@${userstate.username} incorrect syntax: ${currentSettings.prefix}font (fancy, fancybold, outline, bold, small) (message)`);
   }
 }
 

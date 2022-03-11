@@ -1,7 +1,6 @@
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { getTarget } from "../../utils";
-import { getChannelSettings } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const commandsCommand: CommandInt = {

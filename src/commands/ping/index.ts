@@ -1,4 +1,4 @@
-import { Actions, CommonUserstate } from "tmi.js";
+import { Actions, CommonUserstate, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { secondsToHms } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
@@ -17,12 +17,12 @@ const ping: CommandInt = {
   OfflineOnly: false,
   OnlineOnly: false,
   Optout: false,
-  Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
+  Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     let uptime = process.uptime();
 
     await client.ping().then(function (data) {
       let ping: number = Math.floor(Math.round(data as any * 1000));
-      sendMessage(client, channel, `@${userstate['display-name']}, FeelsOkayMan 🏓 Uptime: ${secondsToHms(uptime)} Latency to Twitch IRC: ${ping}ms`);
+      sendMessage(client, channel, `@${userstate.username}, FeelsOkayMan 🏓 Uptime: ${secondsToHms(uptime)} Latency to Twitch IRC: ${ping}ms`);
     });
   }
 }

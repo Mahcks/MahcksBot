@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Actions, CommonUserstate } from "tmi.js";
+import { Actions, CommonUserstate, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { getTarget } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
@@ -19,8 +19,8 @@ const isbannedCommand: CommandInt = {
   OfflineOnly: false,
   OnlineOnly: false,
   Optout: false,
-  Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
-    const user = userstate["display-name"];
+  Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
+    const user = userstate.username;
     let toTarget = getTarget(user, context[0]);
 
     try {

@@ -1,4 +1,4 @@
-import { Actions, CommonUserstate } from "tmi.js";
+import { Actions, CommonUserstate, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { findQuery } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
@@ -21,8 +21,8 @@ const helpCommand: CommandInt = {
   OfflineOnly: false,
   OnlineOnly: false,
   Optout: false,
-  Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
-    const user = userstate['username'];
+  Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
+    const user = userstate.username;
     let search = context[0];
     let command = await findQuery('SELECT * FROM commands WHERE name=? LIMIT 1;', [search]);
     let channelSettings = await getChannelSettings(channel);

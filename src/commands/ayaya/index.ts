@@ -20,6 +20,7 @@ const exampleCommand: CommandInt = {
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     const user = userstate.username;
+    
     let rand = randomArray([
       'waifu',
       'neko',

@@ -19,7 +19,7 @@ const pfpCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    const user = userstate["username"];
+    const user = userstate.username;
     let target = getTarget(user, context[0]);
 
     try {

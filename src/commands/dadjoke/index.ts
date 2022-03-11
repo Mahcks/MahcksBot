@@ -20,11 +20,11 @@ const dadjokeCommand: CommandInt = {
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     axios("https://icanhazdadjoke.com/", { method: "GET", headers: { Accept: "application/json", "User-Agent": "axios 0.21.1" } })
     .then(res => {
-      client.action(channel, `@${userstate["display-name"]} ${res["data"]["joke"]}`);
+      client.action(channel, `@${userstate.username} ${res["data"]["joke"]}`);
     })  
     .catch(async (err) => {
       //await logError(userstate["display-name"]!, 'api', `Error fetching dadjokes from https://icanhazdadjoke.com/`, new Date());
-      client.action(channel, `@${userstate["display-name"]} FeelsDankMan sorry, there was an API issue please try again later.`);
+      client.action(channel, `@${userstate.username} FeelsDankMan sorry, there was an API issue please try again later.`);
     });
   }
 }

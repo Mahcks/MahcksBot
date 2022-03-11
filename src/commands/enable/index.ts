@@ -1,4 +1,4 @@
-import { Actions, CommonUserstate } from "tmi.js";
+import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { findQuery, updateOne } from "../../utils/maria";
 import { getChannelSettings, updateChannelCache } from "../../utils/start";
@@ -18,8 +18,8 @@ const enableCommand: CommandInt = {
   OfflineOnly: false,
   OnlineOnly: false,
   Optout: false,
-  Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
-    const user = userstate['username'];
+  Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
+    const user = userstate.username;
     let cmdTarget = context[0];
     let currentSettings = await getChannelSettings(channel.substring(1));
     if (!cmdTarget) return sendMessage(client, channel, `@${user} please provide a command to enable. ${currentSettings.prefix}enable (command)`);

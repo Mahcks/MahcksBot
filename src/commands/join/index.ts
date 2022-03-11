@@ -1,4 +1,4 @@
-import { Actions, CommonUserstate } from "tmi.js";
+import { Actions, CommonUserstate, Userstate } from "tmi.js";
 import { fetchAndStoreEmotes, storeAllEmotes } from "../../modules/emote-listener";
 import { findQuery, insertRow, removeOne } from "../../utils/maria";
 import { addChannelSetting, ChannelSettings, removeChannelSetting } from "../../utils/start";
@@ -18,9 +18,9 @@ const leaveCommand: CommandInt = {
   OfflineOnly: false,
   OnlineOnly: false,
   Optout: false,
-  Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
+  Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     let isThere = await findQuery('SELECT * FROM channels WHERE id=?', [userstate['user-id']!]);
-    if (isThere[0]) return client.action(channel, `@${userstate['username']} I'm already in your channel.`);
+    if (isThere[0]) return client.action(channel, `@${userstate.username} I'm already in your channel.`);
 
     // Insert into database
     await insertRow('INSERT INTO channels (id, username, prefix, role, disabledCommands, logged) VALUES (?, ?, ?, ?, ?, ?);', 
@@ -42,7 +42,7 @@ const leaveCommand: CommandInt = {
       addChannelSetting(settings);
     } 
 
-    let channelToJoin = `${userstate['username']}`
+    let channelToJoin = `${userstate.username}`
 
     client.join(channelToJoin)
     .then(async (data) => {
