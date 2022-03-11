@@ -1,6 +1,5 @@
 import { Actions, Userstate } from "tmi.js";
 import config from "../../config/config";
-import { redis } from "../../main";
 import runCommand from "../../modules/run-command";
 import { logMessage, updateOrCreateChatter } from "../../utils";
 import { getChannelSettings } from "../../utils/start";
