@@ -4,6 +4,7 @@ import { Actions, client, Userstate } from "tmi.js";
 import config from "../config/config";
 import { pool } from "../main";
 import { findQuery, insertRow, updateOne } from "./maria";
+import { getChannelSettings, updateChannelCache } from "./start";
 
 export function secondsToHms(d: number): string {
   d = Number(d);
@@ -135,15 +136,13 @@ export function booleanCheck(bool: string, defaultBool: boolean) {
 
 export async function isMod(user: Userstate, channel: string) {
   channel = channel[0] === "#" ? channel.substring(1) : channel;
-  let req = await axios.get('https://api.ivr.fi/twitch/modsvips/' + channel);
-  let mods = [...req.data.mods, ...req.data.vips];
 
-  let index = mods.map((e: any) => e.login).indexOf(user.username);
-  let isMod = (typeof mods[index] === 'undefined') ? false : true;
+  let isMod = user.mod || user['user-type'] === "mod";
+  let isBroadcaster = channel === user.username;
+  let isModUp = isMod || isBroadcaster;
 
-  /* const isBroadcaster = channel === user.username;
-  const isModUp = isMod || isBroadcaster; */
-  return isMod;
+  await updateChannelCache(channel, "role", (isModUp) ? "moderator" : "viewer");
+  return isModUp;
 }
 
 export async function checkIfUserOptedout(id: number, command: string) {

@@ -1,13 +1,13 @@
 import { Actions, Userstate } from "tmi.js";
 import config from "../../config/config";
 import runCommand from "../../modules/run-command";
-import { logMessage, updateOrCreateChatter } from "../../utils";
+import { isMod, logMessage, updateOrCreateChatter } from "../../utils";
 import { getChannelSettings } from "../../utils/start";
 
 export default async (client: Actions, channel: string, userstate: Userstate, message: string, self: boolean) => {
   if (self) {
     // TODO: store this in redius.
-    console.log(userstate["user-type"]);
+    isMod(userstate, channel)
     return
   }
 

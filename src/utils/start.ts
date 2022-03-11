@@ -57,7 +57,7 @@ export async function removeChannelSetting(channel: string) {
   logged: boolean; // Does the broadcaster want their channel logged for WST?
   disabledCommands: string[]; // List of commands that are disabled for that streamer.
 */
-export async function updateChannelCache(channel: string, type: 'id' | 'username' | 'prefix' | 'logged' | 'disabledCommands', value: string | string[]) {
+export async function updateChannelCache(channel: string, type: 'id' | 'username' | 'role' | 'prefix' | 'logged' | 'disabledCommands', value: string | string[]) {
   (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
   
   let curr = await getChannelSettings(channel);
