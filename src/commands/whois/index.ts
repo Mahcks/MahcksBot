@@ -1,7 +1,7 @@
-import { Actions, CommonUserstate } from "tmi.js";
+import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { calcDate, getTarget } from "../../utils";
-import { getUser, getUserId, resolveUser } from "../../utils/helix";
+import { resolveUser } from "../../utils/helix";
 import { CommandInt } from "../../validation/ComandSchema";
 
 interface UserSettings {
@@ -26,7 +26,7 @@ const whoisCommand: CommandInt = {
   OfflineOnly: false,
   OnlineOnly: false,
   Optout: false,
-  Code: async (client: Actions, channel: string, userstate: CommonUserstate, context: any[]) => {
+  Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     const user = userstate['display-name'];
     let target = getTarget(user, context[0]);
 
@@ -49,10 +49,10 @@ const whoisCommand: CommandInt = {
       created: calcDate(new Date(), new Date(userLookup['createdAt']), ['s', 'm'])
     }
 
-    if (target.toLowerCase() === userstate['username']) {
-      sendMessage(client, channel, `@${user} that ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
+    if (target.toLowerCase() === userstate.username) {
+      sendMessage(client, channel, `@${user} ID: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
     } else {
-      sendMessage(client, channel, `@${user} that ID is: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
+      sendMessage(client, channel, `@${user} ID: ${usersSettings.id} chat color: ${usersSettings.chatColor} badge: ${usersSettings.badge} created: ${usersSettings.created}`);
     }
   }
 }

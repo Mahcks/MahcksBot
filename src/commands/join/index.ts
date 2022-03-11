@@ -23,8 +23,8 @@ const leaveCommand: CommandInt = {
     if (isThere[0]) return client.action(channel, `@${userstate.username} I'm already in your channel.`);
 
     // Insert into database
-    await insertRow('INSERT INTO channels (id, username, prefix, role, disabledCommands, logged) VALUES (?, ?, ?, ?, ?, ?);', 
-    [parseInt(userstate['user-id']!), context[1].toLowerCase(), '!', 'viewer', '[]', 0]);
+    await insertRow('INSERT INTO channels (id, username, prefix, role, disabledCommands, logged, sevenTvUpdates) VALUES (?, ?, ?, ?, ?, ?, ?);', 
+    [parseInt(userstate['user-id']!), context[1].toLowerCase(), 'mb', 'viewer', '[]', 0, 1]);
 
     // Add to cache
     let uid: number;
@@ -36,7 +36,8 @@ const leaveCommand: CommandInt = {
         prefix: "mb",
         role: 'viewer',
         disabledCommands: [],
-        logged: false
+        logged: false,
+        sevenTvUpdates: true
       };
 
       addChannelSetting(settings);
@@ -46,7 +47,7 @@ const leaveCommand: CommandInt = {
 
     client.join(channelToJoin)
     .then(async (data) => {
-      client.action(channelToJoin, 'Hello! MrDestructoid 👋');
+      client.action(channelToJoin, 'Hello! MrDestructoid 👋 my prefix is "mb". My commands are here: https://www.mahcks.com/mb/commands');
       await storeAllEmotes(channel.substring(1), parseInt(userstate["user-id"]!));
     }).catch((err) => {
       client.action(channel, `@${channelToJoin} sorry there was an error trying to join your channel.`);

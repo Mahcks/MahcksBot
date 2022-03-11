@@ -8,6 +8,7 @@ export interface ChannelSettings {
   role: string;
   logged: boolean | string; // Does the broadcaster want their channel logged for WST?
   disabledCommands: string | string[]; // List of commands that are disabled for that streamer.
+  sevenTvUpdates: boolean;
 }
 
 export interface Permissions {
@@ -29,7 +30,8 @@ export async function initChannelSettings() {
       prefix: channel.prefix,
       role: channel.role,
       disabledCommands: JSON.parse(channel.disabledCommands as string),
-      logged: Boolean(channel.logged)
+      logged: Boolean(channel.logged),
+      sevenTvUpdates: Boolean(channel.sevenTvUpdates)
     };
 
     redis.set(channel.username, JSON.stringify(toPush));
@@ -57,7 +59,9 @@ export async function removeChannelSetting(channel: string) {
   logged: boolean; // Does the broadcaster want their channel logged for WST?
   disabledCommands: string[]; // List of commands that are disabled for that streamer.
 */
-export async function updateChannelCache(channel: string, type: 'id' | 'username' | 'role' | 'prefix' | 'logged' | 'disabledCommands', value: string | string[]) {
+
+type options = 'id' | 'username' | 'role' | 'prefix' | 'logged' | 'disabledCommands' | 'sevenTvUpdates';
+export async function updateChannelCache(channel: string, type: options, value: string | string[]) {
   (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
 
   let curr = await getChannelSettings(channel);

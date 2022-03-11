@@ -32,17 +32,18 @@ const debugCommand: CommandInt = {
       if (isThere[0]) return sendMessage(client, channel, `@${userstate['username']} I'm already in ${context[1]}.`);
 
       // Insert into database
-      await insertRow('INSERT INTO channels (id, username, prefix, role, disabledCommands, logged) VALUES (?, ?, ?, ?, ?, ?);', [id, context[1].toLowerCase(), '!', 'viewer', '[]', 0]);
+      await insertRow('INSERT INTO channels (id, username, prefix, role, disabledCommands, logged, sevenTvUpdates) VALUES (?, ?, ?, ?, ?, ?, ?);', [id, context[1].toLowerCase(), 'mb', 'viewer', '[]', 0, 1]);
 
       // Add to cache
       if (id) {
         let settings: ChannelSettings = {
           id: id,
-          prefix: "!",
+          prefix: "mb",
           role: 'viewer',
           username: context[1].toLowerCase(),
           disabledCommands: [],
-          logged: false
+          logged: true,
+          sevenTvUpdates: true
         };
 
         addChannelSetting(settings);
@@ -52,7 +53,7 @@ const debugCommand: CommandInt = {
 
       client.join(channelToJoin)
         .then((data) => {
-          sendMessage(client, channelToJoin, 'Hello! MrDestructoid 👋');
+          sendMessage(client, channelToJoin, 'Hello! MrDestructoid 👋 my prefix is "mb". My commands are here: https://www.mahcks.com/mb/commands');
         }).catch((err) => {
           sendMessage(client, channel, `@${channelToJoin} sorry there was an error trying to join your channel.`);
           console.log(err);

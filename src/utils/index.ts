@@ -285,6 +285,12 @@ export const getBestAvilableEmote = async (channel: string, emotes: string[], fa
   return randomArray(searchedEmotes);
 };
 
+/**
+ * 
+ * @param min number Lowest number to start the range from
+ * @param max number Highest number to end the range at.
+ * @returns number a random number between the two numbers.
+ */
 export const pickNumberBetweenRange = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
