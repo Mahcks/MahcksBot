@@ -24,7 +24,7 @@ const leaveCommand: CommandInt = {
 
     // Insert into database
     await insertRow('INSERT INTO channels (id, username, prefix, role, disabledCommands, logged, sevenTvUpdates) VALUES (?, ?, ?, ?, ?, ?, ?);', 
-    [parseInt(userstate['user-id']!), context[1].toLowerCase(), 'mb', 'viewer', '[]', 0, 1]);
+    [parseInt(userstate['user-id']!), userstate.username, 'mb', 'viewer', '[]', 0, 1]);
 
     // Add to cache
     let uid: number;
