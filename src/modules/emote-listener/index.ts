@@ -219,7 +219,6 @@ export function getEmoteData(channelName: string, channelId: number) {
 }
 
 function getTwitchEmotes(service: string, type: string, nameProp: string, param: string) {
-  console.log(urls[service][type](param));
   return axios
     .get(urls[service][type](param))
     .then((res: any) => mapEmoteData(res?.data.data, service, type, nameProp));

@@ -11,7 +11,8 @@ import sendMessage from "../send-message/sendMessage";
 const commands = new CommandStore(process.cwd() + "/dist/commands/");
 
 export default async (client: Actions, channel: string, userstate: Userstate, message: string) => {
-  const context = message.slice(config.prefix.length).split(/ +/);
+  let channelSettings = await getChannelSettings(channel.substring(1));
+  const context = message.slice(channelSettings.prefix.length).split(/ +/);
 
   // Removing invis character 7tv uses.
   if (context.includes("󠀀")) { let sevenInd = context.indexOf("󠀀"); context.splice(sevenInd, 1); };
@@ -26,7 +27,6 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   if (checkMessage.data.banned) sendMessage(client, channel.substring(1), `[REDACTED] cmonBruh`);
 
   if (command !== null) {
-    let channelSettings = await getChannelSettings(channel.substring(1));
     if (!command) return;
 
     // If command is disabled for a channel don't run it.

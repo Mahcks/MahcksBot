@@ -33,7 +33,7 @@ const leaveCommand: CommandInt = {
       let settings: ChannelSettings = {
         id: uid,
         username: userstate["username"], 
-        prefix: "!",
+        prefix: "mb",
         role: 'viewer',
         disabledCommands: [],
         logged: false
