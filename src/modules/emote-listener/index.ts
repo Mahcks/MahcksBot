@@ -1,6 +1,7 @@
 import axios from "axios";
 import EventSource from "eventsource";
 import { Actions } from "tmi.js";
+import config from "../../config/config";
 import { pool } from "../../main";
 import { handleSevenTVUpdate } from "../../utils";
 import { findQuery, insertRow, removeOne } from "../../utils/maria";
@@ -32,10 +33,11 @@ export interface ExtraEmoteData {
 }
 
 async function handleSevenTv(client: Actions, event: EmoteEventUpdate) {
+  if (!config.production) return;
   if (event.action === "ADD") {
     console.log(`[7tv] ${event.channel} added new emote: ${event.emote?.name}`);
-    let values = [event.channel, event.name, event.emote_id, "7tv", "channel", `${event.emote?.urls[0][1]}`, event.emote?.visibility === 128 ? 1 : 0];
-    await insertRow(`INSERT INTO emotes (channel, name, id, service, scope, url, zeroWidth) VALUES (?, ?, ?, ?, ?, ?, ?)`, values);
+    let values = [event.channel, event.name, event.emote_id, "7tv", "channel", `${event.emote?.urls[0][1]}`, event.emote?.visibility === 128 ? 1 : 0, new Date()];
+    await insertRow(`INSERT INTO emotes (channel, name, id, service, scope, url, zeroWidth, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, values);
 
   } else if (event.action === "UPDATE") {
     console.log(`[7tv] ${event.channel} updated emote: ${event.emote?.name}`);

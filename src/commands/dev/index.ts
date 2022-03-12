@@ -2,6 +2,7 @@ import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { CommandInt } from "../../validation/ComandSchema";
 import { execSync, exec } from 'child_process';
+import { sqlQuery } from "../../utils/maria";
 
 const devCommand: CommandInt = {
   Name: "developer",
@@ -48,6 +49,16 @@ const devCommand: CommandInt = {
       } catch (error) {
         sendMessage(client, channel, `@${user} FeelsDankMan error: ${error}`);
       }
+    } else if (cmd === "sql") {
+      context.shift();
+      let msg = context.join(" ");
+
+      let values = /\[(.*?)\]/.exec(msg);
+      let qString = msg.replace(/\[(.*?)\]/, '');
+      let query = await sqlQuery(qString, [values]);
+
+      console.log(query);
+
     } else {
       sendMessage(client, channel, `@${user} invalid option FeelsDankMan`);
     }
