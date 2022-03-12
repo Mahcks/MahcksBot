@@ -35,15 +35,22 @@ const isbannedCommand: CommandInt = {
 
     let isChannelBanned;
     let updatedRecently;
-    if (query) {
+    let channelData;
+    if (query[0]) {
       isChannelBanned = Boolean(query[0].unbanned);
       (isChannelBanned) ? updatedRecently = false : updatedRecently = true;
+      channelData = true;
+    } else {
+      channelData = false;
     }
 
     try {
       let req = await axios.get(`https://api.ivr.fi/twitch/resolve/${toTarget}`);
       let data = req.data;
-      sendMessage(client, channel, `@${user} Twitch: ${data.banned.toString()} Channel: ${(isChannelBanned) ? 'false' : 'true'}, ${(updatedRecently) ? `banned ${calcDate(new Date(), new Date(query[0].updated), [])} ago.` : `unbanned ${calcDate(new Date(), new Date(query[0].timestamp), [])}`} ago.`);
+
+      if (channelData) {
+        sendMessage(client, channel, `@${user} Twitch: ${data.banned.toString()} Channel: ${(isChannelBanned) ? 'false' : 'true'}, ${(updatedRecently) ? `banned ${calcDate(new Date(), new Date(query[0].updated), [])} ago.` : `unbanned ${calcDate(new Date(), new Date(query[0].timestamp), [])}`} ago.`);
+      } else sendMessage(client, channel, `@${user} Twitch: ${data.banned.toString()} Channel: false`);
 
     } catch (error: any) {
       let why = error.response.data.error.toLowerCase();
