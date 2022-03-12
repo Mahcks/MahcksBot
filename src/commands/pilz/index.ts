@@ -4,7 +4,7 @@ import { CommandInt } from "../../validation/ComandSchema";
 const pilzCommand: CommandInt = {
   Name: "pilzkman",
   Aliases: ["pilz"],
-  Permissions: [],
+  Permissions: ["developer"],
   GlobalCooldown: 10,
   Cooldown: 30,
   Description: "For pilz.",

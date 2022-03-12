@@ -3,6 +3,7 @@ import moment from "moment";
 import { Actions, client, Userstate } from "tmi.js";
 import config from "../config/config";
 import { pool } from "../main";
+import { EmoteEventUpdate } from "../modules/emote-listener";
 import sendMessage from "../modules/send-message/sendMessage";
 import { findQuery, insertRow, updateOne } from "./maria";
 import { getChannelSettings, updateChannelCache } from "./start";
@@ -75,8 +76,11 @@ export function calcDate(startDate: Date, endDate: Date, exclude: OptionalDateSt
   if (!exclude.includes('m'))
     if (minutes > 0) dateArr.push(minutes + 'm');
 
-  if (!exclude.includes('s'))
-    if (seconds > 0) dateArr.push(seconds + "s");
+  if (!exclude.includes('s')) {
+    if (years < 0) {
+      if (seconds > 0) dateArr.push(seconds + "s");
+    }
+  }
 
   return dateArr.join(", ")
 }
@@ -299,4 +303,19 @@ export const logError = async (client: Actions, channel: string, username: strin
   (channel.startsWith("#")) ? channel.substring(1) : channel;
   await insertRow('INSERT INTO errors (channel, username, type, message, timestamp) VALUES (?, ?, ?, ?, ?);', [channel, username, type, message, new Date()]);
   sendMessage(client, channel, `FeelsDankMan 🚨 @${message}`);
+}
+
+export const handleSevenTVUpdate = async (client: Actions, event: EmoteEventUpdate) => {
+  let settings = await getChannelSettings(event.channel);
+  let eventType = event.action;
+
+  if (settings.sevenTvUpdates) {
+    if (eventType === "ADD") {
+      client.action(event.channel, `[7tv] ${event.actor} added the emote ${event.name}`);
+    } else if (eventType === "REMOVE") {
+      client.action(event.channel, `[7tv] ${event.actor} removed the emote ${event.name}`);
+    } else if (eventType === "UPDATE") {
+      client.action(event.channel, `[7tv] ${event.actor} set the name from ${event.emote?.name} to ${event.name}`);
+    }
+  } else return;
 }

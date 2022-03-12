@@ -1,6 +1,7 @@
 import { Actions, Userstate } from "tmi.js";
-import { findQuery } from "../../utils/maria";
-import { getChannelSettings } from "../../utils/start";
+import sendMessage from "../../modules/send-message/sendMessage";
+import { findQuery, sqlQuery } from "../../utils/maria";
+import { getChannelSettings, updateChannelCache } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const seventvupdatesCommand: CommandInt = {
@@ -20,9 +21,18 @@ const seventvupdatesCommand: CommandInt = {
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     const user = userstate.username;
 
-    let isEnabled = await getChannelSettings(channel);
-    console.log(isEnabled);
+    let currSettings = await getChannelSettings(channel);
+    let isEnabled = currSettings.sevenTvUpdates;
 
+    if (isEnabled) {
+      sendMessage(client, channel, `@${user} disabled 7tv chat updates.`);
+      await updateChannelCache(channel, "sevenTvUpdates", false);
+      await sqlQuery('UPDATE channels SET sevenTvUpdates=? WHERE id=?', [0, userstate['room-id']]);
+    } else {
+      sendMessage(client, channel, `@${user} enabled 7tv chat updates.`);
+      await updateChannelCache(channel, "sevenTvUpdates", true);
+      await sqlQuery('UPDATE channels SET sevenTvUpdates=? WHERE id=?', [1, userstate['room-id']]);
+    }
   }
 }
 

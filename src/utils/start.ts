@@ -1,5 +1,6 @@
 import { redis } from "../main";
 import { findQuery } from "./maria";
+import { initUserBans } from "./timeout";
 
 export interface ChannelSettings {
   id: number; // ID of the broadcaster.
@@ -21,6 +22,9 @@ export let permissions: Permissions[] = [];
 
 // Get all prefixes from database
 export async function initChannelSettings() {
+  redis.flushdb(function (err, succ) {
+    console.log('Cleared redis.');
+  })
   let cSettings = await findQuery('SELECT * FROM channels;', []);
 
   cSettings.forEach((channel: ChannelSettings) => {
@@ -41,6 +45,8 @@ export async function initChannelSettings() {
   perms.forEach((perm: Permissions) => {
     permissions.push(perm);
   });
+
+  initUserBans()
 }
 
 export async function addChannelSetting(settings: ChannelSettings) {
@@ -61,7 +67,7 @@ export async function removeChannelSetting(channel: string) {
 */
 
 type options = 'id' | 'username' | 'role' | 'prefix' | 'logged' | 'disabledCommands' | 'sevenTvUpdates';
-export async function updateChannelCache(channel: string, type: options, value: string | string[]) {
+export async function updateChannelCache(channel: string, type: options, value: boolean | string | string[]) {
   (channel.startsWith("#")) ? channel = channel.substring(1) : channel;
 
   let curr = await getChannelSettings(channel);

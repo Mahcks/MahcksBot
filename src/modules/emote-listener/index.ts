@@ -1,9 +1,11 @@
 import axios from "axios";
 import EventSource from "eventsource";
+import { Actions } from "tmi.js";
 import { pool } from "../../main";
+import { handleSevenTVUpdate } from "../../utils";
 import { findQuery, insertRow, removeOne } from "../../utils/maria";
 
-interface EmoteEventUpdate {
+export interface EmoteEventUpdate {
   channel: string;
   emote_id: string;
   name: string;
@@ -12,7 +14,7 @@ interface EmoteEventUpdate {
   emote?: ExtraEmoteData;
 }
 
-interface ExtraEmoteData {
+export interface ExtraEmoteData {
   name: string;
   visibility: number;
   mime: string;
@@ -29,7 +31,7 @@ interface ExtraEmoteData {
   urls: [[string, string]];
 }
 
-async function handleSevenTv(event: EmoteEventUpdate) {
+async function handleSevenTv(client: Actions, event: EmoteEventUpdate) {
   if (event.action === "ADD") {
     console.log(`[7tv] ${event.channel} added new emote: ${event.emote?.name}`);
     let values = [event.channel, event.name, event.emote_id, "7tv", "channel", `${event.emote?.urls[0][1]}`, event.emote?.visibility === 128 ? 1 : 0];
@@ -42,9 +44,10 @@ async function handleSevenTv(event: EmoteEventUpdate) {
     console.log(`[7tv] ${event.channel} removed emote: ${event.name}`);
     await removeOne(`emotes`, 'Name=?', [event.name]);
   }
+  handleSevenTVUpdate(client, event);
 }
 
-export default async function openEmoteListeners() {
+export default async function openEmoteListeners(client: Actions) {
   let channels: string[] = [];
   let query = await findQuery('SELECT username FROM channels;', []);
 
@@ -60,7 +63,7 @@ export default async function openEmoteListeners() {
   });
 
   sevenTvConn.addEventListener("update", async (e: any) => {
-    await handleSevenTv(JSON.parse(e.data));
+    await handleSevenTv(client, JSON.parse(e.data));
   });
 
   sevenTvConn.addEventListener("open", (e: any) => {

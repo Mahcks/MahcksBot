@@ -46,7 +46,7 @@ const whoisCommand: CommandInt = {
       id: (isSelf) ? userstate['user-id'] : userLookup.id,
       chatColor: (userLookup.chatColor === undefined) ? '[None]' : userLookup.chatColor,
       badge: (userLookup.badge.length === 0) ? '[None]' : getBadges(userLookup.badge),
-      created: calcDate(new Date(), new Date(userLookup['createdAt']), ['s', 'm'])
+      created: calcDate(new Date(), new Date(userLookup['createdAt']), ['m'])
     }
 
     if (target.toLowerCase() === userstate.username) {

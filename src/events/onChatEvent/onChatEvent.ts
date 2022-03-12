@@ -3,6 +3,7 @@ import config from "../../config/config";
 import runCommand from "../../modules/run-command";
 import { isMod, logMessage, updateOrCreateChatter } from "../../utils";
 import { getChannelSettings } from "../../utils/start";
+import { isUserBannedInChannel } from "../../utils/timeout";
 
 export default async (client: Actions, channel: string, userstate: Userstate, message: string, self: boolean) => {
   if (self) await isMod(userstate, channel);
@@ -27,5 +28,9 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   // Save/update chatter in table
   await updateOrCreateChatter(userstate);
 
+  // Check if user is banned or not to keep track of bans.
+  await isUserBannedInChannel(parseInt(userstate['user-id']!), channel.replace('#', ''));
+
+  // Log message in DB
   await logMessage(channel.substring(1), parseInt(userstate['user-id']!), userstate['username'], message.toString(), new Date());
 }
