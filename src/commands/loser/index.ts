@@ -21,7 +21,7 @@ const looserCommand: CommandInt = {
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     let template = 'GUYS GUYS LOOK! LOOK GUYS! THERE IS A HUGE LOSER IN CHAT AND HIS NAME IS 🔔 {USER} HAHAHA LOOK AT THAT FUCKING LOSER XDDD'
     if (context[0]) {
-      sendMessage(client, channel, template.replace('{USER}', context[0]));
+      sendMessage(client, channel, template.replace('{USER}', context[0].toUpperCase()));
     } else {
       let clean = await removeUsersOptedOut(await getAllChatters(channel), await getOptedOutUsers(looserCommand.Name));
       let random = await randomArray(clean);

@@ -4,6 +4,8 @@ import { bold, fancy, fancyBold, outline, small } from "../../utils/fonts";
 import { getChannelSettings } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
+
+const avilFonts = ['fancy', 'fancybold', 'outline', 'small', 'lisp'];
 const fontCommand: CommandInt = {
   Name: "font",
   Aliases: [],
@@ -13,7 +15,7 @@ const fontCommand: CommandInt = {
   Description: "Change the font of any text.",
   DynamicDescription: [
     "Change the font of a message.",
-    "<code>!font (fancy, fancybold, outline, small) (message)</code>",
+    `<code>!font (${avilFonts.join(", ")}) (message)</code>`,
   ],
   Testing: false,
   OfflineOnly: false,
@@ -43,7 +45,11 @@ const fontCommand: CommandInt = {
 
     } else if (askedFont === "small") {
       client.say(channel, `${applyFont(getTranslated(), small)}`)
-    } else client.say(channel, `@${userstate.username} incorrect syntax: ${currentSettings.prefix}font (fancy, fancybold, outline, bold, small) (message)`);
+
+    } else if (askedFont === "lisp") {
+      client.say(channel, getTranslated().replace(/s/g, 'th'));
+
+    } else client.say(channel, `@${userstate.username} incorrect syntax: ${currentSettings.prefix}font (${avilFonts.join(", ")}) (message)`);
   }
 }
 

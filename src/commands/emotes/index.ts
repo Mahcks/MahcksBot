@@ -2,7 +2,8 @@ import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { getUserId } from "../../utils/helix";
 import { CommandInt } from "../../validation/ComandSchema";
-import { findQuery } from "../../utils/maria";
+import { findQuery, sqlQuery } from "../../utils/maria";
+import { calcDate } from "../../utils";
 
 const emotesCommand: CommandInt = {
   Name: "emotes",
@@ -23,6 +24,18 @@ const emotesCommand: CommandInt = {
     const user = userstate.username;
     let target = (context[0]) ? context[0] : channel;
     (target.startsWith("#")) ? target = target.substring(1) : target;
+
+    if (target === "latest") {
+      let query = await sqlQuery('SELECT * FROM emotes WHERE channel=? ORDER BY date DESC LIMIT 5;', [channel.substring(1)]);
+
+      let emoteStr = '';
+      query.forEach((emote: any) => {
+        emoteStr += `${emote.name} (${calcDate(new Date(), new Date(emote.date), [])} ago) `;
+      });
+
+      sendMessage(client, channel, `@${user} 5 latest emotes: ${emoteStr}`);
+      return;
+    }
 
     let isUser = await getUserId(target);
 

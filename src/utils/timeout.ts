@@ -25,7 +25,6 @@ async function userUnbanned(channel: string, uid: number) {
 // Checks if a user is banned from a channel when they chat.
 // This is done because there is no easy way without permission to get the unban event.
 export async function isUserBannedInChannel(uid: number, channel: string) {
-  console.log(channel.replace("#", ""));
   redis.smembers(`user_bans:${channel.replace('#', '')}`, function (err, reply) {
     if (reply.includes(uid.toString())) {
       userUnbanned(channel.replace('#', ''), uid);

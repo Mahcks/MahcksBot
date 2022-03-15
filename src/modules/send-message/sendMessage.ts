@@ -1,6 +1,12 @@
 import { Actions } from "tmi.js";
 import config from "../../config/config";
 
+/* 
+  = Rate Limits = 
+  Viewer - 20 messages per 30 seconds 
+  Moderator - 100 messages per 30 seconds
+*/
+
 let alternate = false;
 export default async (client: Actions, channel: string, message: string) => {
   (message.startsWith("#")) ? channel = channel.substring(1) : channel;
