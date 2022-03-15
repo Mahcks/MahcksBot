@@ -1,5 +1,6 @@
 import { Actions, CommonUserstate } from "tmi.js";
 import { redis } from "../../main";
+import { generateMarkovChain, getLoggedChannels } from "../../modules/markov";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { checkIfUserOptedout, getBestAvilableEmote, isMod } from "../../utils";
 import { getUserId } from "../../utils/helix";
@@ -98,6 +99,9 @@ const debugCommand: CommandInt = {
           console.log(result);
         }
       });
+    
+    } else if (cmd === "markov") {
+      await getLoggedChannels();
     }
   }
 }
