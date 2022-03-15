@@ -36,14 +36,14 @@ const markovCommand: CommandInt = {
     });
 
     // TODO: Exclude any ASCII art
-    const markov = new Markov({ stateSize: 1 });
+    const markov = new Markov({ stateSize: 2 });
     markov.addData(data);
 
     const options: any = {
       maxTries: 2000,
 
       filter: (result: any) => {
-        return result.string.split(' ').length >= 8 && !result.string.includes("⣿") && result.score >= 50
+        return result.string.split(' ').length <= 30 && !result.string.includes("⣿") && result.score >= 50
       }
     }
 
