@@ -43,7 +43,7 @@ const markovCommand: CommandInt = {
       maxTries: 10000,
 
       filter: (result: any) => {
-        return result.string.split(' ').length <= 30 && !result.string.includes("⣿") && result.score >= 50
+        return result.string.split(' ').length <= 150 && !result.string.includes("⣿") && result.score >= 50
       }
     }
 
