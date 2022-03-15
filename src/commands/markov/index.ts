@@ -26,7 +26,7 @@ const markovCommand: CommandInt = {
     let targetChannel = (context[0]) ? context[0] : channel.substring(1);
     targetChannel = (targetChannel.startsWith("-")) ? channel.substring(1) : targetChannel;
 
-    let query = await findQuery('SELECT message FROM logs WHERE channel=? ORDER BY RAND() LIMIT 5000;', [targetChannel]);
+    let query = await findQuery('SELECT message FROM logs WHERE channel=? ORDER BY RAND() LIMIT 10000;', [targetChannel]);
 
     if (!query[0]) return sendMessage(client, channel, `🔮 Sorry I couldn't find any logged messages that channel.`);
 
@@ -36,15 +36,14 @@ const markovCommand: CommandInt = {
     });
 
     // TODO: Exclude any ASCII art
-    const markov = new Markov({ stateSize: 2 });
+    const markov = new Markov({ stateSize: 1 });
     markov.addData(data);
 
     const options: any = {
-      maxTries: 30,
-      prng: Math.random,
+      maxTries: 2000,
 
       filter: (result: any) => {
-        return result.string.split(' ').length >= 5
+        return result.string.split(' ').length >= 8 && !result.string.includes("⣿") && result.score >= 50
       }
     }
 
