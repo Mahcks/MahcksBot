@@ -21,9 +21,10 @@ export async function generateMarkovChain(channel: string, message: string): Pro
     loggedChannels.push(channel.username);
   });
 
-  if (!loggedChannels.includes(channel)) return `🔮 Sorry I couldn't find any logged messages for that channel.`;
-  let query = await findQuery('SELECT message FROM logs WHERE channel=? ORDER BY RAND() LIMIT 10000;', [channel.toLowerCase()]);
-  
+  if (!loggedChannels.includes(channel) && channel !== "all") return `🔮 Sorry I couldn't find any logged messages for that channel.`;
+  let qString = (channel === "all") ? 'SELECT message FROM logs ORDER BY RAND() LIMIT 10000;' : 'SELECT message FROM logs WHERE channel=? ORDER BY RAND() LIMIT 10000;';
+  let query = await findQuery(qString, (channel === "all") ? [] : [channel.toLowerCase()]);
+
   let isOver10k = (query.length >= 10000) ? true : false;
 
   let data: string[] = [];

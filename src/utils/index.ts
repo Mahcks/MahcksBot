@@ -217,7 +217,7 @@ export async function shortenURL(url: string) {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "API-Key": config.lmahcks
+        "API-Key": config.apiKeys.lmahcks
       },
       data: {
         longUrl: url
