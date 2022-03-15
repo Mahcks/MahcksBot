@@ -35,12 +35,12 @@ const markovCommand: CommandInt = {
       data.push(msg.message);
     });
 
-    // TODO: Exclude any ASCII art
+    // TODO: Remove links, usernames and add response for errors
     const markov = new Markov({ stateSize: 2 });
     markov.addData(data);
 
     const options: any = {
-      maxTries: 5000,
+      maxTries: 10000,
 
       filter: (result: any) => {
         return result.string.split(' ').length <= 30 && !result.string.includes("⣿") && result.score >= 50
