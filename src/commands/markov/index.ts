@@ -23,7 +23,7 @@ const markovCommand: CommandInt = {
   Testing: false,
   OfflineOnly: false,
   OnlineOnly: false,
-  Optout: false,
+  Optout: true,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     let targetChannel = (context[0]) ? context[0] : channel.substring(1);
     targetChannel = (targetChannel.startsWith("-")) ? channel.substring(1) : targetChannel;
