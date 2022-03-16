@@ -23,7 +23,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
   });
 
   if (!loggedChannels.includes(channel) && channel !== "all") return `🔮 Sorry I couldn't find any logged messages for that channel.`;
-  let qString = (channel === "all") ? 'SELECT message FROM logs ORDER BY RAND() LIMIT 10000;' : 'SELECT message FROM logs WHERE channel=? ORDER BY RAND() LIMIT 10000;';
+  let qString = (channel === "all") ? 'SELECT message FROM logs ORDER BY RAND() LIMIT 15000;' : 'SELECT message FROM logs WHERE channel=? ORDER BY RAND() LIMIT 10000;';
   let query = await findQuery(qString, (channel === "all") ? [] : [channel.toLowerCase()]);
 
   let isOver10k = (query.length >= 10000) ? true : false;
@@ -37,12 +37,12 @@ export async function generateMarkovChain(channel: string, message: string): Pro
   markov.addData(data);
 
   const scoreLimit = (isOver10k) ? 50 : pickNumberBetweenRange(5, 15);
-  const maxTries = (isOver10k) ? 10000 : 5000;
+  const maxTries = (isOver10k) ? 25000 : 5000;
   const options = {
     maxTries: maxTries,
 
     filter: (result: any) => {
-      return result.string.split(' ').length <= 80 && result.string.split(' ').length >= 8 && !result.string.includes("⣿") && result.score >= scoreLimit;
+      return result.string.split(' ').length <= 80 && result.string.split(' ').length >= 15 && !result.string.includes("⣿") && result.score >= scoreLimit;
     }
   }
 
