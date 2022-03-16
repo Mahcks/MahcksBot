@@ -33,7 +33,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
     data.push(msg.message);
   });
 
-  const markov = new Markov({ stateSize: 1 });
+  const markov = new Markov({ stateSize: 2 });
   markov.addData(data);
 
   const scoreLimit = (isOver10k) ? 50 : pickNumberBetweenRange(5, 15);
@@ -42,7 +42,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
     maxTries: maxTries,
 
     filter: (result: any) => {
-      return result.string.split(' ').length <= 80 && result.string.split(' ').length >= 15 && !result.string.includes("⣿") && result.score >= scoreLimit;
+      return result.string.split(' ').length <= 80 && result.string.split(' ').length >= 8 && !result.string.includes("⣿") && result.score >= scoreLimit;
     }
   }
 
