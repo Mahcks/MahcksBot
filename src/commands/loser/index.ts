@@ -25,7 +25,7 @@ const looserCommand: CommandInt = {
     } else {
       let clean = await removeUsersOptedOut(await getAllChatters(channel), await getOptedOutUsers(looserCommand.Name));
       let random = await randomArray(clean);
-      sendMessage(client, channel, template.replace('{USER}', random));
+      sendMessage(client, channel, template.replace('{USER}', random.toUpperCase()));
     }
   }
 }
