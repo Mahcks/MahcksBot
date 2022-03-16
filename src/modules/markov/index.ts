@@ -42,7 +42,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
     maxTries: maxTries,
 
     filter: (result: any) => {
-      return result.string.split(' ').length <= 80 && !result.string.includes("⣿") && result.score >= scoreLimit;
+      return result.string.split(' ').length <= 80 && result.string.split(' ').length >= 15 && !result.string.includes("⣿") && result.score >= scoreLimit;
     }
   }
 
