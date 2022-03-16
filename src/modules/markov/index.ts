@@ -37,7 +37,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
   markov.addData(data);
 
   const scoreLimit = (isOver10k) ? 50 : pickNumberBetweenRange(5, 15);
-  const maxTries = (isOver10k) ? 10000 : 5000;
+  const maxTries = (isOver10k) ? 15000 : 5000;
   const options = {
     maxTries: maxTries,
 
