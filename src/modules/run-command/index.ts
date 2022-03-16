@@ -47,7 +47,7 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
     if (!shouldRun) return;
 
     if (isUserPremitted(userstate, command.Permissions)) {
-      if (!config.production) {
+      if (config.production) {
         await updateOne('UPDATE commands SET count=count+1 WHERE name=?;', [command.Name]);
         await updateOne('UPDATE chatters SET commandsUsed=commandsUsed+1 WHERE username=?;', [userstate.username]);
         await insertRow('INSERT INTO command_executions (executed, user_id, command, channel, invocation, arguments) VALUES (?, ?, ?, ?, ?, ?)',
