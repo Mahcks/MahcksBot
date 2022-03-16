@@ -4,7 +4,7 @@ import { CommandStore } from "../../store/CommandStore";
 import { checkMessageBanPhrase } from "../../utils";
 import { cooldownCanContinue } from "../../utils/cooldown";
 import isUserPremitted from "../../utils/isUserPremitted";
-import { updateOne } from "../../utils/maria";
+import { insertRow, updateOne } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 import sendMessage from "../send-message/sendMessage";
 
@@ -50,6 +50,8 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
       if (!config.production) {
         await updateOne('UPDATE commands SET count=count+1 WHERE name=?;', [command.Name]);
         await updateOne('UPDATE chatters SET commandsUsed=commandsUsed+1 WHERE username=?;', [userstate.username]);
+        await insertRow('INSERT INTO command_executions (executed, user_id, command, channel, invocation, arguments) VALUES (?, ?, ?, ?, ?, ?)',
+        [new Date(), userstate['user-id'], command.Name, channel.substring(1), commandName, JSON.stringify(context)]);
       }
       return await command.Code(client, channel, userstate, context);
     } else return await client.say(channel, `@${userstate.username} you don't have permission to use that command.`);
