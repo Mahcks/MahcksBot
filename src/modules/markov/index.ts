@@ -2,6 +2,7 @@ import axios from "axios";
 import Markov from "markov-strings";
 import { humanizeNumber, pickNumberBetweenRange } from "../../utils";
 import { findQuery } from "../../utils/maria";
+import { getChannelSettings } from "../../utils/start";
 
 export async function getLoggedChannels() {
   let res = await axios.get("https://logs.ivr.fi/channels");
@@ -48,9 +49,14 @@ export async function generateMarkovChain(channel: string, message: string): Pro
   try {
     const result = markov.generate(options);
     let msg: string = '';
-    (/-stats/gm.test(message)) ? msg = `[Tries: ${result.tries} | Refs: ${result.refs.length} | Score: ${result.score}]🔮 ${result.string}` : msg = `🔮 ${result.string}`;
+    let isUrl: RegExp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+    (/-stats/gm.test(message)) ? msg = `[Tries: ${result.tries} | Refs: ${result.refs.length} | Score: ${result.score}]🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}` : msg += `🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}`;
     return msg
   } catch (err) {
-    return `🔮 Error generating Markov chain after ${humanizeNumber(options.maxTries)} tries. Please try again later.`;
+    let total = await findQuery('SELECT COUNT(*) FROM logs WHERE channel=?;', [channel]);
+    if (total[0]['COUNT(*)'] <= 5000) {
+      let currentSettings = await getChannelSettings(channel);
+      return `🔮 Error generating Markov chain after ${humanizeNumber(options.maxTries)} tries. It may be because this channel only has ${humanizeNumber(total[0]['COUNT(*)'])} messages logged. If you still want to use this command use "${currentSettings.prefix} markov all"`;
+    } else return `🔮 Error generating Markov chain after ${humanizeNumber(options.maxTries)} tries. Please try again later.`;
   }
 }

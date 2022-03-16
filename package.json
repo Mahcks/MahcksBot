@@ -51,7 +51,6 @@
     "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.10",
     "eventsource": "^2.0.0",
-    "genius-lyrics": "^4.3.5",
     "ioredis": "^4.28.5",
     "mariadb": "^2.5.5",
     "markov-strings": "^3.0.1",
