@@ -23,21 +23,7 @@ export async function getLoggedChannels() {
   return channels
 }
 
-function getMarkovSpecificChannel(query: string, values: any[]) {
-  return new Promise(function (resolve, reject) {
-    logPool.query(query, values, (err, result) => {
-      if (!err) {
-        resolve(result);
-      } else {
-        reject({
-          status: "error",
-          message: "Error getting messages",
-          debug: err
-        });
-      }
-    });
-  });
-}
+
 
 export async function cacheMarkovMessages(key: string) {
   let search = await redis.get(key);
@@ -56,20 +42,13 @@ async function getChannelMessages(channel: string, message: string): Promise<str
 
   if (channel === "channels") {
     let loggedChannels: string[] = [];
-    let test: any = await getMarkovSpecificChannel('SHOW TABLES FROM logs;', []);
+    let test: any = await logQuery('SHOW TABLES FROM logs;', []);
     test.forEach((ch: any) => {
       loggedChannels.push(ch['Tables_in_logs']);
     });
 
-    let str = `channels I log: ${loggedChannels.join(", ")}`;
-    if (str.length >= 450) {
-      let haste = postHastebin(`Avilable channels for Markov command: ${loggedChannels.join("\n")}`);
-      return `Avilable channels listed here: ${haste}`;
-    } else {
-      return str
-    }
-
-    return test;
+    let haste = await postHastebin(`Avilable channels for Markov command:\n${loggedChannels.sort().join("\n")}`);
+    return `🔮 Avilable channels listed here: ${haste}`;
   }
 
   if (!loggedChannels.includes(channel) && channel !== "all") return `🔮 Sorry I couldn't find any logged messages for that channel.`;
@@ -83,7 +62,7 @@ async function getChannelMessages(channel: string, message: string): Promise<str
       let parsed = JSON.parse(cache);
       return parsed;
     } else {
-      let msgs: any = await getMarkovSpecificChannel(`SELECT message FROM logs.${channel} ORDER BY RAND() LIMIT 15000;`, []);
+      let msgs: any = await logQuery(`SELECT message FROM logs.${channel} ORDER BY RAND() LIMIT 15000;`, []);
       msgs.forEach((msg: any) => {
         toReturn.push(msg.message);
       });
@@ -128,7 +107,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
       let msg: string = '';
       let isUrl: RegExp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
       (/-stats/gm.test(message)) ? msg = `[Tries: ${result.tries} | Refs: ${result.refs.length} | Score: ${result.score}]🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}` : msg += `🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}`;
-      
+
       let monkaLaugh = await checkMessageBanPhrase(msg);
       if (monkaLaugh === null) return '🔮 Error checking for banphrases.';
       if (/(i'm\s12|im\s12|i\sam\s12|am\s12)/gm.test(message)) return `🔮 [REDACTED] cmonBruh`;
@@ -143,4 +122,8 @@ export async function generateMarkovChain(channel: string, message: string): Pro
       } else return `🔮 Error generating Markov chain after ${humanizeNumber(options.maxTries)} tries. Please try again later.`;
     }
   } else return data;
+}
+
+function logQuery(arg0: string, arg1: never[]): any {
+  throw new Error("Function not implemented.");
 }

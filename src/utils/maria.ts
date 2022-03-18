@@ -1,4 +1,4 @@
-import { pool } from "../main";
+import { logPool, pool } from "../main";
 
 export function insertRow(query: string, values: any[]) {
   pool.getConnection()
@@ -196,7 +196,21 @@ export function find(table: string) {
 
 
 
-
+function logQuery(query: string, values: any[]) {
+  return new Promise(function (resolve, reject) {
+    logPool.query(query, values, (err, result) => {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject({
+          status: "error",
+          message: "Error getting messages",
+          debug: err
+        });
+      }
+    });
+  });
+}
 
 
 
