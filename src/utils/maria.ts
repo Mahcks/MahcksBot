@@ -194,9 +194,7 @@ export function find(table: string) {
     });
 }
 
-
-
-function logQuery(query: string, values: any[]) {
+export function logQuery(query: string, values: any[]) {
   return new Promise(function (resolve, reject) {
     logPool.query(query, values, (err, result) => {
       if (!err) {
@@ -211,8 +209,6 @@ function logQuery(query: string, values: any[]) {
     });
   });
 }
-
-
 
 /** Searches if row exists, if it doesn't create
  * 

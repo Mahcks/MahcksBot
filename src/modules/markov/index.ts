@@ -2,7 +2,7 @@ import axios from "axios";
 import Markov from "markov-strings";
 import { logPool, redis } from "../../main";
 import { checkMessageBanPhrase, humanizeNumber, pickNumberBetweenRange, postHastebin } from "../../utils";
-import { findQuery } from "../../utils/maria";
+import { findQuery, logQuery } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 import { loggedMarkovChannels } from "../channel-logger";
 
@@ -22,8 +22,6 @@ export async function getLoggedChannels() {
 
   return channels
 }
-
-
 
 export async function cacheMarkovMessages(key: string) {
   let search = await redis.get(key);
@@ -122,8 +120,4 @@ export async function generateMarkovChain(channel: string, message: string): Pro
       } else return `🔮 Error generating Markov chain after ${humanizeNumber(options.maxTries)} tries. Please try again later.`;
     }
   } else return data;
-}
-
-function logQuery(arg0: string, arg1: never[]): any {
-  throw new Error("Function not implemented.");
 }
