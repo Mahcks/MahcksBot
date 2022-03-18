@@ -31,7 +31,4 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
 
   // Check if user is banned or not to keep track of bans.
   await isUserBannedInChannel(parseInt(userstate['user-id']!), channel.replace('#', ''));
-
-  // Log message in DB
-  logMessageForChannel(channel.substring(1), userstate['username'], message)
 }
