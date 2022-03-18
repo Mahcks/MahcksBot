@@ -1,5 +1,6 @@
 import { Actions, Userstate } from "tmi.js";
 import config from "../../config/config";
+import { logMessageForChannel } from "../../modules/channel-logger";
 import runCommand from "../../modules/run-command";
 import { isMod, logMessage, updateOrCreateChatter } from "../../utils";
 import { getChannelSettings } from "../../utils/start";
@@ -32,5 +33,5 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   await isUserBannedInChannel(parseInt(userstate['user-id']!), channel.replace('#', ''));
 
   // Log message in DB
-  await logMessage(channel.substring(1), parseInt(userstate['user-id']!), userstate['username'], message.toString(), new Date());
+  logMessageForChannel(channel.substring(1), userstate['username'], message)
 }

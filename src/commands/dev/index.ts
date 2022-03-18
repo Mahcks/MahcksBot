@@ -3,6 +3,7 @@ import sendMessage from "../../modules/send-message/sendMessage";
 import { CommandInt } from "../../validation/ComandSchema";
 import { execSync, exec } from 'child_process';
 import { sqlQuery } from "../../utils/maria";
+import { cacheMarkovMessages } from "../../modules/markov";
 
 const devCommand: CommandInt = {
   Name: "developer",
@@ -58,6 +59,12 @@ const devCommand: CommandInt = {
       let query = await sqlQuery(qString, [values]);
 
       console.log(query);
+
+    } else if (cmd === "redis") {
+      context.shift();
+      let search = context.join(" ");
+      let q = await cacheMarkovMessages(search);
+      console.log(q);
 
     } else {
       sendMessage(client, channel, `@${user} invalid option FeelsDankMan`);
