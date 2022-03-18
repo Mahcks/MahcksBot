@@ -15,29 +15,6 @@ import { findQuery } from "../../utils/maria";
 */
 
 export const loggedMarkovChannels: string[] = ["moonmoon", "cyr", "trainwreckstv", "forsen", "pokelawls", "erobb221"];
-const months: string[] = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
-
-/* 
-
-    let year = new Date().getUTCFullYear();
-    let yDir = path.join(__dirname, '../../test-data/' + year);
-    if (!fs.existsSync(yDir)) {
-      fs.mkdirSync(yDir, { recursive: true });
-    }
-
-    let dir = path.join(__dirname, '../../test-data/' + year + "/" + channel)
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-
-      months.forEach(month => {
-        let mDir = path.join(__dirname, "../../test-data/" + year + "/" + channel + "/" + month);
-        if (!fs.existsSync(mDir)) {
-          fs.mkdirSync(mDir, { recursive: true });
-        }
-      });
-    }
-
-*/
 
 // Checks if the streamer has their own folder yet for channel logs.
 const checkForChannelTable = (channels: string[]) => {

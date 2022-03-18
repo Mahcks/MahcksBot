@@ -319,3 +319,20 @@ export const handleSevenTVUpdate = async (client: Actions, event: EmoteEventUpda
     }
   } else return;
 }
+
+/**
+ * Post data to Hastebin
+ * @param {string} message This will be posted to a Hastebin. 
+ * @returns URL of Hastebin created.
+ */
+ export async function postHastebin(message: string) {
+
+  let response = await axios({
+    method: "POST",
+    url: "https://www.toptal.com/developers/hastebin/documents",
+    data: message
+  });
+
+  let url = await shortenURL(`https://www.toptal.com/developers/hastebin/${response.data["key"]}`);
+  return url;
+}

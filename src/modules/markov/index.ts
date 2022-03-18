@@ -1,7 +1,7 @@
 import axios from "axios";
 import Markov from "markov-strings";
 import { logPool, redis } from "../../main";
-import { humanizeNumber, pickNumberBetweenRange } from "../../utils";
+import { humanizeNumber, pickNumberBetweenRange, postHastebin } from "../../utils";
 import { findQuery } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 import { loggedMarkovChannels } from "../channel-logger";
@@ -54,13 +54,31 @@ async function getChannelMessages(channel: string, message: string): Promise<str
     loggedChannels.push(channel.username);
   });
 
+  if (channel === "channels") {
+    let loggedChannels: string[] = [];
+    let test: any = await getMarkovSpecificChannel('SHOW TABLES FROM logs;', []);
+    test.forEach((ch: any) => {
+      loggedChannels.push(ch['Tables_in_logs']);
+    });
+
+    let str = `channels I log: ${loggedChannels.join(", ")}`;
+    if (str.length >= 450) {
+      let haste = postHastebin(`Avilable channels for Markov command: ${loggedChannels.join("\n")}`);
+      return `Avilable channels listed here: ${haste}`;
+    } else {
+      return str
+    }
+
+    return test;
+  }
+
   if (!loggedChannels.includes(channel) && channel !== "all") return `🔮 Sorry I couldn't find any logged messages for that channel.`;
 
   let toReturn: string[] = [];
 
   if (loggedMarkovChannels.includes(channel)) {
     // Check if local cache has expired yet or not
-    let cache = await redis.get('channel:logs:markov:'+channel);
+    let cache = await redis.get('channel:logs:markov:' + channel);
     if (cache !== null) {
       let parsed = JSON.parse(cache);
       return parsed;
@@ -70,7 +88,7 @@ async function getChannelMessages(channel: string, message: string): Promise<str
         toReturn.push(msg.message);
       });
 
-      redis.set('channel:logs:markov:'+channel, JSON.stringify(toReturn), 'ex', 3600) // expires in an hour
+      redis.set('channel:logs:markov:' + channel, JSON.stringify(toReturn), 'ex', 3600) // expires in an hour
       return toReturn;
     }
 
@@ -89,7 +107,8 @@ export async function generateMarkovChain(channel: string, message: string): Pro
   let data = await getChannelMessages(channel, message);
   let isOver10k = (data.length >= 10000) ? true : false;
 
-  const markov = new Markov({ stateSize: 1 });
+  let stateSize = (loggedMarkovChannels.includes(channel)) ? 1 : 2;
+  const markov = new Markov({ stateSize: stateSize });
 
   if (Array.isArray(data)) {
     markov.addData(data);
@@ -100,7 +119,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
       maxTries: maxTries,
 
       filter: (result: any) => {
-        return result.string.split(' ').length <= 80 && result.string.split(' ').length >= 8 && !result.string.includes("⣿") && result.score >= scoreLimit;
+        return result.string.split(' ').length <= 80 && result.string.split(' ').length >= 10 && !result.string.includes("⣿") && result.score >= scoreLimit;
       }
     }
 

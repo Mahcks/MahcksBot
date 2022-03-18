@@ -2,8 +2,9 @@ import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { CommandInt } from "../../validation/ComandSchema";
 import { execSync, exec } from 'child_process';
-import { sqlQuery } from "../../utils/maria";
+import { findQuery, sqlQuery } from "../../utils/maria";
 import { cacheMarkovMessages } from "../../modules/markov";
+import { logPool } from "../../main";
 
 const devCommand: CommandInt = {
   Name: "developer",
@@ -66,6 +67,19 @@ const devCommand: CommandInt = {
       let q = await cacheMarkovMessages(search);
       console.log(q);
 
+    } else if (cmd === "migrate") {
+      let all = await findQuery('SELECT * FROM logs;', []);
+
+      let queries: string[] = [];
+      all.forEach((log: any) => {
+        if (log.channel === "jayhilaneh") {
+          queries.push(log.timestamp, log.username, log.message);
+        }
+      });
+
+      /* logPool.query(`INSERT INTO logs.jayhilaneh (timestamp, username, message) VALUES ?`, [queries], (err, result) => {
+        if (err) return console.log(err);
+      }); */
     } else {
       sendMessage(client, channel, `@${user} invalid option FeelsDankMan`);
     }
