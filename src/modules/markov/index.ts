@@ -1,7 +1,7 @@
 import axios from "axios";
 import Markov from "markov-strings";
 import { logPool, redis } from "../../main";
-import { humanizeNumber, pickNumberBetweenRange, postHastebin } from "../../utils";
+import { checkMessageBanPhrase, humanizeNumber, pickNumberBetweenRange, postHastebin } from "../../utils";
 import { findQuery } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 import { loggedMarkovChannels } from "../channel-logger";
@@ -128,6 +128,12 @@ export async function generateMarkovChain(channel: string, message: string): Pro
       let msg: string = '';
       let isUrl: RegExp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
       (/-stats/gm.test(message)) ? msg = `[Tries: ${result.tries} | Refs: ${result.refs.length} | Score: ${result.score}]🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}` : msg += `🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}`;
+      
+      let monkaLaugh = await checkMessageBanPhrase(msg);
+      if (monkaLaugh === null) return '🔮 Error checking for banphrases.';
+      if (/(i'm\s12|im\s12|i\sam\s12|am\s12)/gm.test(message)) return `🔮 [REDACTED] cmonBruh`;
+      if (monkaLaugh.data.banned) return `🔮 [REDACTED] cmonBruh`;
+
       return msg
     } catch (err) {
       let total = await findQuery('SELECT COUNT(*) FROM logs WHERE channel=?;', [channel]);
