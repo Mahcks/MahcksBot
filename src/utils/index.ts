@@ -2,7 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { Actions, client, Userstate } from "tmi.js";
 import config from "../config/config";
-import { pool } from "../main";
+import { pool, redis } from "../main";
 import { EmoteEventUpdate } from "../modules/emote-listener";
 import sendMessage from "../modules/send-message/sendMessage";
 import { findQuery, insertRow, updateOne } from "./maria";
@@ -147,6 +147,12 @@ export async function isMod(user: Userstate, channel: string) {
   let isModUp = isMod || isBroadcaster;
 
   await updateChannelCache(channel, "role", (isModUp) ? "moderator" : "viewer");
+
+  let storedMod = await redis.get(channel);
+  if (!storedMod) return;
+  let parsed = JSON.parse(storedMod);
+
+  if (parsed.role === "broadcaster" || parsed.role === "moderator") return true;
   return isModUp;
 }
 
