@@ -1,4 +1,5 @@
 import { Actions, Userstate } from "tmi.js";
+import { randomArray } from "../../utils";
 import GameUtils from "../../utils/games/gameHandler";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -18,8 +19,14 @@ const exampleCommand: CommandInt = {
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     let vs = (context[0]) ? context[0] : "cpu";
+    let action = context[1];
+    let possibleActions = ["rock", "paper", "scissors"];
 
-    //let test = GameUtils.startGame()
+    let botAction = randomArray(possibleActions);
+
+    if (vs === "cpu" || context[0] === "computer" || context[0] === "cpu" || context[0] === "pc") {
+
+    }
   }
 }
 

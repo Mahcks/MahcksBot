@@ -62,7 +62,7 @@ async function getChannelMessages(channel: string, message: string): Promise<str
     } else {
 
       try {
-        let msgs: any = await logQuery(`SELECT message FROM logs.${channel} WHERE username != 'okayegbot' AND username != 'egsbot' AND username != 'supibot' AND username != 'thepositivebot' AND username != 'huwobot' ORDER BY RAND() LIMIT 25000;`, []);
+        let msgs: any = await logQuery(`SELECT message FROM logs.${channel} WHERE username != 'okayegbot' AND username != 'egsbot' AND username != 'supibot' AND username != 'thepositivebot' AND username != 'huwobot' ORDER BY RAND() LIMIT 15000;`, []);
         msgs.forEach((msg: any) => {
           toReturn.push(msg.message);
         });

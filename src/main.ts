@@ -71,6 +71,20 @@ client.setThrottle({
 
 client.connect().then(async () => {
   await initChannelSettings();
+
+  // Opens emote listener
+  await openEmoteListeners(client);
+
+  // Markov data
+  await fetchMarkovData();
+  
+  // Logs channel data.
+  initLogClient();
+
+  // Fetches emotes every 3 hours.
+  cron.schedule('0 */3 * * *', async () => {
+    await fetchAndStoreEmotes();
+  })
 });
 
 import onChatEvent from "./events/onChatEvent/onChatEvent";
@@ -79,22 +93,7 @@ import cron from 'node-cron';
 import { Redis } from "ioredis";
 import onBanEvent from "./events/onBanEvent/onBanEvent";
 import onTimeoutEvent from "./events/onTimeoutEvent";
-import { initLogClient } from "./modules/channel-logger";
+import { fetchMarkovData, initLogClient } from "./modules/channel-logger";
 client.on("chat", async (channel: string, userstate: TMI.Userstate, message: string, self: boolean) => await onChatEvent(client, channel, userstate, message, self));
 client.on("ban", async (channel: string, username: string, reason: null, userstate: any) => onBanEvent(client, channel, username, reason, userstate));
 client.on("timeout", async (channel: string, username: string, reason: null, duration: number, userstate: any) => onTimeoutEvent(channel, username, reason, duration, userstate));
-
-(async () => {
-  // Opens emote listener
-  await openEmoteListeners(client);
-  
-  if (config.production) {
-    initLogClient();
-  }
-  
-  // Fetches emotes every 3 hours.
-  cron.schedule('0 */3 * * *', async () => {
-    await fetchAndStoreEmotes();
-  })
-})();
-
