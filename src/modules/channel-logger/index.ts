@@ -14,7 +14,7 @@ import { findQuery } from "../../utils/maria";
 
 */
 
-export const loggedMarkovChannels: string[] = ["moonmoon", "cyr", "trainwreckstv", "forsen", "pokelawls", "erobb221"];
+export const loggedMarkovChannels: string[] = ["moonmoon", "cyr", "trainwreckstv", "forsen", "pokelawls", "erobb221", "amouranth"];
 
 // Checks if the streamer has their own folder yet for channel logs.
 const checkForChannelTable = (channels: string[]) => {
