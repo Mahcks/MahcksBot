@@ -60,6 +60,7 @@ export const initLogClient = async () => {
   lClient.connect();
 
   lClient.on('message', (channel: string, userstate: TMI.Userstate, message: string, self: boolean) => {
+    if (userstate.username.includes("bot")) return;
     logMessageForChannel(channel.substring(1), userstate['username'], message);
   });
 }

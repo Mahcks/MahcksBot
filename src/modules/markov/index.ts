@@ -60,13 +60,18 @@ async function getChannelMessages(channel: string, message: string): Promise<str
       let parsed = JSON.parse(cache);
       return parsed;
     } else {
-      let msgs: any = await logQuery(`SELECT message FROM logs.${channel} ORDER BY RAND() LIMIT 15000;`, []);
-      msgs.forEach((msg: any) => {
-        toReturn.push(msg.message);
-      });
 
-      redis.set('channel:logs:markov:' + channel, JSON.stringify(toReturn), 'ex', 3600) // expires in an hour
-      return toReturn;
+      try {
+        let msgs: any = await logQuery(`SELECT message FROM logs.${channel} WHERE username != 'okayegbot' AND username != 'egsbot' AND username != 'supibot' AND username != 'thepositivebot' AND username != 'huwobot' ORDER BY RAND() LIMIT 25000;`, []);
+        msgs.forEach((msg: any) => {
+          toReturn.push(msg.message);
+        });
+  
+        redis.set('channel:logs:markov:' + channel, JSON.stringify(toReturn), 'ex', 3600) // expires in an hour
+        return toReturn;
+      } catch (err) {
+        console.log(err);
+      }
     }
 
   } else {
@@ -84,7 +89,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
   let data = await getChannelMessages(channel, message);
   let isOver10k = (data.length >= 10000) ? true : false;
 
-  let stateSize = (loggedMarkovChannels.includes(channel)) ? 1 : 2;
+  let stateSize = (loggedMarkovChannels.includes(channel)) ? 2 : 2;
   const markov = new Markov({ stateSize: stateSize });
 
   if (Array.isArray(data)) {
@@ -96,7 +101,12 @@ export async function generateMarkovChain(channel: string, message: string): Pro
       maxTries: maxTries,
 
       filter: (result: any) => {
-        return result.string.split(' ').length <= 80 && result.string.split(' ').length >= 10 && !result.string.includes("⣿") && result.score >= scoreLimit;
+        return result.string.split(' ').length <= 80 
+        && result.string.split(' ').length >= 10 
+        && !result.string.includes("⣿")
+        && !result.string.includes("http:")
+        && !result.string.includes("https:") 
+        && result.score >= scoreLimit;
       }
     }
 
