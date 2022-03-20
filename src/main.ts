@@ -28,7 +28,7 @@ export const redis: Redis = new Redis();
 
 export let channelsToJoin: string[] = [];
 
-const client = new pb.wrap(new TMI.client({
+export const client = new pb.wrap(new TMI.client({
   options: {
     debug: true
   },

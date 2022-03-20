@@ -308,7 +308,7 @@ export const pickNumberBetweenRange = (min: number, max: number) => {
 export const logError = async (client: Actions, channel: string, username: string, type: "api" | "command" | "permission", message: string) => {
   (channel.startsWith("#")) ? channel.substring(1) : channel;
   await insertRow('INSERT INTO errors (channel, username, type, message, timestamp) VALUES (?, ?, ?, ?, ?);', [channel, username, type, message, new Date()]);
-  sendMessage(client, channel, `FeelsDankMan 🚨 @${message}`);
+  sendMessage(channel, `FeelsDankMan 🚨 @${message}`);
 }
 
 export const handleSevenTVUpdate = async (client: Actions, event: EmoteEventUpdate) => {

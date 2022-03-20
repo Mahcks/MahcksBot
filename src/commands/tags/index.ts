@@ -24,7 +24,7 @@ const tagsCommand: CommandInt = {
     let target = (context[0]) ? context[0] : channel.substring(1);
     let tags = await getTags(target);
     let msg = (tags.length === 0) ? `@${user} that user doesn't have any active tags.` : `@${user} tags for that channel: ${tags.join(", ")}`;
-    sendMessage(client, channel, msg);
+    sendMessage(channel, msg);
   }
 }
 

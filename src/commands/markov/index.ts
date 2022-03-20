@@ -29,7 +29,7 @@ const markovCommand: CommandInt = {
     targetChannel = (targetChannel.startsWith("-")) ? channel.substring(1) : targetChannel;
 
     let msg = await generateMarkovChain(targetChannel, context.join(" "));
-    sendMessage(client, channel, msg);
+    sendMessage(channel, msg);
   }
 }
 

@@ -21,7 +21,7 @@ const codeCommand: CommandInt = {
     const command = context[0];
 
     let url = `https://github.com/Mahcks/MahcksBot/blob/main/src/commands/${command.toLowerCase()}/index.ts`;
-    sendMessage(client, channel, `@${user} ${url}`);
+    sendMessage(channel, `@${user} ${url}`);
   }
 }
 

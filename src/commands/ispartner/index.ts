@@ -26,11 +26,11 @@ const ispartnerCommand: CommandInt = {
         let data = await request.data;
 
         let msg = (data.isPartner) ? `${tar} is a Twitch partner` : `${tar} is not a Twitch partner.`;
-        sendMessage(client, channel, `@${user} ${msg}`);
+        sendMessage(channel, `@${user} ${msg}`);
       } catch (error) {
-        return sendMessage(client, channel, `@${user} sorry I couldn't find that user FeelsDankMan`);
+        return sendMessage(channel, `@${user} sorry I couldn't find that user FeelsDankMan`);
       }
-    } else return sendMessage(client, channel, `@${user} please provide a streamer FeelsDankMan`);
+    } else return sendMessage(channel, `@${user} please provide a streamer FeelsDankMan`);
   }
 }
 

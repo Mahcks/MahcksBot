@@ -21,7 +21,7 @@ const exampleCommand: CommandInt = {
     const user = userstate["display-name"];
     let target = getTarget(user, context[1]);
 
-    sendMessage(client, channel, `@${target} bot made by Mahcksimus, still a work in progress B)`)
+    sendMessage(channel, `@${target} bot made by Mahcksimus, still a work in progress B)`)
   }
 }
 

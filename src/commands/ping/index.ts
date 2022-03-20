@@ -22,7 +22,7 @@ const ping: CommandInt = {
 
     await client.ping().then(function (data) {
       let ping: number = Math.floor(Math.round(data as any * 1000));
-      sendMessage(client, channel, `@${userstate.username}, FeelsOkayMan 🏓 Uptime: ${secondsToHms(uptime)} Latency to Twitch IRC: ${ping}ms`);
+      sendMessage(channel, `@${userstate.username}, FeelsOkayMan 🏓 Uptime: ${secondsToHms(uptime)} Latency to Twitch IRC: ${ping}ms`);
     });
   }
 }

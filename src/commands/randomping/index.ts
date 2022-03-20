@@ -18,7 +18,7 @@ const randompingCommand: CommandInt = {
   Optout: true,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     let users = ['mahcksimus', 'test1', 'test2', 'test3'];
-    sendMessage(client, channel, `${users.join(", ")}`);
+    sendMessage(channel, `${users.join(", ")}`);
     
   }
 }

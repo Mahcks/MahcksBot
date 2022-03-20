@@ -49,14 +49,14 @@ const isbannedCommand: CommandInt = {
       let data = req.data;
 
       if (channelData) {
-        sendMessage(client, channel, `@${user} Twitch: ${data.banned.toString()} Channel: ${(isChannelBanned) ? 'false' : 'true'}, ${(updatedRecently) ? `banned ${calcDate(new Date(), new Date(query[0].updated), [])} ago.` : `unbanned ${calcDate(new Date(), new Date(query[0].timestamp), [])}`} ago.`);
-      } else sendMessage(client, channel, `@${user} Twitch: ${data.banned.toString()} Channel: false`);
+        sendMessage(channel, `@${user} Twitch: ${data.banned.toString()} Channel: ${(isChannelBanned) ? 'false' : 'true'}, ${(updatedRecently) ? `banned ${calcDate(new Date(), new Date(query[0].updated), [])} ago.` : `unbanned ${calcDate(new Date(), new Date(query[0].timestamp), [])}`} ago.`);
+      } else sendMessage(channel, `@${user} Twitch: ${data.banned.toString()} Channel: false`);
 
     } catch (error: any) {
       let why = error.response.data.error.toLowerCase();
 
       if (why === "user was not found") {
-        return sendMessage(client, channel, `@${user} sorry I couldn't find the user ${toTarget}`);
+        return sendMessage(channel, `@${user} sorry I couldn't find the user ${toTarget}`);
       }
     }
   }

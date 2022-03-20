@@ -49,10 +49,10 @@ const copyPastaCommand: CommandInt = {
     } while (copypasta.length > 480 && tries > maxTries);
 
     if (tries >= maxTries) {
-      return sendMessage(client, channel, `@${user} couldn't get a good copypasta after ${tries} tries. FeelsBadMan`);
+      return sendMessage(channel, `@${user} couldn't get a good copypasta after ${tries} tries. FeelsBadMan`);
     }
   
-    sendMessage(client, channel, `@${user} ${copypasta || 'No copypasta found FeelsBadMan'}`);
+    sendMessage(channel, `@${user} ${copypasta || 'No copypasta found FeelsBadMan'}`);
   }
 }
 

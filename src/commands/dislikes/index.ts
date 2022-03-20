@@ -22,7 +22,7 @@ const dislikesCommand: CommandInt = {
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     const user = userstate.username;
-    if (!context[0]) return sendMessage(client, channel, `@${user} please specify the YouTube video ID to get the stats.`);
+    if (!context[0]) return sendMessage(channel, `@${user} please specify the YouTube video ID to get the stats.`);
 
     // Thanks to 0Supa https://github.com/0Supa/okeybot/blob/main/lib/commands/dislikes.js
     const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
@@ -35,9 +35,9 @@ const dislikesCommand: CommandInt = {
 
     try {
       let req = await axios.get(`https://returnyoutubedislikeapi.com/votes?videoId=${encodeURIComponent(videoId)}`);
-      sendMessage(client, channel, `@${user} 👍 Likes: ${humanizeNumber(req.data.likes)} 👎 Dislikes: ${humanizeNumber(req.data.dislikes)} 👁 Views: ${humanizeNumber(req.data.viewCount)} Stats created: ${calcDate(new Date(), new Date(req.data.dateCreated), [])}`);
+      sendMessage(channel, `@${user} 👍 Likes: ${humanizeNumber(req.data.likes)} 👎 Dislikes: ${humanizeNumber(req.data.dislikes)} 👁 Views: ${humanizeNumber(req.data.viewCount)} Stats created: ${calcDate(new Date(), new Date(req.data.dateCreated), [])}`);
     } catch (error) {
-      sendMessage(client, channel, `@${user} an unexpected error occurred. Make sure it was a valid YouTube video ID.`);
+      sendMessage(channel, `@${user} an unexpected error occurred. Make sure it was a valid YouTube video ID.`);
     }
   }
 }

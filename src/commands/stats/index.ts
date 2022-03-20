@@ -28,7 +28,7 @@ const statsCommand: CommandInt = {
     } else if (/(command|cmd)/gi.test(cmd)) {
       // Gets how many times a command has been used.
       let used = await findQuery('SELECT count FROM commands WHERE name=?', [context[1]]);
-      sendMessage(client, channel, `@${user} that command has been used ${used[0].count} times.`);
+      sendMessage(channel, `@${user} that command has been used ${used[0].count} times.`);
     }
   }
 }

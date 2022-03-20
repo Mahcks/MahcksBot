@@ -4,7 +4,7 @@ import { CommandInt } from "../../validation/ComandSchema";
 import { execSync, exec } from 'child_process';
 import { findQuery, sqlQuery } from "../../utils/maria";
 import { cacheMarkovMessages } from "../../modules/markov";
-import { logPool } from "../../main";
+import { logPool, redis } from "../../main";
 
 const devCommand: CommandInt = {
   Name: "developer",
@@ -34,22 +34,22 @@ const devCommand: CommandInt = {
     const cmd = context[0];
     if (cmd === "pull") {
       const res = execSync('git pull').toString().split('\n').filter(Boolean);
-      if (res.includes('Already up to date.')) return sendMessage(client, channel, `@${user} no changes detected.`);
-      sendMessage(client, channel, `@${getChanges(res) || res.join(' | ')}`);
+      if (res.includes('Already up to date.')) return sendMessage(channel, `@${user} no changes detected.`);
+      sendMessage(channel, `@${getChanges(res) || res.join(' | ')}`);
 
     } else if (cmd === "restart") {
       const res = execSync('git pull').toString().split('\n').filter(Boolean);
-      if (res.includes('Already up to date.')) sendMessage(client, channel, `${user} restarting without any changes.`);
-      else sendMessage(client, channel, `@${user} restarting ${getChanges(res) || res.join(" | ")}`);
+      if (res.includes('Already up to date.')) sendMessage(channel, `${user} restarting without any changes.`);
+      else sendMessage(channel, `@${user} restarting ${getChanges(res) || res.join(" | ")}`);
       exec('npm run pm2');
 
     } else if (cmd === "eval") {
       try {
         const ev = await eval('(async () => {' + context.join(" ") + '})()');
         console.log(ev);
-        if (ev) sendMessage(client, channel, `@${user} FeelsOkayMan output: ${String(ev)}`);
+        if (ev) sendMessage(channel, `@${user} FeelsOkayMan output: ${String(ev)}`);
       } catch (error) {
-        sendMessage(client, channel, `@${user} FeelsDankMan error: ${error}`);
+        sendMessage(channel, `@${user} FeelsDankMan error: ${error}`);
       }
     } else if (cmd === "sql") {
       context.shift();
@@ -64,7 +64,7 @@ const devCommand: CommandInt = {
     } else if (cmd === "redis") {
       context.shift();
       let search = context.join(" ");
-      let q = await cacheMarkovMessages(search);
+      let q = await redis.get(search);
       console.log(q);
 
     } else if (cmd === "migrate") {
@@ -81,7 +81,7 @@ const devCommand: CommandInt = {
         if (err) return console.log(err);
       }); */
     } else {
-      sendMessage(client, channel, `@${user} invalid option FeelsDankMan`);
+      sendMessage(channel, `@${user} invalid option FeelsDankMan`);
     }
   }
 }

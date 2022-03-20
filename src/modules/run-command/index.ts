@@ -24,7 +24,7 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   let checkMessage = await checkMessageBanPhrase(message);
   if (checkMessage === null) return client.action(channel, `@${userstate["display-name"]} FeelsDankMan sorry couldn't check for banphrase, try again in a bet FeelsDankMan`);
   if (/(i'm\s12|im\s12|i\sam\s12|am\s12)/gm.test(message)) return;
-  if (checkMessage.data.banned) sendMessage(client, channel.substring(1), `[REDACTED] cmonBruh`);
+  if (checkMessage.data.banned) sendMessage(channel.substring(1), `[REDACTED] cmonBruh`);
 
   if (command !== null) {
     if (!command) return;

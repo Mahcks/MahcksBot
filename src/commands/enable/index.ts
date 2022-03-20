@@ -22,7 +22,7 @@ const enableCommand: CommandInt = {
     const user = userstate.username;
     let cmdTarget = context[0];
     let currentSettings = await getChannelSettings(channel.substring(1));
-    if (!cmdTarget) return sendMessage(client, channel, `@${user} please provide a command to enable. ${currentSettings.prefix}enable (command)`);
+    if (!cmdTarget) return sendMessage(channel, `@${user} please provide a command to enable. ${currentSettings.prefix}enable (command)`);
 
     // TODO: add support to disable multiple commands like '!enable cmd1 cmd2 cmd3'
 
@@ -43,9 +43,9 @@ const enableCommand: CommandInt = {
 
         // Update table.
         await updateOne('UPDATE channels SET disabledCommands=? WHERE id=?;', [JSON.stringify(currDisabled), userstate['user-id']]);
-        sendMessage(client, channel, `@${user} enabled the command "${cmdTarget}"`);
-      } else return sendMessage(client, channel, `@${user} "${cmdTarget}" is enabled. If you'd like to disable it do ${currentSettings.prefix}disable ${cmdTarget}`);
-    } else return sendMessage(client, channel, `@${user} can't find the command "${cmdTarget}" to enable.`); 
+        sendMessage(channel, `@${user} enabled the command "${cmdTarget}"`);
+      } else return sendMessage(channel, `@${user} "${cmdTarget}" is enabled. If you'd like to disable it do ${currentSettings.prefix}disable ${cmdTarget}`);
+    } else return sendMessage(channel, `@${user} can't find the command "${cmdTarget}" to enable.`); 
   }
 }
 

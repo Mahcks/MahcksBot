@@ -1,5 +1,7 @@
 import { Actions } from "tmi.js";
 import config from "../../config/config";
+import { client, redis } from "../../main";
+import updateRateLimit from "./updateRateLimit";
 
 /* 
   = Rate Limits = 
@@ -8,12 +10,23 @@ import config from "../../config/config";
 */
 
 let alternate = false;
-export default async (client: Actions, channel: string, message: string) => {
-  (message.startsWith("#")) ? channel = channel.substring(1) : channel;
-  if (config.production && channel === "mahcksimus") return;
-  let msg = (alternate) ? message.concat(" 󠀀") : message;
-  (alternate) ? alternate = false : alternate = true;
+export default async (channel: string, message: string) => {
+  channel = channel.replace("#", '');
+  let settings = await redis.get(channel);
+  if (!settings) return console.log("[Send Message] Can't send message due to no settings.");
+  let data = JSON.parse(settings);
+  let role = data.role;
 
-  // kinda gets around the 1 second global cooldown for now.
-  client.say(channel, msg);
+  if (config.production && channel === "mahcksimus") return;
+  if (role === "moderator" || role === "broadcaster") {
+    let rateLimited = await updateRateLimit(channel, 'moderator');
+    if (rateLimited) return client.say(channel, message);
+  } else {
+    let rateLimited = await updateRateLimit(channel, 'viewer');
+    if (rateLimited) {
+      let msg = (alternate) ? message.concat(" 󠀀") : message;
+      (alternate) ? alternate = false : alternate = true;
+      client.say(channel, msg);
+    }
+  }
 }

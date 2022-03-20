@@ -22,7 +22,7 @@ const channelCommand: CommandInt = {
     let currentSettings: ChannelSettings = await getChannelSettings(channel);
  
     let disabled = (currentSettings.disabledCommands.length === 0) ? "[None]" : (currentSettings.disabledCommands as string[]).join(", "); 
-    sendMessage(client, channel, `@${user} current prefix: ${currentSettings.prefix} disabled commands: ${disabled}`);
+    sendMessage(channel, `@${user} current prefix: ${currentSettings.prefix} disabled commands: ${disabled}`);
   }
 }
 

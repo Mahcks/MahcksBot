@@ -23,10 +23,10 @@ const wouldyouratherCommand: CommandInt = {
 
     try {
       let res = await axios.get('https://api.aakhilv.me/fun/wyr?num=1');
-      sendMessage(client, channel, `@${user} ${res.data[0]}`);
+      sendMessage(channel, `@${user} ${res.data[0]}`);
 
     } catch (err) {
-      sendMessage(client, channel, `@${user} there was an error fetching a question. Please try again later FeelsDankMan`);
+      sendMessage(channel, `@${user} there was an error fetching a question. Please try again later FeelsDankMan`);
     }
   }
 }

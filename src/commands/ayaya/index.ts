@@ -56,9 +56,9 @@ const exampleCommand: CommandInt = {
 
     try {
       let res = await axios.get(`https://api.waifu.pics/sfw/${rand}`);
-      sendMessage(client, channel, `@${user} ${res.data.url}`);
+      sendMessage(channel, `@${user} ${res.data.url}`);
     } catch (err) {
-      sendMessage(client, channel, `@${user} sorry there was an API issue, try again later FeelsDankMan`);
+      sendMessage(channel, `@${user} sorry there was an API issue, try again later FeelsDankMan`);
     }
   }
 }

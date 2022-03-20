@@ -23,9 +23,9 @@ const opieopCommand: CommandInt = {
     try {
       const res = await axios.get("https://www.themealdb.com/api/json/v1/1/random.php");
       let data = res.data.meals[0];
-      sendMessage(client, channel, `@${user} ${data.strMeal} (${data.strCategory} | ${data.strArea}) ${data.strSource}`);
+      sendMessage(channel, `@${user} ${data.strMeal} (${data.strCategory} | ${data.strArea}) ${data.strSource}`);
     } catch (err) {
-      sendMessage(client, channel, `@${user} error fetching the API for this command. Please try again later. FeelsDankMan`);
+      sendMessage(channel, `@${user} error fetching the API for this command. Please try again later. FeelsDankMan`);
     }
   }
 }

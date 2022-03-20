@@ -21,7 +21,7 @@ const commandsCommand: CommandInt = {
     const user = userstate.username;
     const target = getTarget(user, context[0]);
 
-    sendMessage(client, channel, `@${target} Commands are available here: https://www.mahcks.com/mb/commands`);
+    sendMessage(channel, `@${target} Commands are available here: https://www.mahcks.com/mb/commands`);
   }
 }
 

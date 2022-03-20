@@ -32,9 +32,9 @@ const helpCommand: CommandInt = {
         command = command[0];
         let aliasParse = JSON.parse(command["aliases"]);
         let aliases = (aliasParse.length) ? aliasParse.map((s: string) => channelSettings.prefix + s).join(', ') : 'No aliases';
-        sendMessage(client, channel, `@${user} ${channelSettings.prefix}${command['name']} (${aliases}): ${command["description"]} - ${command['cooldown']}sec cooldown.`);
-      } else sendMessage(client, channel, `@${user} couldn't find a command with the name "${search}"`);
-    } else sendMessage(client, channel, `@${user} Commands and more information avilable here: [TODO]`);
+        sendMessage(channel, `@${user} ${channelSettings.prefix}${command['name']} (${aliases}): ${command["description"]} - ${command['cooldown']}sec cooldown.`);
+      } else sendMessage(channel, `@${user} couldn't find a command with the name "${search}"`);
+    } else sendMessage(channel, `@${user} Commands and more information avilable here: [TODO]`);
   }
 }
 

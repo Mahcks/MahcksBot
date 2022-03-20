@@ -23,7 +23,7 @@ const thumbnailCommand: CommandInt = {
 
     let target = (context[0]) ? context[0] : (channel.startsWith("#") ? channel = channel.substring(1) : channel);
     let thumbnail = await getThumbnail(target);
-    sendMessage(client, channel, `@${user} thumbnail of the stream: ${thumbnail}`);    
+    sendMessage(channel, `@${user} thumbnail of the stream: ${thumbnail}`);    
   }
 }
 

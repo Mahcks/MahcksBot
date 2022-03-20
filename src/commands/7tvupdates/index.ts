@@ -25,11 +25,11 @@ const seventvupdatesCommand: CommandInt = {
     let isEnabled = currSettings.sevenTvUpdates;
 
     if (isEnabled) {
-      sendMessage(client, channel, `@${user} disabled 7tv chat updates.`);
+      sendMessage(channel, `@${user} disabled 7tv chat updates.`);
       await updateChannelCache(channel, "sevenTvUpdates", false);
       await sqlQuery('UPDATE channels SET sevenTvUpdates=? WHERE id=?', [0, userstate['room-id']]);
     } else {
-      sendMessage(client, channel, `@${user} enabled 7tv chat updates.`);
+      sendMessage(channel, `@${user} enabled 7tv chat updates.`);
       await updateChannelCache(channel, "sevenTvUpdates", true);
       await sqlQuery('UPDATE channels SET sevenTvUpdates=? WHERE id=?', [1, userstate['room-id']]);
     }

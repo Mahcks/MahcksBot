@@ -33,7 +33,7 @@ const emotesCommand: CommandInt = {
         emoteStr += `${emote.name} (${calcDate(new Date(), new Date(emote.date), [])} ago) `;
       });
 
-      sendMessage(client, channel, `@${user} 5 latest emotes: ${emoteStr}`);
+      sendMessage(channel, `@${user} 5 latest emotes: ${emoteStr}`);
       return;
     }
 
@@ -42,9 +42,9 @@ const emotesCommand: CommandInt = {
     if (isUser) {
       let emoteCount = await findQuery('SELECT COUNT(*) FROM emotes WHERE channel=? AND scope!="global";', [target.toLowerCase()]);
       if (target.toLowerCase() === channel.substring(1)) {
-        sendMessage(client, channel, `@${user} this channel has ${emoteCount[0]["COUNT(*)"]} emotes: https://e.wrnv.xyz/list/${target}`);
-      } else sendMessage(client, channel, `@${user} ${target} has ${emoteCount[0]["COUNT(*)"]} emotes: https://e.wrnv.xyz/list/${target}`);
-    } else return sendMessage(client, channel, `@${user} that channel doesn't exist.`);
+        sendMessage(channel, `@${user} this channel has ${emoteCount[0]["COUNT(*)"]} emotes: https://e.wrnv.xyz/list/${target}`);
+      } else sendMessage(channel, `@${user} ${target} has ${emoteCount[0]["COUNT(*)"]} emotes: https://e.wrnv.xyz/list/${target}`);
+    } else return sendMessage(channel, `@${user} that channel doesn't exist.`);
   }
 }
 

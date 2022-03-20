@@ -25,11 +25,11 @@ const isbotCommand: CommandInt = {
         let data = await request.data;
 
         let msg = (data.bot) ? `@${user} the account ${data.displayName} is a verified Twitch bot.` : `@${user} the account ${data.displayName} is not a verified Twitch bot.`;
-        return sendMessage(client, channel, msg);
+        return sendMessage(channel, msg);
       } catch (error) {
-        return sendMessage(client, channel, `@${user} sorry I couldn't find the user "${context[0]}"`);
+        return sendMessage(channel, `@${user} sorry I couldn't find the user "${context[0]}"`);
       }
-    } else return sendMessage(client, channel, `@${user} please specific a user to check.`);
+    } else return sendMessage(channel, `@${user} please specific a user to check.`);
   }
 }
 

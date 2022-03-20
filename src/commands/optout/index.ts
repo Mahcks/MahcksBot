@@ -25,20 +25,20 @@ const optoutCommand: CommandInt = {
     let currSettings = await getChannelSettings(channel);
 
     let checkCommand = await findQuery('SELECT * FROM commands WHERE name=?;', [cmdSearch]);
-    if (!cmdSearch) return sendMessage(client, channel, `@${user} please provide a command to optout of: ${currSettings.prefix}optout (command)`);
+    if (!cmdSearch) return sendMessage(channel, `@${user} please provide a command to optout of: ${currSettings.prefix}optout (command)`);
     if (checkCommand[0]) {
       let canOptout = Boolean(checkCommand[0].optout);
-      if (!canOptout) return sendMessage(client, channel, `@${user} can't optout of that command.`);
+      if (!canOptout) return sendMessage(channel, `@${user} can't optout of that command.`);
       
       let isUser = await findQuery('SELECT * FROM optout WHERE id=? AND command=?', [userstate['user-id'], cmdSearch.toLowerCase()]);
       if (isUser[0]) {
-          sendMessage(client, channel, `@${user} already opted out of ${cmdSearch.toLowerCase()}. If you'd like to opt back in use ${currSettings.prefix}optin ${cmdSearch.toLowerCase()}`);
+          sendMessage(channel, `@${user} already opted out of ${cmdSearch.toLowerCase()}. If you'd like to opt back in use ${currSettings.prefix}optin ${cmdSearch.toLowerCase()}`);
       } else {
         await insertRow('INSERT INTO optout (id, username, command) VALUES (?, ?, ?);', [userstate['user-id'], userstate.username, cmdSearch.toLowerCase()]);
-        sendMessage(client, channel, `@${user} opted out of ${cmdSearch.toLowerCase()}`);
+        sendMessage(channel, `@${user} opted out of ${cmdSearch.toLowerCase()}`);
       }
 
-    } else return sendMessage(client, channel, `@${user} couldn't find the command "${cmdSearch}"`);
+    } else return sendMessage(channel, `@${user} couldn't find the command "${cmdSearch}"`);
   }
 }
 
