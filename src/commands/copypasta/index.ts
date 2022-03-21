@@ -30,7 +30,6 @@ const copyPastaCommand: CommandInt = {
       '▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ imGlitch You have lost COCK imGlitch ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬',
       "ᴡʜᴇɴ ɪ'ᴍ ʀᴇᴀᴅʏ ᴛᴏ ɢᴏ ᴛᴏ sʟᴇᴇᴘ ɪ ɢʀᴀʙ ᴍʏ ʟᴀᴘᴛᴏᴘ ᴀɴᴅ ɢᴇᴛ ɪɴ ʙᴇᴅ. ɪ ᴏᴘᴇɴ ᴍʏ ʟᴀᴘᴛᴏᴘ, ɢᴏ ᴛᴏ ᴇsғᴀɴᴅ's sᴛʀᴇᴀᴍ, ᴛᴜʀɴ ᴜᴘ ᴛʜᴇ ʙʀɪɢʜᴛɴᴇss ᴀʟʟ ᴛʜᴇ ᴡᴀʏ ᴜᴘ ᴀɴᴅ ᴡᴀᴛᴄʜ ᴛʜᴇ sᴛʀᴇᴀᴍ ᴡɪᴛʜ ᴛʜᴇ ʟᴀᴘᴛᴏᴘ sᴄʀᴇᴇɴ ᴄʟᴏsᴇ ᴛᴏ ᴍʏ ᴇʏᴇs. ᴡʜᴇɴ ᴛʜᴇ sᴛʀᴇᴀᴍ ɪs ᴅᴏɴᴇ ɪ ᴄʟᴏsᴇ ᴍʏ ᴇʏᴇs ᴀɴᴅ ᴄᴀɴ sᴛɪʟʟ sᴇᴇ ᴇsғᴀɴᴅ's ғᴀᴄᴇ ᴡʜɪʟᴇ ɪ ɢᴏ ᴛᴏ sʟᴇᴇᴘ. ɪᴛ's ᴛʜᴇ ᴏɴʟʏ ᴡᴀʏ ɪ ᴄᴀɴ ғᴇᴇʟ sᴀғᴇ.",
       "Guys can you please not spam the chat. My mom bought me this new laptop and it gets really hot when the chat is being spamed. Now my leg is starting to hurt because it is getting so hot. Please, if you don't want me to get burned, then dont spam the chat",
-      
     ]
 
     async function getCopypasta() {

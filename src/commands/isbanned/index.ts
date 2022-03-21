@@ -1,7 +1,7 @@
 import axios from "axios";
-import { Actions, CommonUserstate, Userstate } from "tmi.js";
+import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { booleanCheck, calcDate, getTarget } from "../../utils";
+import { calcDate, getTarget } from "../../utils";
 import { getUserId } from "../../utils/helix";
 import { findQuery } from "../../utils/maria";
 import { CommandInt } from "../../validation/ComandSchema";

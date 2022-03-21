@@ -194,7 +194,7 @@ export function find(table: string) {
     });
 }
 
-export function logQuery(query: string, values: any[]) {
+export function logQuery(query: string, values: any[]): Promise<any> {
   return new Promise(function (resolve, reject) {
     logPool.query(query, values, (err, result) => {
       if (!err) {
