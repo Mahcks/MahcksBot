@@ -3,6 +3,7 @@ import moment from "moment";
 import { Actions, client, Userstate } from "tmi.js";
 import config from "../config/config";
 import { pool, redis } from "../main";
+import { getLocalBanphrases } from "../modules/ban-phrase";
 import { EmoteEventUpdate } from "../modules/emote-listener";
 import sendMessage from "../modules/send-message/sendMessage";
 import { findQuery, insertRow, updateOne } from "./maria";
@@ -85,20 +86,28 @@ export function calcDate(startDate: Date, endDate: Date, exclude: OptionalDateSt
   return dateArr.join(", ")
 }
 
-export async function checkMessageBanPhrase(message: string) {
-  let data: any;
+export async function checkMessageBanPhrase(message: string): Promise<boolean> {
+  let data = false;
+
   try {
-    data = await axios({
+    let pos = await axios({
       method: 'POST',
       url: `https://cyrbot.com/api/v1/banphrases/test/`,
       headers: { 'Content-Type': 'application/json' },
       data: { message: message }
     });
+    let check = await pos.data;
+    return check.banned;
+
   } catch (error) {
-    data = null;
+    let local = await getLocalBanphrases();
+
+    local.every(phrase => {
+      if (new RegExp(phrase.phrase).test(message)) data = true;
+    });
   }
 
-  return await data;
+  return data;
 }
 
 export async function updateOrCreateChatter(userstate: Userstate) {
@@ -331,7 +340,7 @@ export const handleSevenTVUpdate = async (client: Actions, event: EmoteEventUpda
  * @param {string} message This will be posted to a Hastebin. 
  * @returns URL of Hastebin created.
  */
- export async function postHastebin(message: string) {
+export async function postHastebin(message: string) {
 
   let response = await axios({
     method: "POST",

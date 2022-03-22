@@ -81,6 +81,8 @@ client.connect().then(async () => {
   // Logs channel data.
   initLogClient();
 
+  await updateBanphrases();
+
   // Fetches emotes every 3 hours.
   cron.schedule('0 */3 * * *', async () => {
     await fetchAndStoreEmotes();
@@ -94,6 +96,7 @@ import { Redis } from "ioredis";
 import onBanEvent from "./events/onBanEvent/onBanEvent";
 import onTimeoutEvent from "./events/onTimeoutEvent";
 import { fetchMarkovData, initLogClient } from "./modules/channel-logger";
+import { updateBanphrases } from "./modules/ban-phrase";
 client.on("chat", async (channel: string, userstate: TMI.Userstate, message: string, self: boolean) => await onChatEvent(client, channel, userstate, message, self));
 client.on("ban", async (channel: string, username: string, reason: null, userstate: any) => onBanEvent(client, channel, username, reason, userstate));
 client.on("timeout", async (channel: string, username: string, reason: null, duration: number, userstate: any) => onTimeoutEvent(channel, username, reason, duration, userstate));

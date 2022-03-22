@@ -119,7 +119,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
       let monkaLaugh = await checkMessageBanPhrase(msg);
       if (monkaLaugh === null) return '🔮 Error checking for banphrases.';
       if (/(i'm\s12|im\s12|i\sam\s12|am\s12)/gm.test(message)) return `🔮 [REDACTED] cmonBruh`;
-      if (monkaLaugh.data.banned) return `🔮 [REDACTED] cmonBruh`;
+      if (monkaLaugh) return `🔮 [REDACTED] cmonBruh`;
 
       return msg
     } catch (err) {
