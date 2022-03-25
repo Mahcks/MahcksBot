@@ -11,7 +11,7 @@ const exampleCommand: CommandInt = {
   Cooldown: 30,
   Description: "Displays information about MahcksBot",
   DynamicDescription: [
-    "<code>!about</code>"
+    "<code>mb about</code>"
   ],
   Testing: false,
   OfflineOnly: false,

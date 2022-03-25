@@ -10,7 +10,7 @@ const rolesCommand: CommandInt = {
   Cooldown: 30,
   Description: "Check your own or another users roles.",
   DynamicDescription: [
-    "<code>!roles</code>"
+    "<code>mb roles</code>"
   ],
   Testing: false,
   OfflineOnly: false,

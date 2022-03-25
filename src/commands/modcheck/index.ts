@@ -11,10 +11,10 @@ const modcheckCommand: CommandInt = {
   Description: "This command tells you if a user is a mod in a given channel, and for how long. It defaults to the current channel.",
   DynamicDescription: [
     "Check if a user is moderator in Esfand's chat.",
-    "<code>!modcheck (user)</code>",
+    "<code>mb modcheck (user)</code>",
     "",
     "Check if a user is moderator in another channel.",
-    "<code>!modcheck (user) (channel)</code>"
+    "<code>mb modcheck (user) (channel)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

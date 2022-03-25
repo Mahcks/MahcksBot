@@ -12,7 +12,7 @@ const copyPastaCommand: CommandInt = {
   Cooldown: 30,
   Description: "Displays a random Twitch related copypasta.",
   DynamicDescription: [
-    "<code>!copypasta</code>"
+    "<code>mb copypasta</code>"
   ],
   Testing: false,
   OfflineOnly: false,

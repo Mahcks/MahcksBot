@@ -12,7 +12,7 @@ const enableCommand: CommandInt = {
   Cooldown: 30,
   Description: "Enable a command.",
   DynamicDescription: [
-    "<code>!enable (command)</code>"
+    "<code>mb enable (command)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

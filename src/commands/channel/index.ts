@@ -11,7 +11,7 @@ const channelCommand: CommandInt = {
   Cooldown: 30,
   Description: "Displays current settings for the channel.",
   DynamicDescription: [
-    "<code>!channel</code>"
+    "<code>mb channel</code>"
   ],
   Testing: false,
   OfflineOnly: false,

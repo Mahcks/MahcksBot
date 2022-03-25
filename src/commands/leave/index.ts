@@ -12,7 +12,8 @@ const leaveCommand: CommandInt = {
   Cooldown: 30,
   Description: "Bot leaves the user's channel. It must be used in the bot's channel only.",
   DynamicDescription: [
-    "<code>!leave</code>"
+    "<code>mb leave</code>",
+    "<code>mb part</code>"
   ],
   Testing: false,
   OfflineOnly: false,

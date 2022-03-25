@@ -9,7 +9,8 @@ const pilzCommand: CommandInt = {
   Cooldown: 30,
   Description: "For pilz.",
   DynamicDescription: [
-    "<code>!pilz</code>"
+    "<code>mb pilz</code>",
+    "<code>mb pilzkman</code>"
   ],
   Testing: false,
   OfflineOnly: false,

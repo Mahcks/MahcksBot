@@ -12,7 +12,7 @@ const looserCommand: CommandInt = {
   Description: "lmao what a loser.",
   DynamicDescription: [
     "By default it chooses a random user in the current viewer list. You can also specifiy a user to tag.",
-    "<code>!loser</code>"
+    "<code>mb loser</code>"
   ],
   Testing: false,
   OfflineOnly: false,

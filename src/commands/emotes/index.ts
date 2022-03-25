@@ -14,7 +14,7 @@ const emotesCommand: CommandInt = {
   Description: "Links all emotes in the current channel.",
   DynamicDescription: [
     "By default it targets the current channel, otherwise you can input a seperate channel.",
-    "<code>!emotes (channel)</code>"
+    "<code>mb emotes (channel)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

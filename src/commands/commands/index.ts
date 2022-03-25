@@ -11,7 +11,7 @@ const commandsCommand: CommandInt = {
   Cooldown: 30,
   Description: "Shows all the commands.",
   DynamicDescription: [
-    "<code>!commands (optional: user)</code>"
+    "<code>mb commands (optional: user)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

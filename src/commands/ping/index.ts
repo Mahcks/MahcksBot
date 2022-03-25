@@ -11,7 +11,7 @@ const ping: CommandInt = {
   Cooldown: 30,
   Description: "Ping the bot",
   DynamicDescription: [
-    "<code>!ping</code>"
+    "<code>mb ping</code>"
   ],
   Testing: false,
   OfflineOnly: false,

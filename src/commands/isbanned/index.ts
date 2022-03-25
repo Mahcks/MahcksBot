@@ -20,7 +20,7 @@ const isbannedCommand: CommandInt = {
   Description: "Check if a user is banned.",
   DynamicDescription: [
     "By default it targets yourself for the meme, otherwise specify a target after the command.",
-    "<code>!isbanned (user)</code>"
+    "<code>mb isbanned (user)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

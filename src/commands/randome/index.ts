@@ -19,7 +19,8 @@ const randomeCommand: CommandInt = {
   Cooldown: 30,
   Description: "Picks a random emote from a given channel. If no channel is provided it picks an emote from the current channel.",
   DynamicDescription: [
-    "<code>!randome (channel)</code>"
+    "<code>mb randome (channel)</code>",
+    "<code>mb randomemote (channel)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

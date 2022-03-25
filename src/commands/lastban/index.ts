@@ -12,7 +12,9 @@ const lastbanCommand: CommandInt = {
   Cooldown: 30,
   Description: "Gets the latest ban from the channel.",
   DynamicDescription: [
-    "<code></code>"
+    "<code>mb lastban</code>",
+    "<code>mb lban</code>",
+    "<code>mb latestban</code>"
   ],
   Testing: false,
   OfflineOnly: false,

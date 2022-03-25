@@ -12,7 +12,7 @@ const leaveCommand: CommandInt = {
   Cooldown: 30,
   Description: "Join your channel.",
   DynamicDescription: [
-    "<code>!join</code>"
+    "<code>mb join</code>"
   ],
   Testing: false,
   OfflineOnly: false,

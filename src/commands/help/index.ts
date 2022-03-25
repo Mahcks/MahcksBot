@@ -12,10 +12,10 @@ const helpCommand: CommandInt = {
   Cooldown: 30,
   Description: "Get commands URL or info about a specific command.",
   DynamicDescription: [
-    "<code>!help</code>",
+    "<code>mb help</code>",
     "",
     "Get help for a specific command.",
-    "<code>!help (command)</code>"
+    "<code>mb help (command)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

@@ -11,7 +11,7 @@ const isbotCommand: CommandInt = {
   Cooldown: 30,
   Description: "Check if a specific account is a verified Twitch bot.",
   DynamicDescription: [
-    "<code>!isbot (name)</code>"
+    "<code>mb isbot (name)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

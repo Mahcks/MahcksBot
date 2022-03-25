@@ -12,7 +12,9 @@ const wouldyouratherCommand: CommandInt = {
   Cooldown: 30,
   Description: "Generates a would you rather question.",
   DynamicDescription: [
-    "<code>mb wouldyourather</code>"
+    "<code>mb wouldyourather</code>",
+    "<code>mb wyr</code>",
+    "<code>mb wur</code>"
   ],
   Testing: false,
   OfflineOnly: false,

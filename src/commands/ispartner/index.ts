@@ -11,7 +11,7 @@ const ispartnerCommand: CommandInt = {
   Cooldown: 30,
   Description: "Check if a user is a partner on Twitch.",
   DynamicDescription: [
-    "<code>!ispartner</code>"
+    "<code>mb ispartner</code>"
   ],
   Testing: false,
   OfflineOnly: false,

@@ -12,7 +12,7 @@ const thumbnailCommand: CommandInt = {
   Description: "Get a thumbnail of a stream.",
   DynamicDescription: [
     'Targets the current channel if no channel is specified.',
-    "<code>!thumbnail (user)</code>"
+    "<code>mb thumbnail (user)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

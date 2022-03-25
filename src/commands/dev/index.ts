@@ -15,10 +15,10 @@ const devCommand: CommandInt = {
   Description: "Allows the developer to fetch updates and restart the bot remotely.",
   DynamicDescription: [
     "Pull the latest update from Github",
-    "<code>!dev pull</code>",
+    "<code>mb dev pull</code>",
     "",
     "Restart the bot and if there's an update it'll pull it and restart it.",
-    "<code>!dev restart</code>"
+    "<code>mb dev restart</code>"
   ],
   Testing: false,
   OfflineOnly: false,

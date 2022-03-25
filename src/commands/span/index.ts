@@ -18,7 +18,8 @@ const patternCommand: CommandInt = {
   Cooldown: 30,
   Description: "Generates a pattern with a specific emote.",
   DynamicDescription: [
-    "<code>!span (pattern: normal, space, what) (emote(s))</code>"
+    "<code>mb span (pattern: normal, space, what) (emote(s))</code>",
+    "<code>mb spam (pattern: normal, space, what) (emote(s))</code>"
   ],
   Testing: false,
   OfflineOnly: false,

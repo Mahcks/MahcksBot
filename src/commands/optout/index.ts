@@ -12,7 +12,7 @@ const optoutCommand: CommandInt = {
   Cooldown: 30,
   Description: "Optout from any optoutable commands.",
   DynamicDescription: [
-    "<code>!optout (command)</code>"
+    "<code>mb optout (command)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

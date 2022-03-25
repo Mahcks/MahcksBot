@@ -14,7 +14,7 @@ const dislikesCommand: CommandInt = {
   DynamicDescription: [
     "If you wanted to check this videos dislikes: https://youtu.be/CRCvq-l_unE",
     "Get the string at the end which is: CRCvq-l_unE",
-    "<code>!dislikes (videoId)</code>"
+    "<code>mb dislikes (videoId)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

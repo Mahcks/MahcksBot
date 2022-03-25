@@ -13,7 +13,8 @@ const botstatsCommand: CommandInt = {
   Cooldown: 30,
   Description: "Gives some stats about the bot.",
   DynamicDescription: [
-    "<code>Get some stats about the bot.</code>"
+    "<code>mb botstats</code>",
+    "<code>mb botastats</code>",
   ],
   Testing: false,
   OfflineOnly: false,

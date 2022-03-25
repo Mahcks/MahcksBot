@@ -11,7 +11,7 @@ const reloadCommand: CommandInt = {
   Cooldown: 30,
   Description: "Development purposes only.",
   DynamicDescription: [
-    "<code></code>"
+    "<code>mb reload</code>"
   ],
   Testing: false,
   OfflineOnly: false,

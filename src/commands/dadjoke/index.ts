@@ -10,8 +10,8 @@ const dadjokeCommand: CommandInt = {
   Cooldown: 30,
   Description: "4Head",
   DynamicDescription: [
-    "<code>!dadjoke</code>",
-    "<code>!yodad</code>"
+    "<code>mb dadjoke</code>",
+    "<code>mb yodad</code>"
   ],
   Testing: false,
   OfflineOnly: false,

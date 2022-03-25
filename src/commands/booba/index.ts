@@ -13,7 +13,8 @@ const exampleCommand: CommandInt = {
   Cooldown: 30,
   Description: "Get some stream information thanks to booba.tv",
   DynamicDescription: [
-    "<code></code>"
+    "<code>mb booba</code>",
+    "<code>mb boobatv</code>"
   ],
   Testing: false,
   OfflineOnly: false,

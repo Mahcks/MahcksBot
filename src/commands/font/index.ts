@@ -15,7 +15,7 @@ const fontCommand: CommandInt = {
   Description: "Change the font of any text.",
   DynamicDescription: [
     "Change the font of a message.",
-    `<code>!font (${avilFonts.join(", ")}) (message)</code>`,
+    `<code>mb font (${avilFonts.join(", ")}) (message)</code>`,
   ],
   Testing: false,
   OfflineOnly: false,

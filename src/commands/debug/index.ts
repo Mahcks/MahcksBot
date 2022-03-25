@@ -16,7 +16,7 @@ const debugCommand: CommandInt = {
   Cooldown: 30,
   Description: "Debug command for developer use.",
   DynamicDescription: [
-    "<code>!debug</code>"
+    "<code>mb debug</code>"
   ],
   Testing: false,
   OfflineOnly: false,

@@ -12,7 +12,7 @@ const exampleCommand: CommandInt = {
   Cooldown: 30,
   Description: "Changes the prefix for the specific channel.",
   DynamicDescription: [
-    "<code>!prefix (new prefix)</code>"
+    "<code>mb prefix (new prefix)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

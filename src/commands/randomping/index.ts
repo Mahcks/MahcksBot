@@ -10,7 +10,8 @@ const randompingCommand: CommandInt = {
   Cooldown: 30,
   Description: "Ping random people from chat.",
   DynamicDescription: [
-    "<code>!randomping</code>"
+    "<code>mb randomping</code>",
+    "<code>mb rping</code>"
   ],
   Testing: false,
   OfflineOnly: false,

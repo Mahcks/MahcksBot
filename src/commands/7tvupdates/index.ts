@@ -12,7 +12,8 @@ const seventvupdatesCommand: CommandInt = {
   Cooldown: 30,
   Description: "7tv updates in chat for anyone who misses the notification from the extension or uses Chatterino.",
   DynamicDescription: [
-    "<code>mb 7tvupdates</code>"
+    "<code>mb 7tvupdates</code>",
+    "<code>mb 7tvu</code>"
   ],
   Testing: false,
   OfflineOnly: false,

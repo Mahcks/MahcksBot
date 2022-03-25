@@ -11,7 +11,7 @@ const opieopCommand: CommandInt = {
   Cooldown: 30,
   Description: "Sends a good looking dish along with the recipe.",
   DynamicDescription: [
-    "<code></code>"
+    "<code>mb opieop</code>"
   ],
   Testing: false,
   OfflineOnly: false,

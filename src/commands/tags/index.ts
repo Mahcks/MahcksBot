@@ -12,7 +12,7 @@ const tagsCommand: CommandInt = {
   Description: "Display all tags for any stream. By default it targets the current channel.",
   DynamicDescription: [
     "Gets the current tags of the channel the bot is in, otherwise input a specific channnel.",
-    "<code>!tags (channel)</code>"
+    "<code>mb tags (channel)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

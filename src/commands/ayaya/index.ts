@@ -12,7 +12,7 @@ const exampleCommand: CommandInt = {
   Cooldown: 30,
   Description: "AYAYA Clap",
   DynamicDescription: [
-    "<code>!ayaya</code>"
+    "<code>mb ayaya</code>"
   ],
   Testing: false,
   OfflineOnly: false,

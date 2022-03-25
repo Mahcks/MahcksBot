@@ -14,10 +14,10 @@ const suggestCommand: CommandInt = {
   Description: "Submit a suggestion for the bot.",
   DynamicDescription: [
     "Send a suggestion.",
-    "<code>!suggestion (send) (message)</code>",
+    "<code>mb suggestion (send) (message)</code>",
     "",
     "Check a specific ID for the status.",
-    "<code>!suggestion check (ID)</code>"
+    "<code>mb suggestion check (ID)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

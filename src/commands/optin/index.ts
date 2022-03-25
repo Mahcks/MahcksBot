@@ -12,7 +12,7 @@ const optinCommand: CommandInt = {
   Cooldown: 30,
   Description: "Optin commands that you opted out of before.",
   DynamicDescription: [
-    "<code>!optin (command)</code>"
+    "<code>mb optin (command)</code>"
   ],
   Testing: false,
   OfflineOnly: false,

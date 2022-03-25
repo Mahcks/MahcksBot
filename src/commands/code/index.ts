@@ -10,7 +10,7 @@ const codeCommand: CommandInt = {
   Cooldown: 30,
   Description: "Gets the Github page for that specific command.",
   DynamicDescription: [
-    "<code>!code (command)</code>"
+    "<code>mb code (command)</code>"
   ],
   Testing: false,
   OfflineOnly: false,
