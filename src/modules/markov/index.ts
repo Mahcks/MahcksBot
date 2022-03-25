@@ -53,7 +53,7 @@ async function getChannelMessages(channel: string, message: string): Promise<str
 
   let toReturn: string[] = [];
 
-  if (loggedMarkovChannels.includes(channel)) {
+  /* if (loggedMarkovChannels.includes(channel)) { */
     // Check if local cache has expired yet or not
     let cache = await redis.get('channel:logs:markov:' + channel);
     if (cache !== null) {
@@ -74,13 +74,13 @@ async function getChannelMessages(channel: string, message: string): Promise<str
       }
     }
 
-  } else {
+  /* } else {
     let qString = (channel === "all") ? 'SELECT message FROM logs ORDER BY RAND() LIMIT 10000;' : 'SELECT message FROM logs WHERE channel=? ORDER BY RAND() LIMIT 10000;';
     let query = await findQuery(qString, (channel === "all") ? [] : [channel.toLowerCase()]);
     query.forEach((msg: any) => {
       toReturn.push(msg.message);
     });
-  }
+  } */
 
   return toReturn;
 }
