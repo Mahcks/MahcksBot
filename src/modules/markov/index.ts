@@ -87,11 +87,16 @@ async function getChannelMessages(channel: string, message: string): Promise<str
 }
 
 async function testGenerate(messages: string[]): Promise<string> {
-  const result = generateMarkov({
-    wordsCount: pickNumberBetweenRange(10, 40),
-    sampleSize: 6,
-    source: messages
-  });
+  
+  let result;
+  do {
+    result = generateMarkov({
+      wordsCount: pickNumberBetweenRange(10, 40),
+      sampleSize: 6,
+      source: messages
+    });
+  }
+  while (/(http:|https:|⣿)/gm.test(result));
 
   return result.replace(/,/gi, ' ');
 }
@@ -102,7 +107,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
   if (/-dank/gm.test(message)) {
     if (Array.isArray(data)) {
       let chain = await testGenerate(data);
-      return `FeelsDankMan PowerUpR ${chain}`;
+      return `FeelsDankMan 🔮 ${chain}`;
     } 
   }
 
