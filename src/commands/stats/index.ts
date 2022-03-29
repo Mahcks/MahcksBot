@@ -1,6 +1,6 @@
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { humanizeNumber } from "../../utils";
+import { formatBytes, humanizeNumber } from "../../utils";
 import { findQuery, logQuery } from "../../utils/maria";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -32,11 +32,21 @@ const statsCommand: CommandInt = {
       // Gets how many times a command has been used.
       let used = await findQuery('SELECT count FROM commands WHERE name=?', [context[1]]);
       sendMessage(channel, `@${user} that command has been used ${used[0].count} times.`);
-    
+
     } else if (/(channel)/gi.test(cmd)) {
       let targetChannel = (context[1]) ? context[1].replace('@', '') : channel.substring(1);
       let total = await logQuery(`SELECT COUNT(*) FROM logs.${targetChannel.toLowerCase()};`, []);
-      sendMessage(channel, `@${user} total messages logged: ${humanizeNumber(total[0]["COUNT(*)"])}`);
+
+      /* 
+      
+      
+
+
+      */
+      let dataSize = await logQuery(`SELECT table_name AS 'table_name', ROUND((data_length + index_length)) AS 'size_in_bytes' FROM information_schema.TABLES WHERE table_schema = 'logs' AND table_name = 'taylikestoast'`, [])
+      console.log(dataSize); // should be 342 mb
+      let size = parseInt(dataSize[0]["size_in_bytes"]) as number;
+      sendMessage(channel, `@${user} total messages logged: ${humanizeNumber(total[0]["COUNT(*)"])} size on disc: ${formatBytes(size, 2)}`);
     }
   }
 }

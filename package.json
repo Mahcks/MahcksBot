@@ -49,6 +49,7 @@
     "@madelsberger/pausebuffer": "^1.2.0",
     "@types/ioredis": "^4.28.8",
     "@types/tmi.js": "^1.8.1",
+    "async-markov": "github:Supinic/async-markov",
     "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.10",
     "eventsource": "^2.0.0",

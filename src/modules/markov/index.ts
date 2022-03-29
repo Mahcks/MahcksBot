@@ -1,10 +1,11 @@
 import axios from "axios";
 import Markov from "markov-strings";
-import { logPool, redis } from "../../main";
+import { redis } from "../../main";
 import { checkMessageBanPhrase, humanizeNumber, pickNumberBetweenRange, postHastebin } from "../../utils";
 import { findQuery, logQuery } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 import { loggedMarkovChannels } from "../channel-logger";
+import { generateMarkov } from "../markov-generator";
 
 /* 
   TODO LIST
@@ -62,7 +63,7 @@ async function getChannelMessages(channel: string, message: string): Promise<str
     } else {
 
       try {
-        let msgs: any = await logQuery(`SELECT message FROM logs.${channel} WHERE username != 'okayegbot' AND username != 'egsbot' AND username != 'supibot' AND username != 'thepositivebot' AND username != 'huwobot' ORDER BY RAND() LIMIT 15000;`, []);
+        let msgs: any = await logQuery(`SELECT message FROM logs.${channel} WHERE username != 'okayegbot' AND username != 'egsbot' AND username != 'supibot' AND username != 'thepositivebot' AND username != 'huwobot' AND username != 'streamelements' ORDER BY RAND() LIMIT 15000;`, []);
         msgs.forEach((msg: any) => {
           toReturn.push(msg.message);
         });
@@ -85,17 +86,34 @@ async function getChannelMessages(channel: string, message: string): Promise<str
   return toReturn;
 }
 
+async function testGenerate(messages: string[]): Promise<string> {
+  const result = generateMarkov({
+    wordsCount: pickNumberBetweenRange(10, 40),
+    sampleSize: 6,
+    source: messages
+  });
+
+  return result.replace(/,/gi, ' ');
+}
+
 export async function generateMarkovChain(channel: string, message: string): Promise<string> {
   let data = await getChannelMessages(channel, message);
+  
+  if (/-dank/gm.test(message)) {
+    if (Array.isArray(data)) {
+      let chain = await testGenerate(data);
+      return `FeelsDankMan PowerUpR ${chain}`;
+    } 
+  }
+
   let isOver10k = (data.length >= 10000) ? true : false;
 
-  let stateSize = (loggedMarkovChannels.includes(channel)) ? 2 : 2;
-  const markov = new Markov({ stateSize: stateSize });
+  const markov = new Markov({ stateSize: 2 });
 
   if (Array.isArray(data)) {
     markov.addData(data);
 
-    const scoreLimit = (isOver10k) ? 50 : pickNumberBetweenRange(5, 15);
+    const scoreLimit = (isOver10k) ? 70 : pickNumberBetweenRange(5, 15);
     const maxTries = (isOver10k) ? 15000 : 5000;
     const options = {
       maxTries: maxTries,
