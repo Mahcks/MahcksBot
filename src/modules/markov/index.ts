@@ -6,6 +6,8 @@ import { findQuery, logQuery } from "../../utils/maria";
 import { getChannelSettings } from "../../utils/start";
 import { loggedMarkovChannels } from "../channel-logger";
 import { generateMarkov } from "../markov-generator";
+import * as fs from 'fs';
+import * as path from 'path';
 
 /* 
   TODO LIST
@@ -101,7 +103,38 @@ async function testGenerate(messages: string[]): Promise<string> {
   return result.replace(/,/gi, ' ');
 }
 
+async function generateTrumpChain(message: string) {
+  let data = fs.readFileSync(path.join(__dirname, "./trump.txt"), 'utf-8');
+  let arr = data.toString().replace(/\r\n/g,'\n').split('\n');
+
+  const markov = new Markov({ stateSize: 2 });
+
+  const options = {
+    maxTries: 15000,
+
+    filter: (result: any) => {
+      return result.string.split(' ').length <= 80 
+      && result.string.split(' ').length >= 10 
+      && !result.string.includes("⣿")
+      && !result.string.includes("http:")
+      && !result.string.includes("https:") 
+      && result.score >= 70;
+    }
+  }
+
+  markov.addData(arr);
+  const result = markov.generate(options);
+  let isUrl: RegExp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+  return (/-stats/gm.test(message)) ? `[Tries: ${result.tries} | Refs: ${result.refs.length} | Score: ${result.score}]🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}` : `🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}`;;
+}
+
 export async function generateMarkovChain(channel: string, message: string): Promise<string> {
+  if (channel.toLowerCase() === "trump") {
+    let trump = await generateTrumpChain(message);
+
+    return trump
+  }
+  
   let data = await getChannelMessages(channel, message);
   
   if (/-dank/gm.test(message)) {
