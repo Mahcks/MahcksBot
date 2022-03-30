@@ -37,13 +37,7 @@ const statsCommand: CommandInt = {
       let targetChannel = (context[1]) ? context[1].replace('@', '') : channel.substring(1);
       let total = await logQuery(`SELECT COUNT(*) FROM logs.${targetChannel.toLowerCase()};`, []);
 
-      /* 
-      
-      
-
-
-      */
-      let dataSize = await logQuery(`SELECT table_name AS 'table_name', ROUND((data_length + index_length)) AS 'size_in_bytes' FROM information_schema.TABLES WHERE table_schema = 'logs' AND table_name = 'taylikestoast'`, [])
+      let dataSize = await logQuery(`SELECT table_name AS 'table_name', ROUND((data_length + index_length)) AS 'size_in_bytes' FROM information_schema.TABLES WHERE table_schema = 'logs' AND table_name = '${targetChannel}'`, [])
       console.log(dataSize); // should be 342 mb
       let size = parseInt(dataSize[0]["size_in_bytes"]) as number;
       sendMessage(channel, `@${user} total messages logged: ${humanizeNumber(total[0]["COUNT(*)"])} size on disc: ${formatBytes(size, 2)}`);
