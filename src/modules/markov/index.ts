@@ -140,7 +140,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
   if (/-dank/gm.test(message)) {
     if (Array.isArray(data)) {
       let chain = await testGenerate(data);
-      return `FeelsDankMan 🔮 ${chain}`;
+      return `🔮 [ FeelsDankMan ] ${chain}`;
     } 
   }
 
