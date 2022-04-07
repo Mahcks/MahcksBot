@@ -61,3 +61,13 @@ export async function getThumbnail(channel: string) {
   channel = (channel.startsWith("#")) ? channel.substring(1) : channel;
   return `https://static-cdn.jtvnw.net/previews-ttv/live_user_${channel.toLowerCase()}-1920x1080.jpg`;
 }
+
+export async function getStreamInfo(id: number) {
+  let req = await axios({
+    method: "GET",
+    url: "https://api.twitch.tv/helix/streams?user_id="+id,
+    headers: headers
+  });
+
+  return req.data.data;
+}

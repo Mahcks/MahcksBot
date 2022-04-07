@@ -364,3 +364,11 @@ export function formatBytes(bytes: number, decimals = 2) {
 
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
+
+// Returns a Promise that resolves after "ms" Milliseconds
+export const timer = (ms: number | undefined) => new Promise(res => setTimeout(res, ms))
+
+// Does as the name suggests.
+export function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

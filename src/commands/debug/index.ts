@@ -1,6 +1,7 @@
 import { Actions, CommonUserstate } from "tmi.js";
 import { redis } from "../../main";
 import { generateMarkovChain, getLoggedChannels } from "../../modules/markov";
+import { addPoints, getPoints } from "../../modules/point-system/points";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { checkIfUserOptedout, getBestAvilableEmote, isMod } from "../../utils";
 import { getUserId } from "../../utils/helix";
@@ -102,6 +103,9 @@ const debugCommand: CommandInt = {
     
     } else if (cmd === "markov") {
       await getLoggedChannels();
+    
+    } else if (cmd === "points") {
+      await addPoints(0, parseInt(userstate["user-id"]!));
     }
   }
 }

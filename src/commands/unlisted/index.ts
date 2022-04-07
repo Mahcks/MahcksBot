@@ -3,6 +3,7 @@ import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { randomArray } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
+import * as cheerio from "cheerio";
 
 const unlistedCommand: CommandInt = {
   Name: "unlisted",

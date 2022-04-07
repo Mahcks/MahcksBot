@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import { logPool, redis } from "../../main";
 import { findQuery, logQuery } from "../../utils/maria";
 import config from "../../config/config";
+import { timer } from "../../utils";
 
 /* 
 
@@ -32,7 +33,7 @@ export const fetchMarkovData = async () => {
       msgs.forEach((msg: any) => {
         data.push(msg.message);
       });
-  
+
       redis.set('channel:logs:markov:' + channel, JSON.stringify(data), 'ex', 1800) // expires in 30m
     } catch (err) {
       console.log(err);
@@ -80,6 +81,15 @@ export const initLogClient = async () => {
       debug: false
     }
   });
+
+  /* for (var i = 0; i < loggedChannels.length; i++) {
+    lClient.join(loggedChannels[i])
+      .then((data) => {
+      }).catch((err) => {
+        console.log(`[LOG] Error joining ${loggedChannels[i]} - ${err}`);
+      });
+    await timer(2000);
+  } */
 
   if (config.prefix) {
     lClient.connect();
