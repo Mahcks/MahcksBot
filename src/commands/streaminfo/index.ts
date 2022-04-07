@@ -34,7 +34,6 @@ const StreamInfoCommand: CommandInt = {
     }
 
     let sd = await getStreamInfo(id);
-    console.log(sd[0]);
     if (typeof sd[0] === "undefined") return sendMessage(channel, `@${userstate.username} that user is currently offline, try again later.`);
     sendMessage(channel, `@${userstate.username} ${sd[0].user_name} is streaming ${sd[0].game_name} to ${humanizeNumber(sd[0].viewer_count)} viewers. Current title: ${sd[0].title}`)
   }
