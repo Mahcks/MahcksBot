@@ -19,13 +19,15 @@ const UselessFactCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    const apis = [{ name: "uselessfacts", link: "https://uselessfacts.jsph.pl/random.json?language=en" }, { name: "funfact", link: "https://api.aakhilv.me/fun/facts?num=1'" }];
+    const apis = [{ name: "uselessfacts", link: "https://uselessfacts.jsph.pl/random.json?language=en" }, { name: "funfact", link: "https://api.aakhilv.me/fun/facts?num=1'" }, { name: "asli", link: "https://asli-fun-fact-api.herokuapp.com/" }];
     let randomApi = randomArray(apis);
 
     try {
       let response = await fetchAPI(randomApi["link"]);
       if (randomApi.name === "funfact") {
         return sendMessage(channel, `@${userstate.username} ${response[0]}`);
+      } else if (randomApi.name === "asli") {
+        return sendMessage(channel, `@${userstate.username} ${response.data.fact}`);
       } else {
         sendMessage(channel, `@${userstate.username} ${response.text}`);
       }
