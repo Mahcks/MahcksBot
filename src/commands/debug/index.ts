@@ -6,6 +6,7 @@ import sendMessage from "../../modules/send-message/sendMessage";
 import { checkIfUserOptedout, getBestAvilableEmote, isMod } from "../../utils";
 import { getUserId } from "../../utils/helix";
 import { findQuery, insertRow, removeOne, updateOne } from "../../utils/maria";
+import { testTelegramUkraine } from "../../utils/slavaukraine";
 import { addChannelSetting, ChannelSettings, removeChannelSetting } from "../../utils/start";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -106,6 +107,9 @@ const debugCommand: CommandInt = {
     
     } else if (cmd === "points") {
       await addPoints(0, parseInt(userstate["user-id"]!));
+    
+    } else if (cmd === "telegram") {
+      await testTelegramUkraine();
     }
   }
 }

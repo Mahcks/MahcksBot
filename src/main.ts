@@ -73,13 +73,15 @@ client.connect().then(async () => {
   await initChannelSettings();
 
   // Opens emote listener
-  await openEmoteListeners(client);
+  if (config.production) {
+    await openEmoteListeners(client);
+
+    // Logs channel data.
+    initLogClient();
+  }
 
   // Markov data
   await fetchMarkovData();
-  
-  // Logs channel data.
-  initLogClient();
 
   await updateBanphrases();
 

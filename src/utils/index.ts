@@ -1,5 +1,5 @@
 import axios from "axios";
-import moment from "moment";
+import moment, { lang } from "moment";
 import { Actions, client, Userstate } from "tmi.js";
 import config from "../config/config";
 import { pool, redis } from "../main";
@@ -371,4 +371,15 @@ export const timer = (ms: number | undefined) => new Promise(res => setTimeout(r
 // Does as the name suggests.
 export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ * Translates text to fun languages using api.funtranslations.com
+ * @param text 
+ */
+export async function funTranslation(launguage: string, text: string) {
+  const languagesSupported = ["morse", "jive", "cockney", "brooklyn", "ermahgerd", "pirate", "minion", "ferblatin", "chef", "dolan", "fudd", "sindarin", "quneya", "oldenglish", "shakespeare", "uk", "dothraki", "valyrian", "vulcan", "klingon", "piglatin", "yoda", "sith", "cheunh", "gungan", "mandalorian", "huttese"];
+
+  if (!languagesSupported.includes(launguage)) return "That language is not supported.";
+
 }
