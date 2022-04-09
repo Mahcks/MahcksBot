@@ -9,8 +9,6 @@ import { isUserBannedInChannel } from "../../utils/timeout";
 export default async (client: Actions, channel: string, userstate: Userstate, message: string, self: boolean) => {
   if (self) await isMod(userstate, channel);
 
-  console.log(`[${channel}] ${userstate.username}: ${message}`);
-
   if (config.production) {
     if (channel === "#pajlada") {
       if (/(pajaS\s🚨\sALERT)/gm.test(message) && userstate["user-id"] === "82008718") {
