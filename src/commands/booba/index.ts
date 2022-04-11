@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { randomArray } from "../../utils";
+import { fetchAPI, randomArray } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 import * as nanoid from 'nanoid';
 
@@ -23,7 +23,8 @@ const exampleCommand: CommandInt = {
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
 	const user = userstate.username;
 
-  const boobas = await axios.get('https://api.booba.tv/');
+  const boobas = await fetchAPI('https://api.booba.tv/');
+  if (boobas.error) return sendMessage(channel, `@${user} ${boobas.defaultMessage}`);
   let data = boobas.data;
 
   const booba = randomArray(data);

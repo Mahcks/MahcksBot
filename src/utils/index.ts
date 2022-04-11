@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import moment, { lang } from "moment";
 import { Actions, client, Userstate } from "tmi.js";
 import config from "../config/config";
@@ -177,13 +177,23 @@ export async function checkIfUserOptedout(id: number, command: string) {
   return toReturn;
 }
 
-export async function fetchAPI(url: string) {
+export interface APIFetch {
+  error: boolean;
+  data: any;
+  defaultMessage: string;
+}
+
+export async function fetchAPI(url: string): Promise<APIFetch> {
   try {
     const response = await axios.get(url);
-    return response.data;
+    return { error: false, data: response.data, defaultMessage: `FeelsDankMan Sorry there was an API error, please try again later.` };
   } catch (error) {
-    console.warn(error)
-    return error;
+    if (axios.isAxiosError(error)) {
+      console.log(error);
+      return { error: true, data: error.response?.data, defaultMessage: `FeelsDankMan Sorry there was an API error, please try again later.` };
+    } else {
+      return { error: true, data: error, defaultMessage: `FeelsDankMan Sorry there was an API error, please try again later.`};
+    }
   }
 }
 
@@ -198,7 +208,8 @@ export async function getAllChatters(channel: string) {
   let chatters: string[] = [];
 
   let chatData = await fetchAPI(`https://tmi.twitch.tv/group/user/${channel}/chatters`);
-  let cd = chatData["chatters"];
+  if (chatData.error) return [];
+  let cd = chatData.data.chatters;
   chatters.push(...cd["broadcaster"], ...cd["moderators"], ...cd["staff"], ...cd["admins"], ...cd["global_mods"], ...cd["viewers"]);
   return chatters;
 }

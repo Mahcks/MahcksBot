@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { randomArray } from "../../utils";
+import { fetchAPI, randomArray } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const exampleCommand: CommandInt = {
@@ -20,7 +20,7 @@ const exampleCommand: CommandInt = {
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
     const user = userstate.username;
-    
+
     let rand = randomArray([
       'waifu',
       'neko',
@@ -54,12 +54,9 @@ const exampleCommand: CommandInt = {
       'cringe'
     ]);
 
-    try {
-      let res = await axios.get(`https://api.waifu.pics/sfw/${rand}`);
-      sendMessage(channel, `@${user} ${res.data.url}`);
-    } catch (err) {
-      sendMessage(channel, `@${user} sorry there was an API issue, try again later FeelsDankMan`);
-    }
+    let res = await fetchAPI(`https://api.waifu.pics/sfw/${rand}`);
+    if (res.error) return sendMessage(channel, `@${user} ${res.defaultMessage}`);
+    sendMessage(channel, `@${user} ${res.data.url}`);
   }
 }
 

@@ -24,29 +24,29 @@ const WowPopulationCommand: CommandInt = {
       let res;
       try {
         res = await fetchAPI(`https://ironforge.pro/api/server/tbc/${server}`);
+        if (res.error) return sendMessage(channel, `@${userstate.username} ${res.defaultMessage}`);
       } catch (error) {
-        return sendMessage(channel, `${userstate['display-name']} FeelsDankMan sorry, there was an API issue, please try again later.`);
+        return sendMessage(channel, `${userstate.username} FeelsDankMan sorry, there was an API issue, please try again later.`);
       }
 
-      let allData = res["charts"]["all"]["datasets"];
+      let allData = res.data.charts.all.datasets;
       let factionData: any = { aliance: 0, horde: 0 }
 
       allData.forEach((faction: any) => {
-        let fData: any[] = faction["data"];
-        if (faction["label"].toLowerCase() === "alliance") {
-          factionData["aliance"] = fData.pop();
+        let fData: any[] = faction.data;
+        if (faction.label.toLowerCase() === "alliance") {
+          factionData.aliance = fData.pop();
         } else {
-          factionData["horde"] = fData.pop();
+          factionData.horde = fData.pop();
         }
       });
 
-      let totalPlayers = factionData["aliance"] + factionData["horde"];
-      let aliancePerc = ((factionData["aliance"] / totalPlayers) * 100).toFixed(2);
-      let horderPerc = ((factionData["horde"] / totalPlayers) * 100).toFixed(2);
-      client.say(channel, `@${userstate['display-name']} ${capitalizeFirstLetter(server)} population - Aliance: %${aliancePerc}/${factionData["aliance"].toLocaleString()} | Horde %${horderPerc}/${factionData["horde"].toLocaleString()}`);
+      let totalPlayers = factionData.aliance + factionData.horde;
+      let aliancePerc = ((factionData.aliance / totalPlayers) * 100).toFixed(2);
+      let horderPerc = ((factionData.horde / totalPlayers) * 100).toFixed(2);
+      client.say(channel, `@${userstate.username} ${capitalizeFirstLetter(server)} population - Aliance: %${aliancePerc}/${factionData["aliance"].toLocaleString()} | Horde %${horderPerc}/${factionData["horde"].toLocaleString()}`);
     } catch (err) {
-      console.log(err);
-      client.say(channel, `@${userstate["display-name"]} there was an error fetching data for "${capitalizeFirstLetter(server)}"`);
+      client.say(channel, `@${userstate.username} there was an error fetching data for "${capitalizeFirstLetter(server)}"`);
     }
   }
 }

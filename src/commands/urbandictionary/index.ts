@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { humanizeNumber } from "../../utils";
+import { fetchAPI, humanizeNumber } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const UrbanDictionaryCommand: CommandInt = {
@@ -23,8 +23,10 @@ const UrbanDictionaryCommand: CommandInt = {
     const user = userstate.username;
     const link = (/(-random)/g.test(context[0])) ? "https://api.urbandictionary.com/v0/random" : `http://api.urbandictionary.com/v0/define?term=${context.join(' ')}`;
 
-    const req = await axios.get(link);
-    const max: any = req.data.list.reduce((prev: any, curr: any) => (prev.thumbs_up > curr.thumbs_up) ? prev : curr);
+    const req = await fetchAPI(link);
+    if (req.error) return sendMessage(channel, `@${user} ${req.defaultMessage}`);
+    if (req.data.data.list.length === 0) return sendMessage(channel, `@${user} couldn't find any results for that search.`);
+    const max: any = req.data.data.list.reduce((prev: any, curr: any) => (prev.thumbs_up > curr.thumbs_up) ? prev : curr);
     let msg = `@${user} [${humanizeNumber(max.thumbs_up)} 👍 | ${humanizeNumber(max.thumbs_down)} 👎] ${max.definition.replace(/[\[\]']+/g, '')}`;
 
     if (msg.length >= 500) {

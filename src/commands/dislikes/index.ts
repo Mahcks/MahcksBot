@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { calcDate, humanizeNumber } from "../../utils";
+import { calcDate, fetchAPI, humanizeNumber } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const dislikesCommand: CommandInt = {
@@ -34,8 +34,9 @@ const dislikesCommand: CommandInt = {
     } else videoId = context[0];
 
     try {
-      let req = await axios.get(`https://returnyoutubedislikeapi.com/votes?videoId=${encodeURIComponent(videoId)}`);
-      sendMessage(channel, `@${user} 👍 Likes: ${humanizeNumber(req.data.likes)} 👎 Dislikes: ${humanizeNumber(req.data.dislikes)} 👁 Views: ${humanizeNumber(req.data.viewCount)} Stats created: ${calcDate(new Date(), new Date(req.data.dateCreated), [])}`);
+      let req = await fetchAPI(`https://returnyoutubedislikeapi.com/votes?videoId=${encodeURIComponent(videoId)}`);
+      if (req.error) return sendMessage(channel, `@${user} ${req.defaultMessage}`);
+      sendMessage(channel, `@${user} 👍 Likes: ${humanizeNumber(req.data.data.likes)} 👎 Dislikes: ${humanizeNumber(req.data.data.dislikes)} 👁 Views: ${humanizeNumber(req.data.data.viewCount)} Stats created: ${calcDate(new Date(), new Date(req.data.data.dateCreated), [])}`);
     } catch (error) {
       sendMessage(channel, `@${user} an unexpected error occurred. Make sure it was a valid YouTube video ID.`);
     }

@@ -3,6 +3,7 @@ import { Actions, Userstate } from "tmi.js";
 import { CommandInt } from "../../validation/ComandSchema";
 import * as cheerio from 'cheerio';
 import sendMessage from "../../modules/send-message/sendMessage";
+import { fetchAPI } from "../../utils";
 
 const copyPastaCommand: CommandInt = {
   Name: "copypasta",
@@ -33,7 +34,7 @@ const copyPastaCommand: CommandInt = {
     ]
 
     async function getCopypasta() {
-      const req = await axios.get('https://www.twitchquotes.com/random');
+      const req = await fetchAPI('https://www.twitchquotes.com/random');
       const html = cheerio.load(req.data);
       const copypasta = html(`div[id^="clipboard_copy_content"]`).text();
 

@@ -25,10 +25,11 @@ const pfpCommand: CommandInt = {
 
     try {
       let res = await fetchAPI(`https://decapi.me/twitch/avatar/${target}`);
-      if (res.toLowerCase().includes("user not found")) {
+      if (res.error) return sendMessage(channel, `@${user} ${res.defaultMessage}`);
+      if (res.data.toLowerCase().includes("user not found")) {
         sendMessage(channel, `@${user} couldn't find the user "${target}"`);
       } else {
-        let link = await shortenURL(res);
+        let link = await shortenURL(res.data);
         if (target.toLowerCase() === userstate["username"]) {
           sendMessage(channel, `@${user} here is your profile picture: ${link}`);
         } else sendMessage(channel, `@${user} here is their profile picture: ${link}`);

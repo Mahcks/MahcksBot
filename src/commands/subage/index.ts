@@ -1,4 +1,5 @@
 import { Actions, Userstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { calcDate, fetchAPI, getTarget } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -41,21 +42,22 @@ const SubageCommand: CommandInt = {
     
     try {
       subcheck = await fetchAPI(`https://api.ivr.fi/twitch/subage/${target.toLowerCase()}/${targetChannel.toLowerCase()}`);
+      if (subcheck.error) return sendMessage(channel, subcheck.data);
     } catch (error) {
       return client.action(channel, `@${user} FeelsDankMan sorry, there was an API issue please try again later.`);
     }
 
-    if (subcheck.subscribed == false) {
-      let oldSub = subcheck.cumulative;
+    if (subcheck.data.subscribed == false) {
+      let oldSub = subcheck.data.cumulative;
       if (oldSub.months === 0 || typeof oldSub.months === "undefined") {
         return client.action(channel, `${target} is not subbed to ${targetChannel} and never has subbed to them.`);
       } else {
         return client.action(channel, `${target} is not subbed to ${targetChannel} but has been previously for a total of ${oldSub.months} months. Sub ended ${calcDate(new Date(), new Date(oldSub.end), ['s'])} ago.`);
       }
     } else {
-      let subData = subcheck.meta;
-      let subLength = subcheck.cumulative;
-      let substreak = subcheck.streak;
+      let subData = subcheck.data.meta;
+      let subLength = subcheck.data.cumulative;
+      let substreak = subcheck.data.streak;
 
       if (subData === undefined) return client.action(channel, `@${user} "${target}" or "${targetChannel}" is not a valid username.`);
 

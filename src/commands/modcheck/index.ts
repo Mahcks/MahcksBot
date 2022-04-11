@@ -1,4 +1,5 @@
 import { Actions, Userstate } from "tmi.js";
+import sendMessage from "../../modules/send-message/sendMessage";
 import { getTarget, fetchAPI, calcDate } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -35,12 +36,13 @@ const modcheckCommand: CommandInt = {
     let modCheck;
     try {
       modCheck = await fetchAPI(`https://api.ivr.fi/twitch/modsvips/${targetChannel}`);
+      if (modCheck.error) return sendMessage(channel, `@${user} ${modCheck.defaultMessage}`);
     } catch (error) {
       //await logError(user!, 'api', `Error fetching API for !modcheck - https://api.ivr.fi/twitch/modsvips/${targetChannel}`, new Date());
       return client.action(channel, `@${user} FeelsDankMan sorry, there was an API issue please contact Mahcksimus.`);
     }
 
-    let isMod = modCheck["mods"];
+    let isMod = modCheck.data.mods;
     let modRes = "";
 
     await isMod.forEach(async function (modstatus: any) {

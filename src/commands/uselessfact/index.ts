@@ -24,12 +24,13 @@ const UselessFactCommand: CommandInt = {
 
     try {
       let response = await fetchAPI(randomApi["link"]);
+      if (response.error) return sendMessage(channel, `@${userstate.username} ${response.defaultMessage}`);
       if (randomApi.name === "funfact") {
-        return sendMessage(channel, `@${userstate.username} ${response[0]}`);
+        return sendMessage(channel, `@${userstate.username} ${response.data[0]}`);
       } else if (randomApi.name === "asli") {
-        return sendMessage(channel, `@${userstate.username} ${response.data.fact}`);
+        return sendMessage(channel, `@${userstate.username} ${response.data.data.fact}`);
       } else {
-        sendMessage(channel, `@${userstate.username} ${response.text}`);
+        sendMessage(channel, `@${userstate.username} ${response.data.text}`);
       }
 
     } catch (error) {
