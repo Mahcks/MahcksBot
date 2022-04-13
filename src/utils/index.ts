@@ -192,7 +192,7 @@ export async function fetchAPI(url: string): Promise<APIFetch> {
       console.log(error);
       return { error: true, data: error.response?.data, defaultMessage: `FeelsDankMan Sorry there was an API error, please try again later.` };
     } else {
-      return { error: true, data: error, defaultMessage: `FeelsDankMan Sorry there was an API error, please try again later.`};
+      return { error: true, data: error, defaultMessage: `FeelsDankMan Sorry there was an API error, please try again later.` };
     }
   }
 }
@@ -393,4 +393,82 @@ export async function funTranslation(launguage: string, text: string) {
 
   if (!languagesSupported.includes(launguage)) return "That language is not supported.";
 
+}
+
+/**
+ * Emote origin from Supinic API
+ */
+
+interface SupibotEmoteOriginEntry {
+  ID: string;
+  emoteID: string | null;
+  type: string;
+  author: string | null;
+  reporter: string | null;
+  text: string | null;
+  notes: string | null;
+}
+
+//: Promise<SupibotEmoteOriginEntry[] | null>
+export async function cacheEmoteOrigins(): Promise<SupibotEmoteOriginEntry[] | null> {
+  const key = "list:supibot:origins";
+
+  let expired = await redis.ttl(key);
+  if (expired == -1 || await redis.exists(key) == 0) {
+    const res = await axios.get("https://supinic.com/api/data/origin/list", {
+      headers: {
+        "User-Agent": "twitch.tv/mahcksimus"
+      }
+    });
+
+    redis.set(key, JSON.stringify(res.data.data), 'ex', 43200) // 12 hours
+    return res.data.data;
+  } else {
+    let data = await redis.get(key);
+    if (!data) return null;
+    return JSON.parse(data);
+  }
+}
+
+export async function checkEmoteOrigin(emoteId: string | number): Promise<SupibotEmoteOriginEntry | null> {
+  const originList = await cacheEmoteOrigins();
+
+  if (originList) {
+    return originList.find(entry => entry.emoteID === emoteId.toString()) ?? null;
+  }
+
+  return null;
+}
+
+// Prio 7tv -> BTTV -> FFZ
+let bttvEmoteSearch = "https://api.betterttv.net/3/emotes/shared/search?query=[emoteCode]&limit=1";
+let ffzEmoteSearch = "https://api.frankerfacez.com/v1/emotes?q=[emoteCode]&sort=count-desc";
+
+export async function findSevenTVEmote(code: string) {
+  const options: any = {
+    method: 'POST',
+    url: 'https://api.7tv.app/v2/gql',
+    headers: { 'Content-Type': 'application/json' },
+    data: {
+      query: 'query($query: String!,$page: Int,$pageSize: Int,$globalState: String,$sortBy: String,$sortOrder: Int,$channel: String,$submitted_by: String,$filter: EmoteFilter) {search_emotes(query: $query,limit: $pageSize,page: $page,pageSize: $pageSize,globalState: $globalState,sortBy: $sortBy,sortOrder: $sortOrder,channel: $channel,submitted_by: $submitted_by,filter: $filter) {id,visibility,channel_count,owner {id,display_name,role {id,name,color},banned}name,tags}}',
+      variables: { query: code, sortBy: 'popularity', limit: 1, sortOrder: 0 }
+    }
+  };
+
+  let res = await axios.request(options);
+  return res.data;
+}
+
+export async function findBTTVEmote(code: string) {
+  const res = await axios.get(bttvEmoteSearch.replace("[emoteCode]", code));
+  return res.data;
+}
+
+export async function findEmoteByPrio(code: string, platform: "any" | "bttv" | "ffz" | "7tv") {
+  switch (platform) {
+    case "7tv":
+      return await findSevenTVEmote(code);
+    case "bttv":
+      return await findBTTVEmote(code);
+  }
 }

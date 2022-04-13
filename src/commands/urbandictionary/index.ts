@@ -25,8 +25,8 @@ const UrbanDictionaryCommand: CommandInt = {
 
     const req = await fetchAPI(link);
     if (req.error) return sendMessage(channel, `@${user} ${req.defaultMessage}`);
-    if (req.data.data.list.length === 0) return sendMessage(channel, `@${user} couldn't find any results for that search.`);
-    const max: any = req.data.data.list.reduce((prev: any, curr: any) => (prev.thumbs_up > curr.thumbs_up) ? prev : curr);
+    if (req.data.list.length === 0) return sendMessage(channel, `@${user} couldn't find any results for that search.`);
+    const max: any = req.data.list.reduce((prev: any, curr: any) => (prev.thumbs_up > curr.thumbs_up) ? prev : curr);
     let msg = `@${user} [${humanizeNumber(max.thumbs_up)} 👍 | ${humanizeNumber(max.thumbs_down)} 👎] ${max.definition.replace(/[\[\]']+/g, '')}`;
 
     if (msg.length >= 500) {
