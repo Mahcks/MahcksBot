@@ -103,8 +103,8 @@ async function testGenerate(messages: string[]): Promise<string> {
   return result.replace(/,/gi, ' ');
 }
 
-async function generateTrumpChain(message: string) {
-  let data = fs.readFileSync(path.join(__dirname, "./trump.txt"), 'utf-8');
+async function generateTrumpChain(message: string, type: string) {
+  let data = fs.readFileSync(path.join(__dirname, `./${type}.txt`), 'utf-8');
   let arr = data.toString().replace(/\r\n/g,'\n').split('\n');
 
   const markov = new Markov({ stateSize: 2 });
@@ -129,8 +129,8 @@ async function generateTrumpChain(message: string) {
 }
 
 export async function generateMarkovChain(channel: string, message: string): Promise<string> {
-  if (channel.toLowerCase() === "trump") {
-    let trump = await generateTrumpChain(message);
+  if (channel.toLowerCase() === "trump" || channel.toLowerCase() === "quote") {
+    let trump = await generateTrumpChain(message, channel.toLowerCase());
 
     return trump
   }
