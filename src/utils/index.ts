@@ -472,3 +472,7 @@ export async function findEmoteByPrio(code: string, platform: "any" | "bttv" | "
       return await findBTTVEmote(code);
   }
 }
+
+export function isNum(val: any) {
+  return !isNaN(val)
+}

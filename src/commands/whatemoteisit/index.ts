@@ -95,9 +95,9 @@ const WhatEmoteIsItCommand: CommandInt = {
         return sendMessage(channel, `@${user} ${tEmote.emoteCode} (ID: ${tEmote.emoteCode}) - ${active} ${tier} emote to an unknown banned or deleted channel. ${cdnLink}`);
       } else if (tEmote.channelName !== null) {
         let channelString = `@${tEmote.channelName}`;
-        /* if (tEmote.channelName.toLowerCase() !== tEmote.channelLogin?.toLowerCase()) {
+        if (tEmote.channelName.toLowerCase() !== tEmote.channelLogin?.toLowerCase()) {
           channelString = `@${tEmote.channelLogin} (${tEmote.channelName})`;
-        } */
+        }
 
         tier = `Tier ${tEmote.emoteTier} ${tEmote.emoteAssetType?.toLowerCase()} sub emote to channel ${channelString}`;
       }

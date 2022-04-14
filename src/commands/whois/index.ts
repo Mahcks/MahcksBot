@@ -10,6 +10,7 @@ interface UserSettings {
   chatColor: string;
   badge: string[] | string;
   created: string;
+  isBanned: string;
 }
 
 const whoisCommand: CommandInt = {
@@ -32,7 +33,8 @@ const whoisCommand: CommandInt = {
     let target = getTarget(user, context[0]);
 
     let isSelf = (target.toLowerCase() === userstate['username']) ? true : false;
-    let userLookup = await resolveUser(target.toLowerCase());
+    let userLookupData = await resolveUser(target.toLowerCase());
+    let userLookup = userLookupData[0];
 
     function getBadges(badges: any[]) {
       let total: string[] = [];
@@ -43,18 +45,17 @@ const whoisCommand: CommandInt = {
       return total;
     }
 
+    //console.log(userLookup.badges);
+
     let usersSettings: UserSettings = {
       id: (isSelf) ? userstate['user-id'] : userLookup.id,
       chatColor: (userLookup.chatColor === undefined) ? '[None]' : userLookup.chatColor,
-      badge: (userLookup.badge.length === 0) ? '[None]' : getBadges(userLookup.badge),
+      badge: (userLookup.badges.length === 0) ? '[None]' : getBadges(userLookup.badges),
+      isBanned: (userLookup.banned) ? `⛔ (${userLookup.banReason})` : "",
       created: calcDate(new Date(), new Date(userLookup['createdAt']), ['m'])
     }
 
-    if (target.toLowerCase() === userstate.username) {
-      sendMessage(channel, `@${user} ID: ${usersSettings.id} chat color: ${usersSettings.chatColor} (${await getColorName(usersSettings.chatColor)}) badge: ${usersSettings.badge} created: ${usersSettings.created}`);
-    } else {
-      sendMessage(channel, `@${user} ID: ${usersSettings.id} chat color: ${usersSettings.chatColor} (${await getColorName(usersSettings.chatColor)}) badge: ${usersSettings.badge} created: ${usersSettings.created}`);
-    }
+    sendMessage(channel, `@${user} ID: ${usersSettings.id} chat color: ${usersSettings.chatColor} (${await getColorName(usersSettings.chatColor)}) badge: ${usersSettings.badge} created: ${usersSettings.created} ${usersSettings.isBanned}`);
   }
 }
 

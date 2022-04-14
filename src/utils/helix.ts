@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { isNum } from ".";
 import config from "../config/config";
 
 const headers = {
@@ -22,8 +23,11 @@ export async function getUser(user: string | number) {
  * @param user string
  */
 export async function resolveUser(user: string) {
+  let isNumber = isNum(Number(user)); // true if string
+  let link = "https://api.ivr.fi/v2/twitch/user?";
+  let endpoint = (isNumber) ? `id=${user}` : `login=${user}`;
   try {
-    const res = await axios.get(`https://api.ivr.fi/twitch/resolve/${user}`);
+    const res = await axios.get(link + endpoint);
     return res.data;
   } catch (error: any) {
     return error.response.data.error;
