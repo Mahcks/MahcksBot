@@ -1,7 +1,9 @@
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
-import { fetchAPI } from "../../utils";
+import { fetchAPI, randomArray } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
+import * as fs from 'fs';
+import * as path from 'path';
 
 const HmmCommand: CommandInt = {
   Name: "hmm",
@@ -22,7 +24,11 @@ const HmmCommand: CommandInt = {
     const req = await fetchAPI("https://www.conversationstarters.com/random.php");
     if (req.error) return sendMessage(channel, `@${userstate.username} ${req.defaultMessage}`);
 
-    sendMessage(channel, `🤔 ${req.data.replace("<img src=bullet.gif width=17 height=16>", "")}`);
+    let data = fs.readFileSync(path.join(__dirname, `./icebreakers.txt`), 'utf-8');
+    let arr = data.toString().replace(/\r\n/g,'\n').split('\n');
+    let chosen = randomArray(arr);
+
+    sendMessage(channel, `🤔 ${chosen}`);
   }
 }
 
