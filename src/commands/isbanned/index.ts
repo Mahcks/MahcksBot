@@ -2,7 +2,7 @@ import axios from "axios";
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { calcDate, getTarget } from "../../utils";
-import { getUserId } from "../../utils/helix";
+import { getUserId, resolveUser } from "../../utils/helix";
 import { findQuery } from "../../utils/maria";
 import { CommandInt } from "../../validation/ComandSchema";
 
@@ -44,21 +44,15 @@ const isbannedCommand: CommandInt = {
       channelData = false;
     }
 
-    try {
-      let req = await axios.get(`https://api.ivr.fi/twitch/resolve/${toTarget}`);
-      let data = req.data;
+    let req = await resolveUser(toTarget);
+    if (req.length === 0) return sendMessage(channel, `@${user} couldn't find that user!`);
+    let data = req[0];
 
-      if (channelData) {
-        sendMessage(channel, `@${user} Twitch: ${data.banned.toString()} Channel: ${(isChannelBanned) ? 'false' : 'true'}, ${(updatedRecently) ? `banned ${calcDate(new Date(), new Date(query[0].updated), [])} ago.` : `unbanned ${calcDate(new Date(), new Date(query[0].timestamp), [])}`} ago.`);
-      } else sendMessage(channel, `@${user} Twitch: ${data.banned.toString()} Channel: false`);
+    let twitchBanStr = (data.banned) ? `⛔ (${data.banReason})` : "✅";
 
-    } catch (error: any) {
-      let why = error.response.data.error.toLowerCase();
-
-      if (why === "user was not found") {
-        return sendMessage(channel, `@${user} sorry I couldn't find the user ${toTarget}`);
-      }
-    }
+    if (channelData) {
+      sendMessage(channel, `@${user} Twitch: ${twitchBanStr} Channel: ${(isChannelBanned) ? '✅' : '⛔'}, ${(updatedRecently) ? `banned ${calcDate(new Date(), new Date(query[0].updated), [])} ago.` : `unbanned ${calcDate(new Date(), new Date(query[0].timestamp), [])}`} ago.`);
+    } else sendMessage(channel, `@${user} Twitch: ${twitchBanStr} Channel: ✅`);
   }
 }
 

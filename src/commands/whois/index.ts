@@ -34,6 +34,7 @@ const whoisCommand: CommandInt = {
 
     let isSelf = (target.toLowerCase() === userstate['username']) ? true : false;
     let userLookupData = await resolveUser(target.toLowerCase());
+    if (userLookupData.length === 0) return sendMessage(channel, `@${user} couldn't find that user!`);
     let userLookup = userLookupData[0];
 
     function getBadges(badges: any[]) {
@@ -44,8 +45,6 @@ const whoisCommand: CommandInt = {
 
       return total;
     }
-
-    //console.log(userLookup.badges);
 
     let usersSettings: UserSettings = {
       id: (isSelf) ? userstate['user-id'] : userLookup.id,
