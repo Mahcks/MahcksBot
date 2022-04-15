@@ -103,6 +103,31 @@ async function testGenerate(messages: string[]): Promise<string> {
   return result.replace(/,/gi, ' ');
 }
 
+async function generateIcebreaker(message: string) {
+  let data = fs.readFileSync(path.join(__dirname, `./hmm.txt`), 'utf-8');
+  let arr = data.toString().replace(/\r\n/g,'\n').split('\n');
+
+  const markov = new Markov({ stateSize: 3 });
+
+  const options = {
+    maxTries: 15000,
+
+    filter: (result: any) => {
+      return result.string.split(' ').length <= 15 
+      && result.string.split(' ').length >= 8 
+      && !result.string.includes("⣿")
+      && !result.string.includes("http:")
+      && !result.string.includes("https:") 
+      && result.score >= 100;
+    }
+  }
+
+  markov.addData(arr);
+  const result = markov.generate(options);
+  let isUrl: RegExp = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+  return (/-stats/gm.test(message)) ? `[Tries: ${result.tries} | Refs: ${result.refs.length} | Score: ${result.score}]🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}` : `🔮 ${result.string.replace(isUrl, '[Redacted-URL]')}`;;
+}
+
 async function generateTrumpChain(message: string, type: string) {
   let data = fs.readFileSync(path.join(__dirname, `./${type}.txt`), 'utf-8');
   let arr = data.toString().replace(/\r\n/g,'\n').split('\n');
@@ -133,6 +158,10 @@ export async function generateMarkovChain(channel: string, message: string): Pro
     let trump = await generateTrumpChain(message, channel.toLowerCase());
 
     return trump
+  } else if (channel.toLowerCase() === "hmm") {
+    let icebreaker = generateIcebreaker(message);
+
+    return icebreaker;
   }
   
   let data = await getChannelMessages(channel, message);
