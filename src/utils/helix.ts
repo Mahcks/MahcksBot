@@ -75,3 +75,40 @@ export async function getStreamInfo(id: number) {
 
   return req.data.data;
 }
+
+export async function getUsersFollowers(username: string) {
+  let id = await getUserId(username);
+
+  let response = await axios.get(`https://api.twitch.tv/helix/users/follows?from_id=${id}&first=100`, {
+    method: "GET",
+    headers: headers
+  });
+
+  let data = await response.data;
+  let total = [];
+  for (let i = 0; i < data.data.length; i++) {
+    let streamers = { streamer: data.data[i]["to_name"], date: data.data[i]["followed_at"] };
+    total.push(streamers);
+  }
+
+  let totalPages = Math.ceil(data.total / 100);
+  let cursor = data.pagination.cursor;
+  let pages = [];
+  for (let i = 1; i < totalPages; i++) {
+    let response2 = await axios.get(`https://api.twitch.tv/helix/users/follows?from_id=${id}&first=100&after=${cursor}`, {
+      method: "GET",
+      headers: headers
+    });
+
+    let datatwo = await response2.data;
+    cursor = datatwo.pagination.cursor;
+    pages.push(datatwo.data);
+  }
+
+  for (let i = 0; i < pages.length; i++) {
+    for (let j = 0; j < pages[i].length; j++) {
+      total.push({ streamer: pages[i][j]["to_name"], date: pages[i][j]["followed_at"] });
+    }
+  }
+  return total;
+}
