@@ -87,7 +87,11 @@ export default {
     });
 
     if (validPosts.length === 0) {
-      this.getRandomPost(type, randomArray(this.carSubreddits));
+      if (type === "cars") {
+        this.getRandomPost(type, randomArray(this.carSubreddits))
+      } else {
+        this.getRandomPost(type, type);
+      }
     }
 
     return randomArray(validPosts);
@@ -117,6 +121,33 @@ export default {
     });
 
     let chosen = await this.pickPost(type, posts);
+    return chosen;
+  },
+  getTitle: async function (subreddit: string): Promise<RedditPost | string> {
+    const link = `http://reddit.com/r/${subreddit}/${randomArray(this.options.listing)}.json?limit=100&t=${randomArray(this.options.timeframe)}`;
+    let req = await fetchAPI(link);
+    if (req.error) return req.defaultMessage;
+
+    let found = (req.data.data === undefined) ? req.data[0].data.children : req.data.data.children;
+    let posts: RedditPost[] = [];
+    found.forEach((post: any) => {
+      let newPost: RedditPost = {
+        subreddit: post.data.subreddit,
+        title: post.data.title,
+        hidden: post.data.hidden,
+        name: post.data.name,
+        upvote_ratio: post.data.upvote_ratio,
+        ups: post.data.ups,
+        url_overridden_by_dest: (post.data.url_overridden_by_dest === undefined) ? null : post.data.url_overridden_by_dest,
+        over_18: post.data.over_18,
+        permalink: post.data.permalink,
+        url: post.data.url,
+      };
+
+      posts.push(newPost);
+    });
+
+    let chosen = randomArray(posts);
     return chosen;
   }
 }

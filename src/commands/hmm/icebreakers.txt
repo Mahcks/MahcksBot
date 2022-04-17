@@ -2926,3 +2926,766 @@ If you had to delete all but 3 apps from your smartphone, which ones would you k
 You’re going sail around the world, what’s the name of your boat?
 What fictional family would you be a member of?
 What’s your favorite sandwich and why?
+What fashion trend did you love that is embarrassing now?
+What’s the worst present you have ever received?
+What was your worst haircut?
+If you were wrongfully put into an insane asylum, how would you convince the staff that you’re actually sane?
+If you were held at gunpoint and told that if you didn’t impress them with your dance moves, you would be killed, what dance moves would you bust out?
+If you were an animal, what animal would you want to be, and why?
+What word(s) did you misuse or mispronounce when you were a kid?
+What’s the most imaginative pick-up line you can come up with?
+What is the most inappropriate time you have ever laughed?
+What is the most useless fact you know?
+What is the most essential product of every grocery shop for you?
+If you had your own talk show, what would it be called?
+How useful would you be in a zombie apocalypse?
+What topic could you give a 15-minute presentation on without any preparation?
+If the universe is just a simulation, what update does it need?
+If you had to sing karaoke, what song would you pick?
+If animals could talk, which would be the rudest?
+What’s the last thing you did for the first time?
+What would you say to your president if you ran into him randomly?
+What is the naughtiest thing you have ever done as a teenager?
+What is the clumsiest thing you have done?
+Do you think there is Life in Outer Space?
+Have you ever sent a text message to the wrong person?
+What prejudices do you have in your life?
+If you had a pet parrot, what would you teach it to say?
+If you had to become an inanimate object for a year, what object would you choose to be, and why?
+Have you ever been thrown out of a public place?
+If you were about to die but were allowed one song to listen to, which one would it be and why?
+If you were to pitch me buying toilet paper for $50, what would your pitch be?
+What was the best day of your life, and why?
+Do you laugh when the ketchup bottle “farts”?
+What is the weirdest compliment you have ever received?
+If you had an unlimited supply of something for the rest of your life, what would it be?
+What does your perfect breakfast look like?
+Do you believe in any conspiracy theories?
+What is something you hate?
+What is your favorite and least favorite thing about technology?
+What movie or TV-Show can you rewatch over and over again?
+What is your favorite smell, and why?
+What apps do you use the most?
+What is something you do better than most people?
+What is your earliest childhood memory?
+What are you extremely bad at?
+If you would write your autobiography, what would the title be?
+How, do you think, will the world be in 100 years?
+How would you change your life if the average life expectancy was 200 years?
+What is happiness for you?
+What are the most underrated things in life?
+What was the worst date you have ever been on?
+What do you find to be cringeworthy?
+What’s the bravest thing you have ever done?
+What’s the wisest quote you have ever heard or read?
+When raising your child, what would you do differently than your parents did?
+What is the worst response to “I love you”?
+What’s the nicest thing anyone has ever done for you?
+What’s the most incredible coincidence that ever happened to you?
+What are the biggest regrets of your youth?
+In three words, how would you describe your personality?
+What is your guilty pleasure?
+What is the best advice you have ever been given?
+What was the worst job you ever had?
+Are you a cat person or a dog person?
+What’s your favorite place of all the places you have traveled to?
+Do you have a bucket list, what’s on it?
+If you could have any exotic animal as a pet, which would it be?
+Who is the most interesting person you’ve ever met, and why?
+What was the last thing you were excited about?
+Do you believe in having a “five-year plan”?
+What’s more important to you: family or friends?
+If you won 10 million dollars, what would you do with the money?
+What would you say to your 16 years old self?
+If you could relive one moment in your life, which would it be?
+Do you hit the snooze button or wake up immediately?
+What’s your most controversial opinion?
+What’s an irrational fear you have?
+What is something you will never do again?
+How many birds would it take to kill a human?
+How do you answer the question: “What’s up?”
+What language do you wish you could speak?
+What was the weirdest conversation you have ever had?
+What was the worst movie you ever watched?
+What celebrity would you want to be trapped in an elevator with?
+What ist the funniest Wifi name you have ever seen?
+What makes a good life?
+Do you have any phobia?
+Which job would you never take, and why?
+Who is your hero?
+What does a perfect weekend look like to you?
+Do you prefer watching movies or reading books?
+Are you an introvert or an extravert?
+What is your most unshakeable belief?
+Do you think money can make you happy?
+What kind of music do you like?
+What is something you hate?
+What would you want to change in the world?
+What kind of sport do you like best and why?
+What are your goals in life?
+What is one thing that you want to change in your life?
+What is one personality trait you can’t stand?
+What did you want to become when you were a kid?
+What makes you happy?
+How do you relax in stressful times?
+What has been the lowest point in your life?
+How do you imagine the world in 2050?
+What is the best lie you have ever told as a child?
+What do you miss about your childhood?
+What is the most useless animal, in your opinion?
+What TV shows did you watch when you were a kid?
+Have you ever been in love?
+Which actor/actress would play you in a movie about your life?
+What can you talk about all day long?
+What movie universe would you most like to live in?
+What will people be nostalgic for in 40 years?
+What are the top 3 things you want to accomplish in your life?
+If you were a mad scientist, what scientific experiment would you run if money and ethics weren’t an issue?
+Would you rather do the first job you ever had for the rest of your life or have 10 babies?
+Would you rather be dumb and happy or intelligent and depressed?
+Would you rather have hands that never stop growing or feet that never stop growing?
+Would you rather stop climate change or end all wars on Earth?
+Would you rather be insane and know that your insane or be insane and believe you are sane?
+Would you rather travel 100 years in the future or 100 years in the past?
+Would you rather stay in a room for a night with 50 spiders or 50 mosquitos?
+Would you rather never be able to eat anything sweet or never be able to eat anything salty?
+Would you rather give up all Social Media for the rest of your life or never watch Netflix again?
+Would you rather be stuck on an island alone for the rest of your life or be stuck on an island with annoying people?
+Would you rather be able to speak all human languages or talk to animals?
+Would you rather be able to fly or be invisible?
+Would you rather lose your phone once a month for the rest of your life or lose your keys once a month for the rest of your life?
+Would you rather have a rewind button or a pause button in your life?
+Would you rather give up showering for a month or give up the internet for a month?
+Would you rather have a head the size of a watermelon or a head the size of a tennis ball?
+Would you rather have the ability to talk to animals that fly, land animals, or animals that live underwater?
+Would you rather begin every sentence with “According to my calculations”, or end every sentence with “Period”?
+Would you rather always have to rap instead of speaking or always have to sing instead of speaking?
+Would you rather always have an itchy spot that you can’t scratch or always feel like you have to sneeze?
+Would you rather be woken up by your favorite song or by an alarm?
+Would you rather drink coffee or tea?
+Would you rather be able to teleport or fly?
+Would you rather fight 50 cat-sized humans or one human-sized cat?
+Would you rather live without heating or without AC?
+Would you rather give up your smartphone or your computer/laptop?
+Would you rather your parents or your siblings pick your next boyfriend/girlfriend?
+Would you rather have a pet parrot or a pet squirrel?
+Would you rather kill one innocent person or kill five people who committed minor crimes?
+Would you rather have uncontrollable gas at work for the rest of your life or uncontrollable gas on every first date for the rest of your life?
+If you were a professional wrestler, what would be your entrance theme song?
+If the zombie apocalypse is coming, who are 2 people you want on your team?
+If you could choose between living in the 60s, 70s, 80s, or 90s: Which decade would you choose and why?
+If you could rename one body part, which body part would you choose, and what would you name it?
+If you could be reincarnated as an animal of your choice, which animal would you choose, and why?
+If you could be immortal, which age would you like to stay forever?
+If you could have a superpower, what would it be?
+If you could have dinner with one person (dead or alive), who would it be?
+If you could make one rule that everyone had to follow, what rule would you make?
+If you could know the absolute truth to one question, what question would you ask?
+If you could choose to eat one thing for the rest of your life, what would it be?
+If you could travel anywhere, where would you go and why?
+If you could solve one world problem, what would it be?
+If you could resurrect one person, who would you choose and why?
+If you could give me only one tip to improve my life, what would it be?
+If you could change one thing in the world, what would it be?
+If you could have a slogan describing you, what would it be, and why?
+If you could have five superpowers, which would you pick and why?
+If you could choose one item to erase from the world, what would it be?
+If you could redesign humans, how would you make them better?
+If you could have a never-ending candle that smelled like anything you wanted, what fragrance would you want it to be?
+If you could remove one memory from your life, what would it be?
+If you could only wear one color for the rest of your life, what color would it be?
+If you could morph two animals to make one new animal, what two animals would you choose, and how would you name it?
+If you could bring back a fashion trend, what would it be?
+If you could have a conversation with any one of our world leaders, who would you choose and why?
+If you could visit any planet, which would it be?
+If you could only eat one food for the rest of your life, what would it be?
+If you could live out the life and storyline of one character in the Harry Potter series, who would you pick and why?
+If you had to teach a class on one thing, what would you teach?
+What three words describe you the best?
+What’s the worse excuse you have ever used?
+If your boss was a fictional character, which one would he/she be?
+What’s your go-to productivity trick?
+If you could change one thing in your company, what would it be?
+What is the best compliment that you have ever received from someone?
+What do you like the most about your job?
+What’s the biggest misconception people have about you?
+If you could become an expert in anything you want this instant, what would it be?
+What was your dream job when you were a child?
+Are you a procrastinator?
+Name one colleague who is the most likely to survive a zombie apocalypse?
+What’s your standard uniform when you’re working from home?
+Are you planning any trips this year?
+What’s the first thing you do when you come home from work?
+What’s a mistake you made early on in your career? What did you learn from it?
+Where would you invest if you had one million dollars right now?
+What is your biggest weakness?
+Which two coworkers would you want on your team during a zombie apocalypse?
+What’s your least favorite thing at work?
+What’s your morning routine?
+What household chore do you hate the most?
+What’s your favorite season?
+If you had to list four books everyone should read at least once, what would you list?
+What were some hobbies you had as a kid?
+Have you ever met anyone famous?
+If you had to describe what you do professionally in 5 words, what would they be?
+What’s one artist/celebrity that you’re embarrassed to admit you like?
+Would you rather live in the city or in the countryside for the rest of your life?
+What’s your favorite activity to unwind after a busy day?
+What would you change if you were the CEO of the company you work for?
+What are misconceptions about your job?
+Who do you admire and why?
+If you could learn one new skill this instant, what would it be?
+What is one of your greatest achievements?
+What’s your weirdest family tradition?
+What do you want to do when you retire?
+If you would win 10 million dollars, would you quit your job?
+If there was no dress code, how would you dress for work?
+What was the first thing you bought with your own money?
+Which book would you recommend for everyone to read?
+What’s your biggest weakness?
+What’s your least favorite place in the world?
+What has been the highlight of your day so far?
+What’s a useless skill you have?
+What is something you believed earlier in your career, but think about differently now?
+What is your secret talent?
+If you could end world hunger, but everyone would have to eat the same bland food, would you do it?
+Is there something you would like to change about yourself? If so, what would you like to change?
+What’s the nicest thing a co-worker has ever done to you?
+What’s your favorite physical attribute about yourself?
+Who is the bravest person you know?
+What personal trait has gotten you in the most trouble?
+Who’s your celebrity crush?
+If someone hacked into your computer and was threatening to release your browser history to your boss, how much would you pay them to avoid it?
+What do you think is the greatest invention of all time?
+What do you lie most about?
+If you had to replace your hands with something other than hands, what would you choose and why?
+If you could change one thing about your life, what would it be?
+What’s one food you could never bring yourself to eat?
+What subjects should be taught in school, but aren’t?
+What would you buy with 100 dollars?
+If you were the headmaster of your school, what changes would you make?
+What is your dream job?
+If you could ask the president one question, what would you ask?
+What kind of animal represents your personality the best?
+What’s the most embarrassing thing you did?
+If you could design a school uniform, what would it look like?
+How would you describe yourself in three words?
+What’s your least favorite subject in school?
+What are you passionate about?
+What are you proud of?
+What is an app you hate, but you still use it anyway?
+Would you like to be able to see in the future? Why? Why not?
+What is your biggest fear?
+If you could trade lives for a day with a person of your choice, who would it be and why?
+What is an annoying habit of yours?
+How do you imagine your life in 10 years?
+Who is your role model in life?
+If you could create a law, what would it be?
+What is your nickname?
+How would you describe the perfect teacher?
+If you could be any flavor of ice cream, what flavor would you want to be?
+Do you consider yourself as a couch potato or an athlete?
+Do you know any other languages?
+What is something you have in common with the person next to you?
+What would you do if you were a billionaire?
+Do you play any instrument?
+What word would you add to the dictionary, and what would it mean?
+What do you want to learn about this year?
+If aliens landed on Earth and offered to take you home with them, would you go?
+What fictional world or universe would you like to visit?
+What fictional character would you like to meet?
+What’s the dumbest thing you have ever done?
+If you could be teleported anywhere you wanted to, where would you go?
+What movie or book would you change the ending if you could?
+If you had a theme song or a soundtrack of your life, what would it be?
+What was your first job?
+What would be your first question after waking up from being cryogenically frozen for 100 years?
+If you were heard by everyone in the world for 30 seconds, what would you say?
+What did you think was cool then, when you were young but isn’t cool now?
+What would a mirror opposite of yourself be like?
+What’s your current favorite TV-Show to binge-watch on Netflix or Amazon Prime?
+If someone made a movie of your life, what genre would it be? (comedy, romantic-comedy, action movie, science fiction, drama,…)
+Who has been the biggest influence in your life?
+What band or singer were you obsessed with in middle school?
+What’s the longest time you’ve gone without talking to anyone?
+What’s a joke that’s so stupid it’s funny?
+What is the best event you have ever attended?
+What is something that most people are obsessed with, but you just don’t get the point of it?
+If you went 10 years into the future and could only make one Google search before returning, what would it be?
+Who would be your celebrity hook-up if you had the chance?
+What does a typical day of yours look like?
+What was a turning point that changed your life?
+What app do you use most often?
+Would you rather be with someone who plans every little detail, or someone who is entirely spontaneous?
+Have you ever stalked your crush or ex on any social media platform?
+What are some of your funniest/craziest drunk stories?
+How different is your life from one year ago?
+What’s the most embarrassing thing that has happened to you in front of your crush?
+What’s your favorite meme?
+If you have an itch in your nose, in your butt, and on your eye, which one do you scratch first?
+What is your most-used emoji?
+If your life was a movie, what genre would it be, and who would play you?
+What was the worst style choice you ever made?
+What movie made you cry?
+TikTok, Youtube, Instagram, what do you like the most?
+What is the most annoying habit someone can have?
+If you were going to bury a time capsule, what would you put in?
+What was the last thing you couldn’t get off your mind?
+Have you ever borrowed something and never have returned it yet?
+What is one thing you don’t know how to do, but wish you did?
+What weird talents do you have?
+Do you think humans be able to solve the climate change problem before it’s too late?
+What is something you really like about yourself?
+Do you have any concerns about your future?
+What’s the worst present you’ve ever received?
+What’s your silliest “first world problem”?
+What is the worst thing that a person can put on their bio on a dating app?
+What is one thing you couldn’t live without?
+What reality show would you like to be on?
+If you were to hear one last song before you die, which one would it be?
+Would you eat less meat if you had to kill it all yourself?
+If you could write a love letter to your favorite food, what would you write?
+If you could remove one emotion from your life, what would that be?
+What’s the most embarrassing thing that happened to you in class?
+Who is your crush?
+What was your first kiss like, and how old were you?
+What’s one annoying thing about your parents?
+What do you think about veganism?
+Do you collect anything?
+If you met Donald Trump on a public toilet, what would you say or do?
+Have you ever given someone a piece of bad advice?
+What is your favorite food that everyone would most likely hate?
+If you had to be someone else, who would you be, and why?
+What is your most unshakeable belief?
+If you have the choice between knowing all the secrets of the universe, and one billion dollars, which would you choose?
+Are you an early bird or a night owl?
+Have you ever experienced karma in real life?
+Who do you trust most in life?
+If you had to choose a species to become extinct, which one would you choose and why?
+What always makes you laugh?
+Do you like surprises?
+Do you believe in fate?
+What was the weirdest dream you ever had?
+What was the first concert you went to?
+What’s the best gift you have ever received?
+What dog breed would you be?
+Who’s your worst enemy?
+What movie do you wish you could watch it again for the first time?
+If you had to change your name, what would you change it to?
+What food will you never eat again?
+What emoji best describes your personality?
+If your dog pulled a gun on you, what would you do?
+What’s your favorite dessert?
+How do you want to be remembered?
+Does your car have a name?
+If you had to create a new cult, what would it be about?
+If you were reincarnated as a plant, which plant would you like to be?
+If you were god, what would you do?
+What do you want to be when you grow up?
+What’s your favorite animal, and why?
+What’s your favorite TV-Show?
+What’s the most embarrassing thing that has ever happened to you?
+What was your favorite family vacation, and why?
+What superhero power would you like to have?
+What is your favorite color?
+What is your favorite video game?
+What do you like more, TikTok or Youtube?
+Do you want to have a tattoo in the future? What tattoo would you get?
+What is the best prank someone’s ever played on you?
+What scares you?
+Have you ever lied to your parents?
+Do you have any pets?
+Have you ever cheated on a test?
+What would you do if you were invisible for a day?
+What would you wish for if a genie gave you three wishes?
+What is your favorite hobby?
+Which fictional character would you like to be best friends with?
+What’s the best Halloween costume you have ever worn?
+What toppings do you like on your pizza?
+Do you like school?
+How often do you use the internet?
+What is your silliest dance move?
+What’s your favorite subject in school?
+What’s your least favorite vegetable?
+If you forgot to do your homework, what excuse would you use?
+What always makes you laugh?
+If you would find a stray kitten, what would you do?
+What was the happiest day of your life so far?
+If you were a dictator of a small island nation, what crazy dictator stuff would you do?
+If you were transported 200 years into the past, how would you prove that you were from the future?
+What things did you do as a kid that you now realize is extremely weird?
+Do you fold your pizza when you eat it?
+What are 5 random facts about yourself?
+What is something trendy today, but in 5 years, everyone will look back on and be embarrassed by?
+What sort of things do you do when no one is watching?
+What hobby would you get into if time and money weren’t an issue?
+What’s the weirdest place you have urinated?
+How would you explain the internet to your grandparents?
+Do you wipe front to back or back to front?
+What movie would be significantly improved if it was made into a musical?
+What was your most embarrassing moment in front of a doctor?
+What is your most embarrassing moment from high school?
+What job would you be terrible at?
+If you had the power to shrink one object of your choice and carry it with you in your pocket, which item would it be?
+What is something that is normal in movies, but never happens in real life?
+What would you do if you were the only human left on Earth?
+What would be the worst name you could give your child?
+If animals could talk, which would be the most polite?
+What are you addicted to?
+Would you rather never have to wash dishes or never have to do laundry ever again?
+Do you dance in front of the mirror when you’re alone?
+Have you ever said hi to someone on the street thinking they were someone else?
+How do you handle people you don’t like?
+What is the worst purchase you have ever made?
+Have you ever lied to get out of a tricky situation?
+Have you ever tripped and fallen in public?
+What is your favorite midnight snack?
+What is the most spontaneous thing you have ever done?
+Would you rather have hands for feet or feet for hands?
+Would you rather take part in a zombie apocalypse or a pandemic?
+Would you rather drive an ice cream truck to work or come dressed as a clown?
+Would you rather wear bell-bottomed pants or sport a mohawk?
+Would you rather have a dinosaur as a pet or a tiger?
+Would you rather go on a date with the Tiger King or dress like him?
+Would you rather color your hair neon or have a gold tooth?
+Would you rather always sing out of tune or never be able to keep up with the beat?
+Would you rather never use emojis again or never spell right again?
+Would you rather eat only pickles for a week or drink only soy sauce for a week?
+If you could pick between dating a superhero or a supervillain, who would you choose?
+What would you do first if you were invisible for a day?
+If you were a drag performer, what would your drag name be?
+If you could be an animal for a day, which would you choose?
+What is your most guilty pleasure?
+If you could pick one member in the group to kill, who would it be and why?
+If you could pick one member in the group to take to a deserted island, who would it be and why?
+What is your worst dating story?
+What would you pick if you could choose your own superpower?
+If you could only eat one dish for the rest of your life, what would it be?
+I dare you to show me your dating apps and let me text someone.
+For the next five minutes, you have to respond to every question with only a bark.
+I dare you to cut your hair right now.
+I dare you to take a shot of a shot we make (the shot can include weird pantry ingredients like eggs, vinegar, or even soy sauce!)
+Wear your clothes inside out for the rest of the game.
+I dare you to pretend you’re an astronaut and walk and jump on the moon.
+It’s Opposite Day! Answer every question with the opposite statement for the rest of the game.
+Recreate your most awkward first date with a person in the group.
+I dare you to rap about your colleagues for at least one minute.
+Pretend to hold a conversation with a water/beer bottle for at least one minute.
+Never have I ever cheated on an exam in college.
+Never have I ever taken a long lunch break and gotten away with it.
+Never have I ever worn sweatpants with a shirt during an online meeting.
+Never have I ever faked a call to get out of a conversation. 
+Never have I ever gone outside with my clothes worn inside out.
+Never have I ever waved to someone without realizing they were waving to someone else.
+Never have I ever tried to talk my way out of a ticket.
+Never have I ever eaten something terrible just so someone wouldn’t feel bad about it.
+Never have I ever used traffic as an excuse for not showing up on time.
+Never have I ever binged an entire series in one night.
+What’s your most exciting college party story?
+What is your most epic senior prank story?
+What was your nickname in school?
+Have you ever had a crush on one of your professors?
+What was the best thing that happened to you in school?
+What’s your funniest prom story?
+What’s your most awkward school dating story?
+What was the most ridiculous thing you got in trouble for in school?
+Have you ever fallen asleep in class?
+What was the most embarrassing thing that happened to you in middle school?
+If you could pick one coworker to switch lives with, who would it be?
+Who do you think is the Office Diva?
+Who is the Michael Scott of the workplace?
+What is the best thing that has happened to you in the workplace?
+What is the funniest mail that you accidentally sent to your colleagues?
+Which colleague do you think would make it alive out of The Hunger Games? Why?
+Who do you think has the best fashion sense in the workplace? 
+Which team building event do you secretly despise?
+What was your worst job ever?
+If you could write a tell-all book about your workplace, what would you call it?
+If you had to swap your legs with the legs of any other animal, which animal would you choose?
+What’s your favorite useless fact?
+What’s something you’re kind of snobby about?
+How do you feel about clowns?
+What’s your favorite meme or viral video?
+What’s the smelliest food to cook in the office microwave?
+What activity helps you relieve stress?
+What is the most awkward thing that ever happened to you during an interview?
+If you could have any view out your office window, what would you choose?
+What’s the best animal sound you can make?
+What food is so funny that it can be a comedian? Crackers.
+I can be hot, I can be cold, I can run, and I can be still, I can be hard, and I can be soft. What am I? Water.
+I am a ball that can be rolled but never bounced or thrown. What am I? Eyeball.
+What do a dollar and the moon have in common? 4 quarters.
+What did the doctor prescribe to the sick lemon? Lemon-aid.
+What band would you be embarrassed to admit you listen to?
+What’s the most embarrassing moment from your teen years?
+What’s your silliest memory with your best friend?
+How long would you last in a zombie apocalypse?
+What “old person” things do you do?
+Who was your childhood actor/actress crush?
+What’s the craziest dare you ever took?
+What’s the best prank you’ve ever played on someone?
+As a kid, did you ever do something wrong but manage to pin it on your siblings?
+What is your guilty pleasure?
+What’s the craziest fashion trend you ever rocked?
+If you could have one superpower today, what would it be, and for what purpose?
+If you were going to be frozen tomorrow for a one-way 1000-year interstellar voyage, what would you most want to communicate (and to whom) before you leave?
+What’s the weirdest thing in your fridge right now?
+What emoji represents you today and why?
+If you could pick up a new skill in an instant, what would it be?
+How would you describe your communication style in 3 words?
+What’s one rule your parents or guardians enforced when you were a kid?
+If you had to eat only one dish for the rest of time, what would it be?
+If you were coming out onto a stage, what would your entrance song be?
+If you were setting off to Mars and could take only one luxury item with you, what would it be?
+Have you ever left a one-star review online?
+What’s the most interesting article you’ve read lately?
+What’s your biggest accomplishment?
+What has been most influential in your life so far?
+What’s your favorite season?
+On the count of three say one word.
+What’s your favorite funny face to make?
+Tell me about the first party you ever went to.
+What’s a better game, ’21 questions’ or ‘hide and go seek’?
+What’s your favorite handshake?
+Who’s your all-time favorite YouTuber?
+Thinking over the past week, what’s one thing you would have done differently?
+How did you meet your best friend?
+If someone took a candid picture of you, what would they most likely find you doing?
+What’s your go-to “good vibes” song?
+What are you most proud of?
+What’s the greatest challenge you overcame?
+What’s your unusual talent?
+What unusual or quirky things do you do regularly?
+Can you share a photo of yourself as a baby?
+What is your favorite birthday cake flavor?
+What is your favorite thing to do after a tough day?
+What are you really terrible at?
+Do you have a nickname? What were you called as a kid?
+Name a jingle that has stuck with you
+What do you think the worst job in the world is?
+What would you do if you notice that there is no toilet paper while using a public toilet?
+What would you do if you were seated next to a chronic farter on a packed airplane?
+What is the longest you’ve gone without sleep?
+If you were a kitchen appliance, which one would you be and why?
+If you were to choose a fictional family to be with, who would they be and why?
+If you were to be reincarnated as an animal, what would it be and why?
+If you had to eat one meal for the rest of your life, what would it be and why?
+If you were famous, what would you be famous for?
+Would you go with aliens if they arrive on Earth? Why?
+Who is the smartest person you know?
+You just won a cruise to anywhere in the world! Where would you go?
+Would you rather go back in time or be transported to the future?
+What’s the best vacation you have ever taken?
+If you could be on any game show, which would you choose?
+What’s the worst thing someone has ever done to you that you found incredibly difficult to forgive?
+Where do you see yourself in 5/10/20 years?
+Would you rather be the funniest or the smartest person in the room?
+Would you rather be the person giving or taking advice?
+What’s the one thing in your daily routine that you wish you could eliminate?
+What is your worst late-night story?
+What is something that always makes you laugh?
+When have you done something outlandish for what you usually do?
+What is the most adventurous thing that you’ve done?
+What is something you did when you were younger that makes you cringe to think about?
+If you could be any food, what would you be and why?
+What is the craziest thing you’ve ever done?
+If you were a pet, what would you want to do to your owner?
+If you had a time machine and could go back in time, what would you change in history?
+Would you rather live in the ocean or in deep outer space?
+In what ways do you consider yourself fortunate?
+What was the first significant thing you bought with your own money?
+What do you want to try for the first time in the year ahead?
+What do you wish you spent less time doing?
+What is the best compliment you’ve received?
+Which song can you listen to all day long?
+What outdated slang do you still use?
+Money can’t buy happiness: True or false?
+What is the oldest thing you own?
+Can you live without your smartphone for 24 hours?
+If you could only eat one type of food for the rest of your life, what would it be?
+What was your favorite song in high school?
+If you could experience one year from your life again, which year would it be?
+If you could make a place disappear, which one would it be?
+If you could have dinner with any person, alive or dead, who would it be?
+What famous animal movie character do you like the most?
+If you could eliminate one food so no one could eat it ever again, what would you destroy?
+What crazy activities do you dream of trying someday?
+If you had a TV show, what would the name be and who would play you?
+What’s your favorite book or movie, and why?
+Which cartoon character would you like to be?
+What’s a current trend you think is stupid?
+If you could switch one thing about yourself, what would it be?
+Describe your perfect day.
+Which family member are you closest to?
+What show are you most likely to binge-watch?
+How do you think the world will end?
+What’s the worst thing you ever did as a kid — and got away with?
+Have you ever gotten super lost? What happened?
+What was your favorite item of clothing as a kid?
+Do you have any crazy roommate stories?
+What’s the grossest food you ever had to eat to be polite?
+have the power of flight or invisibility?
+sing like a rock star or cook like a gourmet chef?
+What was the worst style choice you ever made?
+If you could devise a new invention, what would you create?
+If you chose a career all over again, what would you do?
+If you never had to sleep, what would you do with all those extra hours each day?
+Did you have a name for your first car?
+What sport are you a big fan of?
+Have you ever mistakenly texted someone you were not supposed to?
+What’s the story behind your name?
+If you could jump inside any book, fiction or nonfiction, where would you go?
+If trapped in a horror movie, who would be the first one to die from your team?
+All things considered, the worst advice you’ve followed and regretted?
+Aliens have landed on Earth and have claimed one of your team members as their spy. You’re the least bit surprised. Who is it?
+If you had to break the ice during some awkward silences, which joke would you crack?
+Name one thing that you’ve always imagined doing but never did?
+What’s your favorite ’80s movie?
+What was your best class in school?
+Who is your favorite author?
+What is an easy item on your bucket list that you haven’t done yet?
+What was the last thing you ate?
+What is your favorite holiday?
+What is your favorite part of working from home?
+What is the most interesting book genre?
+What is your favorite movie genre to watch?
+What is your most used phone app?
+What is your favorite thing to eat for breakfast?
+Are you more productive in the morning or at night?
+What is something interesting we would not know about you just by looking?
+If you could live in any state, which state would you pick?
+If you could live in any country, which country would you pick?
+What do you usually eat for a quick lunch?
+What is your #1 recommendation in this city?
+What is the best kitchen gadget?
+Which song could you listen to over and over again?
+You can visit any fictional time or place. Which would you pick?
+Which show do you remember most from your childhood?
+What is the earliest book you remember?
+What is your favorite season?
+What is your favorite seasoning?
+What is the best piece of advice you have ever gotten at work?
+Imagine you no longer have to work. How would you spend a Tuesday?
+What person from history would you add to Mount Rushmore?
+What is your go-to TV show to watch at night?
+What is your favorite mythical creature?
+Who was your most unique pet?
+If you could be great at any Olympic sport, which would it be?
+What was the worst job you ever had?
+What is your favorite holiday tradition?
+Do you prefer funny stories or dramatic ones?
+What would it take to give up your smartphone for a month?
+What is the best dessert?
+Where is your favorite vacation spot?
+Do you know how to speak more than one language?
+Who is the most famous person you have met?
+What is your favorite musical instrument?
+Would you rather live close to work or at work?
+How would you describe your job to a five year old?
+What do your family and friends think you do all day?
+What was your first job?
+What is your earliest memory of this job?
+What is your standard office lunch?
+What did you want to be when you grew up?
+Do prefer working from home or the office?
+Is it better to be late for work or to leave early?
+What is the most unusual job you have heard of?
+Would it be better to start work five years later or end five years earlier?
+Would you support “National Avocado Day” as a work holiday?
+What is something you did at work that no-one noticed?
+What is the best work holiday?
+What was the first way you made money?
+Which beverage goes best with pizza?
+How do you top your burgers?
+What is your “when I was your age…” story?
+What did you want to be when you grew up?
+What is a current trend that you just don’t understand?
+What piece of advice would you share with your younger self?
+Beach holiday or ski trip?
+What movie defined your generation?
+Which song do you remember most from prom?
+When you are alone in the car, what volume is the music at?
+What is your hobby?
+If you had to move to another country, which one would you choose?
+When did you start liking/hating mushrooms?
+Would you rather stay at a hotel or an AirBNB?
+Do you take your PTO all at one time, or another way?
+Which of your teachers is most memorable and why?
+Which fictional team is the best team of all time?
+Which real team is the best team of all time?
+Would you rather be an Avenger or a Power Ranger?
+Would you rather join Metallica or Backstreet Boys?
+Were the Spice Girls a good team?
+What is your earliest memory of teamwork?
+What is something you accomplished as part of a team?
+What was the first team you were part of?
+Have you ever won something as a team?
+Would you rather do a large project independently or as part of a team?
+On a scale of 1 – 10, how much of a team player are you?
+Can lone wolves be part of a team?
+What was your first online screen name?
+Which class is both difficult and fun?
+Which class do you wish the school offered?
+What was the best childhood gym activity?
+What do you miss about kindergarten?
+If you had to write a textbook, what would it be on?
+Do prefer a quick pop-quiz or end of year exam?
+What career do you want?
+What is your “I almost missed an exam” story?”
+How did you choose your college?
+What do people not understand about being a student?
+Do you prefer online classes or in-person?
+Should college be mandatory?
+What is something you are grateful for as a student?
+What is a weird food you have tried? Would you eat it again?
+Show us your cell phone wallpaper. Is there a story behind it?
+If you could have an unlimited supply of one thing for the rest of your life, what would you pick?
+Would you let aliens beam you up if they came to Earth?
+What season would you be?
+What is a simple dance move that you are bad at?
+What is your favorite song to sing?
+What vegetable is best with cheese?
+You are the best criminal mastermind in the world. What crime would you commit if you knew you would get away with it?
+If you could be any supernatural creature, which would you pick?
+What reality show would you want to be on?
+There is a free, round-trip shuttle to Mars. The catch: it will take one year of your life to go, visit, and come back. Are you in?
+Imagine you could teleport anywhere. Where would you go right now?
+Would you want to have a personal assistant follow you around everywhere and do what you asked of them?
+Pick any band to play at your funeral.
+What is a good way to give back to the community?
+What is an easy way to do something nice for someone?
+Who is someone in your community that makes a difference?
+Would you rather live in a city or a town?
+What is the best example of a community you have seen?
+Would you join a community in space if it was permanent?
+Would you rather live 100 years in the past or 100 years in the future?
+How much money do you make?
+Who is your office crush?
+What was the most difficult thing about your childhood?
+Have you ever seen a therapist?
+What is your mother’s maiden name?
+How did you get your worst scar?
+What is the worst advice you have been given?
+What is the first gift you remember receiving?
+What is your earliest memory of Christmas?
+Have you ever told someone Santa is not real?
+How do you like your potatoes?
+What is the best holiday or winter treat?
+What is a simple holiday tradition you like?
+What is your New Years resolution?
+Would you rather live at the North Pole or the South Pole?
+Which holiday song is your favorite?
+What is your favorite color and why?
+Which super power do you want?
+Which are better, cookies or brownies?
+What is your favorite type of ice cream?
+Do you prefer hot chocolate or tea?
+Do you have an imaginary friend?
+What is something you like?
+Which month were you born?
+What do you call your grandparents?
+How tall are you?
+What size shoes do you wear?
+What is your favorite movie?
+What do you do for fun?
+What is something you find funny?

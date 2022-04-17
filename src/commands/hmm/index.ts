@@ -4,6 +4,7 @@ import { fetchAPI, randomArray } from "../../utils";
 import { CommandInt } from "../../validation/ComandSchema";
 import * as fs from 'fs';
 import * as path from 'path';
+import reddit from "../../utils/reddit";
 
 const HmmCommand: CommandInt = {
   Name: "hmm",
@@ -21,14 +22,20 @@ const HmmCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    const req = await fetchAPI("https://www.conversationstarters.com/random.php");
-    if (req.error) return sendMessage(channel, `@${userstate.username} ${req.defaultMessage}`);
 
-    let data = fs.readFileSync(path.join(__dirname, `./icebreakers.txt`), 'utf-8');
-    let arr = data.toString().replace(/\r\n/g,'\n').split('\n');
-    let chosen = randomArray(arr);
 
-    sendMessage(channel, `🤔 ${chosen}`);
+    var chance = Math.random();
+    if (chance < 0.3) {
+      // 70% chance to get from r/askreddit
+      const post = await reddit.getTitle("askreddit");
+      if (typeof post === "string") return sendMessage(channel, `@${userstate.username} ${post}`);
+      sendMessage(channel, `🤔 ${post.title}`);
+    } else {
+      let data = fs.readFileSync(path.join(__dirname, `./icebreakers.txt`), 'utf-8');
+      let arr = data.toString().replace(/\r\n/g,'\n').split('\n');
+      let chosen = randomArray(arr); 
+      sendMessage(channel, `🤔 ${chosen}`);
+    }
   }
 }
 
