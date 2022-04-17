@@ -24,7 +24,6 @@ export default async (client: Actions, channel: string, userstate: Userstate, me
   let checkMessage = await checkMessageBanPhrase(message);
   if (checkMessage === null) return client.action(channel, `@${userstate["display-name"]} FeelsDankMan sorry couldn't check for banphrase, try again in a bet FeelsDankMan`);
   if (/(i'm\s12|im\s12|i\sam\s12|am\s12)/gm.test(message)) return;
-  console.log(checkMessage);
   if (checkMessage) sendMessage(channel.substring(1), `[REDACTED] cmonBruh`);
 
   if (command !== null) {

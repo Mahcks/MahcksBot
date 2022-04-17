@@ -4,7 +4,6 @@ import config from "../config/config";
 // Temp data since it's not to important to store in JSON or DB
 const cooldowns = new Map();
 const globalCD = new Map();
-const keywordCD = new Map();
 
 export async function addCooldown(user: string, commandName: string, cdTime: number) {
   let res = null;
