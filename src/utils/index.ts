@@ -251,6 +251,7 @@ export async function shortenURL(url: string) {
     });
     return await request.data["shortUrl"];
   } catch (error) {
+    console.log(error);
     return null;
   }
 }

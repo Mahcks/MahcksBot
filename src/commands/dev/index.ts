@@ -5,6 +5,7 @@ import { execSync, exec } from 'child_process';
 import { findQuery, sqlQuery } from "../../utils/maria";
 import { cacheMarkovMessages } from "../../modules/markov";
 import { logPool, redis } from "../../main";
+import reddit from "../../utils/reddit";
 
 const devCommand: CommandInt = {
   Name: "developer",
