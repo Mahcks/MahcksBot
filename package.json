@@ -53,6 +53,7 @@
     "async-markov": "github:Supinic/async-markov",
     "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.10",
+    "either-wyr": "^1.0.1",
     "eventsource": "^2.0.0",
     "ioredis": "^4.28.5",
     "mariadb": "^2.5.5",
