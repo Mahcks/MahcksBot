@@ -24,18 +24,18 @@ const HmmCommand: CommandInt = {
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
 
 
-    var chance = Math.random();
-    if (chance < 0.3) {
+    /* var chance = Math.random(); */
+   /*  if (chance < 0.3) { */
       // 70% chance to get from r/askreddit
       const post = await reddit.getTitle("askreddit");
       if (typeof post === "string") return sendMessage(channel, `@${userstate.username} ${post}`);
       sendMessage(channel, `🤔 ${post.title}`);
-    } else {
+/*     } else {
       let data = fs.readFileSync(path.join(__dirname, `./icebreakers.txt`), 'utf-8');
       let arr = data.toString().replace(/\r\n/g,'\n').split('\n');
       let chosen = randomArray(arr); 
       sendMessage(channel, `🤔 ${chosen}`);
-    }
+    } */
   }
 }
 
