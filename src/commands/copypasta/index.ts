@@ -20,7 +20,7 @@ const copyPastaCommand: CommandInt = {
   OnlineOnly: false,
   Optout: false,
   Code: async (client: Actions, channel: string, userstate: Userstate, context: any[]) => {
-    const user = userstate.username;
+    /* const user = userstate.username;
     const maxTries = 5;
 
     let quotes = [
@@ -50,9 +50,9 @@ const copyPastaCommand: CommandInt = {
 
     if (tries >= maxTries) {
       return sendMessage(channel, `@${user} couldn't get a good copypasta after ${tries} tries. FeelsBadMan`);
-    }
+    } */
   
-    sendMessage(channel, `@${user} ${copypasta || 'No copypasta found FeelsBadMan'}`);
+    sendMessage(channel, `This feature is disabled for now, too much hot BOOBA action.`);
   }
 }
 
