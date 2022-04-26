@@ -1,7 +1,7 @@
 import { Actions, Userstate } from "tmi.js";
 import sendMessage from "../../modules/send-message/sendMessage";
 import { getTarget } from "../../utils";
-import { billycoinsGet } from "../../utils/billycoins";
+import billycoins from "../../utils/billycoins";
 import { CommandInt } from "../../validation/ComandSchema";
 
 const BillyCoinsCommand: CommandInt = {
@@ -22,12 +22,12 @@ const BillyCoinsCommand: CommandInt = {
     const user = userstate.username;
     const target = getTarget(user, context[0]);
 
-    let currentBalance = await billycoinsGet(parseInt(userstate["user-id"]!));
+    let currentBalance = await billycoins.get(parseInt(userstate["user-id"]!));
     let balMessage = ` balance is ${currentBalance}`;
     if (user === target) {
-      return sendMessage(channel, `@${user} your ${balMessage}`);
+      return sendMessage(channel, `@${user} you have ${balMessage} BillyCoins`);
     } else {
-      return sendMessage(channel, `@${user} that user's ${balMessage}`);
+      return sendMessage(channel, `@${user} that user has ${balMessage} BillyCoins`);
     }
   }
 }

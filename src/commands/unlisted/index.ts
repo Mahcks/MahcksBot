@@ -24,7 +24,7 @@ const unlistedCommand: CommandInt = {
 
     const req = await fetchAPI("https://api.retpaladinbot.com/twitch/unlisted");
     if (req.error) return sendMessage(channel, `@${user} ${req.defaultMessage}`);
-    let random = randomArray(req.data.data.data);
+    let random = randomArray(req.data.data);
     let isMature = (random.isMature) ? "[MATURE]" : "";
 
     sendMessage(channel, `@${user} ${isMature} ${random.title} [${random.viewerCount} viewers] - https://twitch.tv/${random.username}`);
