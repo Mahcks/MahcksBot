@@ -102,8 +102,14 @@ const CoomerCheckCommand: CommandInt = {
       });
     });
 
-    let msg = (coomerList.count == 0) ? `Not a coomer B) ${coomerList.count}/${streamers.length}` : `follows ${coomerList.count}/${streamers.length} streamers that are checked for: ${coomerList.list.join(", ")}`;
-    sendMessage(channel, `@${user} ${msg}`)
+    if (user.toLowerCase() === target.toLowerCase()) {
+      let msg = (coomerList.count == 0) ? `@${user} you're not a coomer B) ${coomerList.count}/${streamers.length}` : `@${user} you follow ${coomerList.count}/${streamers.length} streamers that are checked for: ${coomerList.list.join(", ")}`;
+      sendMessage(channel, `${msg}`)
+    } else {
+      let msg = (coomerList.count == 0) ? `@${user} ${target} is not a coomer B) ${coomerList.count}/${streamers.length}` : `@${user} ${target} follows ${coomerList.count}/${streamers.length} streamers that are checked for: ${coomerList.list.join(", ")}`;
+      sendMessage(channel, `${msg}`)
+    }
+    
   }
 }
 
