@@ -48,7 +48,7 @@ const whoisCommand: CommandInt = {
 
     let usersSettings: UserSettings = {
       id: (isSelf) ? userstate['user-id'] : userLookup.id,
-      chatColor: (userLookup.chatColor === undefined) ? '[None]' : userLookup.chatColor,
+      chatColor: (userLookup.chatColor === undefined) ? '[None]' : (isSelf) ? userstate.color : userLookup.chatColor,
       badge: (userLookup.badges.length === 0) ? '[None]' : getBadges(userLookup.badges),
       isBanned: (userLookup.banned) ? `⛔ (${userLookup.banReason})` : "",
       created: calcDate(new Date(), new Date(userLookup['createdAt']), ['m'])
