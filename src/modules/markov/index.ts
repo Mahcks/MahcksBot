@@ -211,7 +211,7 @@ export async function generateMarkovChain(channel: string, message: string): Pro
       let total = await findQuery('SELECT COUNT(*) FROM logs WHERE channel=?;', [channel]);
       if (total[0]['COUNT(*)'] <= 5000) {
         let currentSettings = await getChannelSettings(channel);
-        return `🔮 Error generating Markov chain after ${humanizeNumber(options.maxTries)} tries. It may be because this channel only has ${humanizeNumber(total[0]['COUNT(*)'])} messages logged. If you still want to use this command use "${currentSettings.prefix} markov all"`;
+        return `🔮 Error generating Markov chain after ${humanizeNumber(options.maxTries)} tries."`;
       } else return `🔮 Error generating Markov chain after ${humanizeNumber(options.maxTries)} tries. Please try again later.`;
     }
   } else return data;
