@@ -16,7 +16,7 @@ import { timer } from "../../utils";
 
 */
 
-export const loggedMarkovChannels: string[] = ["moonmoon", "cyr", "trainwreckstv", "forsen", "pokelawls", "erobb221", "amouranth", "esfandtv"];
+export const loggedMarkovChannels: string[] = ["moonmoon", "cyr", "trainwreckstv", "forsen", "pokelawls", "erobb221", "amouranth", "esfandtv", "summit1g"];
 
 export const fetchMarkovData = async () => {
   let loggedChannels: string[] = [];
