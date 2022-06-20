@@ -27,7 +27,7 @@ const unlistedCommand: CommandInt = {
     let random = randomArray(req.data.data);
     let isMature = (random.isMature) ? "[MATURE]" : "";
 
-    sendMessage(channel, `@${user} ${isMature} ${random.title} [${random.viewerCount} viewers] - https://twitch.tv/${random.username}`);
+    sendMessage(channel, `@${user} ${isMature} ${random.title} [${random.viewerCount} viewers] - https://twitch.tv/${random.username} | https://static-cdn.jtvnw.net/previews-ttv/live_user_${random.username}-1920x1080.jpg?`);
   }
 }
 
