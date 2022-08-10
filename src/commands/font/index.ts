@@ -48,7 +48,6 @@ const fontCommand: CommandInt = {
 
     } else if (askedFont === "lisp") {
       client.say(channel, getTranslated().replace(/s/g, 'th'));
-
     } else client.say(channel, `@${userstate.username} incorrect syntax: ${currentSettings.prefix}font (${avilFonts.join(", ")}) (message)`);
   }
 }

@@ -48,11 +48,11 @@ const isbannedCommand: CommandInt = {
     if (req.length === 0) return sendMessage(channel, `@${user} couldn't find that user!`);
     let data = req[0];
 
-    let banReason = (data.banReason === "TOS_TEMPORARY") ? "temporary ban" : "indefinite ban";
+    let banReason = data.banReason;
     let twitchBanStr = (data.banned) ? `Yes (${banReason})` : "No";
 
     if (channelData) {
-      sendMessage(channel, `@${user} Twitch: ${twitchBanStr} Channel: ${(isChannelBanned) ? 'Yes' : 'No'}, ${(updatedRecently) ? `banned ${calcDate(new Date(), new Date(query[0].updated), [])} ago.` : `unbanned ${calcDate(new Date(), new Date(query[0].timestamp), [])}`} ago.`);
+      sendMessage(channel, `@${user} Twitch: ${twitchBanStr} Channel: ${(isChannelBanned) ? 'Yes' : 'No'}, ${(updatedRecently) ? `banned ${calcDate(new Date(), new Date(query[0].updated), [])} ago.` : `unbanned ${calcDate(new Date(), new Date(query[0].timestamp), [])}`}`);
     } else sendMessage(channel, `@${user} Twitch: ${twitchBanStr} Channel: No`);
   }
 }
